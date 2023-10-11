@@ -1,3 +1,4 @@
+using CustomerService.API.Temp;
 using Microsoft.AspNetCore.Connections;
 using Polly;
 using RabbitMQ.Client;

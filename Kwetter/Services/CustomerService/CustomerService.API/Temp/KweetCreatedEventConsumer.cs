@@ -6,9 +6,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace CustomerService.API.Temp
 {
-    public class KweetCreatedConsumer : AsyncEventingBasicConsumer
+    public class KweetCreatedEventConsumer : AsyncEventingBasicConsumer
     {
-        public KweetCreatedConsumer(IModel model) : base(model){}
+        public KweetCreatedEventConsumer(IModel model) : base(model){}
 
         public async Task HandleBasicDeliver(string consumerTag, ulong deliveryTag, bool redelivered, string exchange, string routingKey, IBasicProperties properties, ReadOnlyMemory<byte> body)
         {
