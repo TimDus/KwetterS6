@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . ./
 
 # Build the solution including the "Common" class library
-RUN dotnet restore
+RUN dotnet restore "CustomerService.API.csproj"
 RUN dotnet publish -c Release -o out
 
 # Use a lightweight runtime image as the base image
