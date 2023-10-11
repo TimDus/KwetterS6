@@ -1,0 +1,44 @@
+networks:
+  backend:
+  frontend:
+  rabbitmq:
+    
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - 15672:15672
+      - 5672:5672
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    command: [ "bash", "-c", "chmod 400 /var/lib/rabbitmq/.erlang.cookie; rabbitmq-server" ]
+    networks:
+      - rabbitmq
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:15672"]
+        interval: 10s
+        timeout: 10s
+        retries: 3
+
+  kweetapi:
+    image: timdus/kweetapi:latest
+    ports:
+      - 8101:80
+    networks:
+      - backend
+      - rabbitmq 
+    depends_on:
+      - rabbitmq
+
+  customerapi:
+    image: timdus/customerapi:latest
+    ports:
+      - 8102:80
+    networks:
+      - backend
+      - rabbitmq 
+    depends_on:
+      - rabbitmq

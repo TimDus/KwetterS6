@@ -1,0 +1,35 @@
+{
+  "Routes": [
+    //Kweet
+    {
+      "UpstreamPathTemplate": "/api/Kweet",
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "kweetapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Kweet"
+    },
+
+    //Customer
+    {
+      "UpstreamPathTemplate": "/api/Customer",
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customerapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Customer"
+    }
+  ],
+  //Global config
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:800"
+  }
+}
