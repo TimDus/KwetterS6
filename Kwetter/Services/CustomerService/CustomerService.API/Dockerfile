@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 
 # Set the working directory inside the container
-WORKDIR /kwetter
+WORKDIR /Kwetter
 
 # Build the solution including the "Common" class library
 RUN dotnet restore "Services/CustomerService/CustomerService.API/CustomerService.API.csproj"
@@ -12,7 +12,7 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
 
 # Set the working directory inside the container
-WORKDIR /kwetter
+WORKDIR /Kwetter
 
 # Copy the built application from the build stage
 COPY --from=build /app/out ./

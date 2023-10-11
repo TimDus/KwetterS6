@@ -9,11 +9,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{E8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KweetService", "KweetService", "{0262AAF0-9685-4BD0-95D0-F56C787B70F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KweetService.API", "Services\KweetService\KweetService.API\KweetService.API.csproj", "{C4EE2C76-EC8B-4E85-A22E-1AA006AC5D19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KweetService.API", "Services\KweetService\KweetService.API\KweetService.API.csproj", "{C4EE2C76-EC8B-4E85-A22E-1AA006AC5D19}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIGateway", "APIGateway", "{8C235A7A-35D8-4C72-877B-C9398AC3E4C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIGateway", "Services\APIGateway\APIGateway\APIGateway.csproj", "{CE7F3C1D-8B6F-40FB-8DE2-6E2C3785AFC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIGateway", "Services\APIGateway\APIGateway\APIGateway.csproj", "{CE7F3C1D-8B6F-40FB-8DE2-6E2C3785AFC4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{536BA009-C6F6-4CA8-8C78-790AA0489AC4}"
 	ProjectSection(SolutionItems) = preProject
@@ -22,7 +22,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CustomerService", "CustomerService", "{952358B0-296B-444E-B952-E4F312DB8BB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerService.API", "Services\CustomerService\CustomerService.API\CustomerService.API.csproj", "{D6F6DBE7-93DD-48EF-B5F8-F62D819B453B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerService.API", "Services\CustomerService\CustomerService.API\CustomerService.API.csproj", "{D6F6DBE7-93DD-48EF-B5F8-F62D819B453B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflow", "Workflow", "{32A8A403-972C-45EF-860E-302043508E02}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\dotnet-desktop.yml = ..\.github\workflows\dotnet-desktop.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

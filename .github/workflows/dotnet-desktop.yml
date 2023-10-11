@@ -7,7 +7,6 @@ on:
 
 env:
   DOCKERHUB_USERNAME: timdus
-  DOCKERHUB_PASSWORD: dckr_pat_rPGoZ5xSt_esEeWG0mmhn6uZgdA
 
 jobs:
   build_customerapi:
