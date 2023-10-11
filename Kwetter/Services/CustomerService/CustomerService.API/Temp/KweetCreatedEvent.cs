@@ -1,6 +1,6 @@
 ﻿namespace CustomerService.API.Temp
 {
-    public class KweetCreateEvent
+    public class KweetCreatedEvent
     {
         public Guid Id { get; set; }
         public string kweet { get; set; }

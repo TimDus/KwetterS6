@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Connections;
 using Polly;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Exceptions;
 using System.Net.Sockets;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -50,6 +51,32 @@ builder.Services.AddSingleton<IConnection>(sp =>
 
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+
+    // Declare the exchange
+    var connection = scope.ServiceProvider.GetRequiredService<IConnection>();
+    var channel = connection.CreateModel();
+    var exchangeName = "kweet-created-exchange";
+    var exchangeType = ExchangeType.Direct;
+    var durable = true;
+    var autoDelete = false;
+
+    channel.ExchangeDeclare(exchangeName, exchangeType, durable, autoDelete);
+
+    // Declare a queue and bind it to the exchange
+    var queueName = "kweet-created-queue";
+    var exclusive = false;
+    var arguments = new Dictionary<string, object>();
+
+    channel.QueueDeclare(queueName, durable, exclusive, autoDelete, arguments);
+    channel.QueueBind(queueName, exchangeName, "kweet.created");
+
+    // Declare consumer
+    var consumer = new KweetCreatedEventConsumer(channel);
+    channel.BasicConsume(queueName, autoAck: false, consumer);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
