@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
 # Build the solution including the "Common" class library
-RUN dotnet restore
+RUN dotnet restore "Services/CustomerService/CustomerService.API/CustomerService.API.csproj"
 RUN dotnet publish -c Release -o out
 
 # Use a lightweight runtime image as the base image
