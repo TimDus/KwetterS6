@@ -26,7 +26,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerService.API", "Serv
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflow", "Workflow", "{32A8A403-972C-45EF-860E-302043508E02}"
 	ProjectSection(SolutionItems) = preProject
-		..\.github\workflows\dotnet-desktop.yml = ..\.github\workflows\dotnet-desktop.yml
+		..\.github\workflows\buildandpush.yml = ..\.github\workflows\buildandpush.yml
 	EndProjectSection
 EndProject
 Global

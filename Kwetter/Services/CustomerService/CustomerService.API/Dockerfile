@@ -9,7 +9,7 @@ COPY . ./
 
 # Build the solution including the "Common" class library
 RUN dotnet restore "./Kwetter/Services/CustomerService/CustomerService.API/CustomerService.API.csproj"
-RUN dotnet publish -c Release -o out
+RUN dotnet publish -c Release -o out "./Kwetter/Services/CustomerService/CustomerService.API/CustomerService.API.csproj"
 
 # Use a lightweight runtime image as the base image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime

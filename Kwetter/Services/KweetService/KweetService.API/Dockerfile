@@ -8,8 +8,8 @@ WORKDIR /app
 COPY . ./
 
 # Build the solution including the "Common" class library
-RUN dotnet restore "./KweetService.API.csproj"
-RUN dotnet publish -c Release -o out
+RUN dotnet restore "./Kwetter/Services/KweetService/KweetService.API/KweetService.API.csproj"
+RUN dotnet publish -c Release -o out "./Kwetter/Services/KweetService/KweetService.API/KweetService.API.csproj"
 
 # Use a lightweight runtime image as the base image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
