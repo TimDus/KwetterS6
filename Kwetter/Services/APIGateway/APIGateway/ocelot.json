@@ -7,8 +7,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "kweetapi",
-          "Port": 80
+          "Host": "kweetapi-1",
+          "Port": 8101
         }
       ],
       "DownstreamPathTemplate": "/api/Kweet",
@@ -22,8 +22,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "customerapi",
-          "Port": 80
+          "Host": "customerapi-1",
+          "Port": 8102
         }
       ],
       "DownstreamPathTemplate": "/api/Customer",
