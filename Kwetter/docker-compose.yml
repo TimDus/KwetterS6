@@ -44,3 +44,13 @@ services:
       - rabbitmq 
     depends_on:
       - rabbitmq
+
+  apigateway:
+    image: timdus/apigateway:latest
+    ports:
+      - 8100:80
+    networks:
+      - backend
+      - rabbitmq 
+    depends_on:
+      - rabbitmq

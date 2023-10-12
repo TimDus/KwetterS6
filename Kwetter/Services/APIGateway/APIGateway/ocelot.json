@@ -11,7 +11,8 @@
           "Port": 80
         }
       ],
-      "DownstreamPathTemplate": "/api/Kweet"
+      "DownstreamPathTemplate": "/api/Kweet",
+      "SwaggerKey": "kweet"
     },
 
     //Customer
@@ -25,7 +26,30 @@
           "Port": 80
         }
       ],
-      "DownstreamPathTemplate": "/api/Customer"
+      "DownstreamPathTemplate": "/api/Customer",
+      "SwaggerKey": "customer"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "kweet",
+      "Config": [
+        {
+          "Name": "Kweet API",
+          "Version": "v1",
+          "Url": "http://localhost:5100/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "customer",
+      "Config": [
+        {
+          "Name": "Orders API",
+          "Version": "v1",
+          "Url": "http://localhost:5200/swagger/v1/swagger.json"
+        }
+      ]
     }
   ],
   //Global config
