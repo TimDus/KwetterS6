@@ -51,6 +51,6 @@ services:
       - 8100:80
     networks:
       - backend
-      - rabbitmq 
     depends_on:
-      - rabbitmq
+      - customerapi
+      - kweetapi
