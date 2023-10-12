@@ -46,7 +46,7 @@ services:
       - rabbitmq
 
   apigateway:
-    image: timdus/apigateway:latest
+    image: timdus/kwettergateway:latest
     ports:
       - 8100:80
     networks:

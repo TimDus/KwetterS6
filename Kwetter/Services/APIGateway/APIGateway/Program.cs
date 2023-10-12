@@ -10,6 +10,8 @@ builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
     .AddEnvironmentVariables();
 builder.Services.AddOcelot(builder.Configuration);
 
+builder.Services.AddControllers();
+
 builder.Services.AddSwaggerForOcelot(builder.Configuration);
 
 var app = builder.Build();
