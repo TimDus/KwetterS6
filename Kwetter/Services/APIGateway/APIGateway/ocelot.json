@@ -37,7 +37,7 @@
         {
           "Name": "Kweet API",
           "Version": "v1",
-          "Url": "http://localhost:5100/swagger/v1/swagger.json"
+          "Url": "http://localhost:8101/swagger/v1/swagger.json"
         }
       ]
     },
@@ -47,7 +47,7 @@
         {
           "Name": "Orders API",
           "Version": "v1",
-          "Url": "http://localhost:5200/swagger/v1/swagger.json"
+          "Url": "http://localhost:8102/swagger/v1/swagger.json"
         }
       ]
     }
