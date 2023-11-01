@@ -10,6 +10,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KweetService", "KweetService", "{0262AAF0-9685-4BD0-95D0-F56C787B70F3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KweetService.API", "Services\KweetService\KweetService.API\KweetService.API.csproj", "{C4EE2C76-EC8B-4E85-A22E-1AA006AC5D19}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F9EB89E2-380F-4A2F-82D9-9D9B43575999} = {F9EB89E2-380F-4A2F-82D9-9D9B43575999}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIGateway", "APIGateway", "{8C235A7A-35D8-4C72-877B-C9398AC3E4C3}"
 EndProject
@@ -23,11 +26,18 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CustomerService", "CustomerService", "{952358B0-296B-444E-B952-E4F312DB8BB4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerService.API", "Services\CustomerService\CustomerService.API\CustomerService.API.csproj", "{D6F6DBE7-93DD-48EF-B5F8-F62D819B453B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F9EB89E2-380F-4A2F-82D9-9D9B43575999} = {F9EB89E2-380F-4A2F-82D9-9D9B43575999}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflow", "Workflow", "{32A8A403-972C-45EF-860E-302043508E02}"
 	ProjectSection(SolutionItems) = preProject
 		..\.github\workflows\buildandpush.yml = ..\.github\workflows\buildandpush.yml
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{AC60A371-71DA-4159-8EE0-2B514E2EEDDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{F9EB89E2-380F-4A2F-82D9-9D9B43575999}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +57,10 @@ Global
 		{D6F6DBE7-93DD-48EF-B5F8-F62D819B453B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6F6DBE7-93DD-48EF-B5F8-F62D819B453B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6F6DBE7-93DD-48EF-B5F8-F62D819B453B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9EB89E2-380F-4A2F-82D9-9D9B43575999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9EB89E2-380F-4A2F-82D9-9D9B43575999}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9EB89E2-380F-4A2F-82D9-9D9B43575999}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9EB89E2-380F-4A2F-82D9-9D9B43575999}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +72,8 @@ Global
 		{CE7F3C1D-8B6F-40FB-8DE2-6E2C3785AFC4} = {8C235A7A-35D8-4C72-877B-C9398AC3E4C3}
 		{952358B0-296B-444E-B952-E4F312DB8BB4} = {E871D6F0-64B4-4855-91E1-6677D25692A6}
 		{D6F6DBE7-93DD-48EF-B5F8-F62D819B453B} = {952358B0-296B-444E-B952-E4F312DB8BB4}
+		{AC60A371-71DA-4159-8EE0-2B514E2EEDDE} = {E871D6F0-64B4-4855-91E1-6677D25692A6}
+		{F9EB89E2-380F-4A2F-82D9-9D9B43575999} = {AC60A371-71DA-4159-8EE0-2B514E2EEDDE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2B5A65A9-0857-4D6D-9876-59B6E417394B}

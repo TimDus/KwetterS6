@@ -1,4 +1,11 @@
+<<<<<<< Updated upstream
 using Microsoft.AspNetCore.Hosting;
+=======
+using KweetService.API.CommandHandler;
+using KweetService.API.Logic;
+using KweetService.API.Temp;
+using MediatR;
+>>>>>>> Stashed changes
 using Polly;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Exceptions;
@@ -14,12 +21,21 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddTransient<IRequestHandler<CreateKweetCommand>, CreateKweetCommandHandler>();
+builder.Services.AddTransient<IKweetLogic, KweetLogic>();
+
 builder.Services.AddSingleton<IConnection>(sp =>
 {
     var factory = new ConnectionFactory()
     {
+<<<<<<< Updated upstream
         //HostName = "localhost",
         HostName = "rabbitmq",
+=======
+        HostName = "localhost",
+        //HostName = "rabbitmq",
+>>>>>>> Stashed changes
         Port = 5672,
         UserName = "guest",
         Password = "guest",

@@ -18,8 +18,13 @@ builder.Services.AddSingleton<IConnection>(sp =>
 {
     var factory = new ConnectionFactory()
     {
+<<<<<<< Updated upstream
         //HostName = "localhost",
         HostName = "rabbitmq",
+=======
+        HostName = "localhost",
+        //HostName = "rabbitmq",
+>>>>>>> Stashed changes
         Port = 5672,
         UserName = "guest",
         Password = "guest",

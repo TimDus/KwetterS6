@@ -2,7 +2,7 @@
 
 namespace KweetService.API.Temp
 {
-    public class CreateKwetCommand : IRequest
+    public class CreateKweetCommand : IRequest
     {
         public Guid Id { get; set; }
         public string Kweet { get; set; }

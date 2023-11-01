@@ -3,19 +3,21 @@ using System.Text.Json;
 using System.Text;
 using RabbitMQ.Client.Events;
 using Microsoft.Extensions.Configuration;
+using Common;
 
 namespace CustomerService.API.Temp
 {
     public class KweetCreatedEventConsumer : AsyncEventingBasicConsumer
     {
-        public KweetCreatedEventConsumer(IModel model) : base(model){}
+        public KweetCreatedEventConsumer(IModel model) : base(model)
+        {}
 
-        public async Task HandleBasicDeliver(string consumerTag, ulong deliveryTag, bool redelivered, string exchange, string routingKey, IBasicProperties properties, ReadOnlyMemory<byte> body)
+        public override async Task HandleBasicDeliver(string consumerTag, ulong deliveryTag, bool redelivered, string exchange, string routingKey, IBasicProperties properties, ReadOnlyMemory<byte> body)
         {
             var json = Encoding.UTF8.GetString(body.ToArray());
-            var postCreateEvent = JsonSerializer.Deserialize<KweetCreatedEvent>(json);
+            var kweetCreateEvent = JsonSerializer.Deserialize<KweetCreateEvent>(json);
 
-            Console.WriteLine(postCreateEvent.kweet);
+            Console.WriteLine(kweetCreateEvent.Kweet);
 
             Model.BasicAck(deliveryTag, false);
         }

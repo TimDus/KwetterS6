@@ -1,3 +1,4 @@
+using KweetService.API.Logic;
 using KweetService.API.Temp;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -10,24 +11,22 @@ namespace KweetService.API.Controllers
     [Route("api/[controller]")]
     public class KweetController : ControllerBase
     {
-        private readonly IMediator _mediator;
-        public KweetController(IMediator mediator)
+        private readonly IKweetLogic _kweetLogic;
+
+        public KweetController(IKweetLogic kweetLogic)
         {
-            _mediator = mediator;
+            _kweetLogic = kweetLogic;
         }
 
         [HttpPost]
         public ActionResult Create(string kweet)
         {
-
-            var command = new CreateKwetCommand
+            var kweetEntity = new KweetEntity
             {
-                Id = Guid.NewGuid(),
-                CreatedDate = DateTime.Now,
                 Kweet = kweet
             };
 
-            _mediator.Send(command);
+            _kweetLogic.CreateKweetLogic(kweetEntity);
 
             // Return a 200 OK response
             return Ok();

@@ -1,8 +1,6 @@
-﻿using MediatR;
-
-namespace KweetService.API.Temp
+﻿namespace Common
 {
-    public class CreateKwetCommand : IRequest
+    public class KweetCreateEvent
     {
         public Guid Id { get; set; }
         public string Kweet { get; set; }
