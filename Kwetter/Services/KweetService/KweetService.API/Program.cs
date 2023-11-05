@@ -2,6 +2,7 @@ using KweetService.API.CommandHandler;
 using KweetService.API.Logic;
 using KweetService.API.Temp;
 using MediatR;
+using Microsoft.OpenApi.Models;
 using Polly;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Exceptions;
@@ -14,19 +15,37 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "KweetService",
+        Description = "KweetService API for Kwetter",
+
+    });
+});
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddTransient<IRequestHandler<CreateKweetCommand>, CreateKweetCommandHandler>();
 builder.Services.AddTransient<IKweetLogic, KweetLogic>();
 
+string rmqName;
+
+if (builder.Environment.IsDevelopment())
+{
+    rmqName = "localhost";
+} else
+{
+    rmqName = "rabbitmq";
+}
+
 builder.Services.AddSingleton<IConnection>(sp =>
 {
     var factory = new ConnectionFactory()
     {
-        HostName = "localhost",
-        //HostName = "rabbitmq",
+        HostName = rmqName, 
         Port = 5672,
         UserName = "guest",
         Password = "guest",
@@ -79,11 +98,21 @@ using (var scope = app.Services.CreateScope())
 
 // Configure the HTTP request pipeline.
 
-    app.UseSwagger();
-    app.UseSwaggerUI();
+app.UseSwagger(c =>
+{
+    c.SerializeAsV2 = true;
+});
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "KweetApi V1");
+});
 
-
+app.UseRouting();
 app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 app.MapControllers();
 

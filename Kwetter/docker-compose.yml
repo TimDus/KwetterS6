@@ -34,6 +34,18 @@ services:
       - rabbitmq 
     depends_on:
       - rabbitmq
+      - kweetdb
+
+  kweetdb:
+    container_name: kweet-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+     - ACCEPT_EULA=Y
+     - SA_PASSWORD=Test123!
+    networks:
+     - backend
+    ports:
+     - 8001:1433
 
   customerapi:
     image: timdus/customerapi:latest
@@ -42,8 +54,46 @@ services:
     networks:
       - backend
       - rabbitmq 
+    environment:
+     - DB_HOST=customerdb
+     - DB_NAME=customer
+     - DB_SA_PASSWORD=Test123!
     depends_on:
       - rabbitmq
+      - customerdb
+
+  customerdb:
+    container_name: customer-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+     - ACCEPT_EULA=Y
+     - SA_PASSWORD=Test123!
+    networks:
+     - backend
+    ports:
+     - 8002:1433
+
+  followapi:
+    image: timdus/followapi:latest
+    ports:
+      - 8103:80
+    networks:
+      - backend
+      - rabbitmq 
+    depends_on:
+      - rabbitmq
+      - followdb
+
+  followdb:
+    container_name: follow-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+     - ACCEPT_EULA=Y
+     - SA_PASSWORD=Test123!
+    networks:
+     - backend
+    ports:
+     - 8003:1433
 
   apigateway:
     image: timdus/kwettergateway:latest
@@ -51,6 +101,4 @@ services:
       - 8100:80
     networks:
       - backend
-    depends_on:
-      - customerapi
-      - kweetapi
+      - frontend
