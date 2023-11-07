@@ -1,18 +1,18 @@
 {
   "Routes": [
-    //Kweet
+    //Customer
     {
-      "UpstreamPathTemplate": "/api/Kweet",
+      "UpstreamPathTemplate": "/api/Follow",
       "UpstreamHttpMethod": [ "GET", "POST" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 8101
+          "Port": 8103
         }
       ],
-      "DownstreamPathTemplate": "/api/Kweet",
-      "SwaggerKey": "kweet"
+      "DownstreamPathTemplate": "/api/Follow",
+      "SwaggerKey": "follow"
     }
   ]
 }

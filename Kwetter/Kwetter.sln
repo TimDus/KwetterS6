@@ -41,7 +41,24 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FollowService", "FollowService", "{9E4B5A01-FEBE-4C63-9984-7CE825F56EA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FollowService.API", "Services\FollowService\FollowService.API\FollowService.API.csproj", "{39DF3D68-7395-49AD-97E5-529B243768E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FollowService.API", "Services\FollowService\FollowService.API\FollowService.API.csproj", "{39DF3D68-7395-49AD-97E5-529B243768E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", "{ADA318F3-D9B9-4B09-8A39-069B18E83A19}"
+	ProjectSection(SolutionItems) = preProject
+		..\Kubernetes\kwetternamespace.yaml = ..\Kubernetes\kwetternamespace.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AD321D73-43BF-4C82-A0ED-8E51DF02F0E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KweetService", "KweetService", "{5A19069E-0D36-4D30-8BC2-27FCC5F04A53}"
+	ProjectSection(SolutionItems) = preProject
+		..\Kubernetes\Services\KweetService\kweetservice.deployment.yaml = ..\Kubernetes\Services\KweetService\kweetservice.deployment.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rabbitmq", "rabbitmq", "{9640A684-C5AF-4904-8536-EEFA088EFD68}"
+	ProjectSection(SolutionItems) = preProject
+		..\Kubernetes\rabbitmq\rabbitmq.deployment.yaml = ..\Kubernetes\rabbitmq\rabbitmq.deployment.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -84,6 +101,9 @@ Global
 		{F9EB89E2-380F-4A2F-82D9-9D9B43575999} = {AC60A371-71DA-4159-8EE0-2B514E2EEDDE}
 		{9E4B5A01-FEBE-4C63-9984-7CE825F56EA3} = {E871D6F0-64B4-4855-91E1-6677D25692A6}
 		{39DF3D68-7395-49AD-97E5-529B243768E3} = {9E4B5A01-FEBE-4C63-9984-7CE825F56EA3}
+		{AD321D73-43BF-4C82-A0ED-8E51DF02F0E4} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
+		{5A19069E-0D36-4D30-8BC2-27FCC5F04A53} = {AD321D73-43BF-4C82-A0ED-8E51DF02F0E4}
+		{9640A684-C5AF-4904-8536-EEFA088EFD68} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2B5A65A9-0857-4D6D-9876-59B6E417394B}

@@ -11,7 +11,7 @@
           "Port": 8102
         }
       ],
-      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamPathTemplate": "/api/Customer",
       "SwaggerKey": "customer"
     }
   ]

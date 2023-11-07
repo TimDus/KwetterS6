@@ -21,6 +21,17 @@
           "Url": "http://localhost:8102/swagger/v1/swagger.json"
         }
       ]
+    },
+    {
+      "Key": "follow",
+      "TransformByOcelotConfig": false,
+      "Config": [
+        {
+          "Name": "follow.API",
+          "Version": "1.0",
+          "Url": "http://localhost:8103/swagger/v1/swagger.json"
+        }
+      ]
     }
   ]
 }
