@@ -9,11 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{E8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KweetService", "KweetService", "{0262AAF0-9685-4BD0-95D0-F56C787B70F3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KweetService.API", "Services\KweetService\KweetService.API\KweetService.API.csproj", "{C4EE2C76-EC8B-4E85-A22E-1AA006AC5D19}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F9EB89E2-380F-4A2F-82D9-9D9B43575999} = {F9EB89E2-380F-4A2F-82D9-9D9B43575999}
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIGateway", "APIGateway", "{8C235A7A-35D8-4C72-877B-C9398AC3E4C3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIGateway", "Services\APIGateway\APIGateway\APIGateway.csproj", "{CE7F3C1D-8B6F-40FB-8DE2-6E2C3785AFC4}"
@@ -25,11 +20,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CustomerService", "CustomerService", "{952358B0-296B-444E-B952-E4F312DB8BB4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerService.API", "Services\CustomerService\CustomerService.API\CustomerService.API.csproj", "{D6F6DBE7-93DD-48EF-B5F8-F62D819B453B}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F9EB89E2-380F-4A2F-82D9-9D9B43575999} = {F9EB89E2-380F-4A2F-82D9-9D9B43575999}
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflow", "Workflow", "{32A8A403-972C-45EF-860E-302043508E02}"
 	ProjectSection(SolutionItems) = preProject
 		..\.github\workflows\buildandpush.yml = ..\.github\workflows\buildandpush.yml
@@ -37,11 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflow", "Workflow", "{32
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{AC60A371-71DA-4159-8EE0-2B514E2EEDDE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{F9EB89E2-380F-4A2F-82D9-9D9B43575999}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FollowService", "FollowService", "{9E4B5A01-FEBE-4C63-9984-7CE825F56EA3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FollowService.API", "Services\FollowService\FollowService.API\FollowService.API.csproj", "{39DF3D68-7395-49AD-97E5-529B243768E3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", "{ADA318F3-D9B9-4B09-8A39-069B18E83A19}"
 	ProjectSection(SolutionItems) = preProject
@@ -53,6 +39,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KweetService", "KweetService", "{5A19069E-0D36-4D30-8BC2-27FCC5F04A53}"
 	ProjectSection(SolutionItems) = preProject
 		..\Kubernetes\Services\KweetService\kweetservice.deployment.yaml = ..\Kubernetes\Services\KweetService\kweetservice.deployment.yaml
+		..\Kubernetes\Services\KweetService\kweetservicedb.deployment.yaml = ..\Kubernetes\Services\KweetService\kweetservicedb.deployment.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rabbitmq", "rabbitmq", "{9640A684-C5AF-4904-8536-EEFA088EFD68}"
@@ -60,50 +47,85 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rabbitmq", "rabbitmq", "{96
 		..\Kubernetes\rabbitmq\rabbitmq.deployment.yaml = ..\Kubernetes\rabbitmq\rabbitmq.deployment.yaml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FollowService", "FollowService", "{12D415B3-D6C0-4664-9531-34581FA40254}"
+	ProjectSection(SolutionItems) = preProject
+		..\Kubernetes\Services\FollowService\followservice.deployment.yaml = ..\Kubernetes\Services\FollowService\followservice.deployment.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CustomerService", "CustomerService", "{0F6B2377-FC9C-43A7-B40A-9EAEDD76BF48}"
+	ProjectSection(SolutionItems) = preProject
+		..\Kubernetes\Services\CustomerService\customerservice.deployment.yaml = ..\Kubernetes\Services\CustomerService\customerservice.deployment.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIGateway", "APIGateway", "{7584EB9E-0BE5-454D-99E9-4C48428E3B94}"
+	ProjectSection(SolutionItems) = preProject
+		..\Kubernetes\Services\APIGateway\apigateway.deployment.yaml = ..\Kubernetes\Services\APIGateway\apigateway.deployment.yaml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KweetService.API", "Services\KweetService\API\KweetService.API.csproj", "{E7BA8B17-2F60-4444-9711-E7670B22CE12}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5A936CB4-A4CE-455A-9F93-CE6705788B8E} = {5A936CB4-A4CE-455A-9F93-CE6705788B8E}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FollowService.API", "Services\FollowService\API\FollowService.API.csproj", "{A5581739-32A8-4527-BDEA-F61B1E153627}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5A936CB4-A4CE-455A-9F93-CE6705788B8E} = {5A936CB4-A4CE-455A-9F93-CE6705788B8E}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerService.API", "Services\CustomerService\API\CustomerService.API.csproj", "{42A3214E-78E5-4416-AEAF-2C88F9100E3F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5A936CB4-A4CE-455A-9F93-CE6705788B8E} = {5A936CB4-A4CE-455A-9F93-CE6705788B8E}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Services\Common\API\Common.csproj", "{5A936CB4-A4CE-455A-9F93-CE6705788B8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C4EE2C76-EC8B-4E85-A22E-1AA006AC5D19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C4EE2C76-EC8B-4E85-A22E-1AA006AC5D19}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C4EE2C76-EC8B-4E85-A22E-1AA006AC5D19}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C4EE2C76-EC8B-4E85-A22E-1AA006AC5D19}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CE7F3C1D-8B6F-40FB-8DE2-6E2C3785AFC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CE7F3C1D-8B6F-40FB-8DE2-6E2C3785AFC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE7F3C1D-8B6F-40FB-8DE2-6E2C3785AFC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE7F3C1D-8B6F-40FB-8DE2-6E2C3785AFC4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D6F6DBE7-93DD-48EF-B5F8-F62D819B453B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D6F6DBE7-93DD-48EF-B5F8-F62D819B453B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D6F6DBE7-93DD-48EF-B5F8-F62D819B453B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D6F6DBE7-93DD-48EF-B5F8-F62D819B453B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F9EB89E2-380F-4A2F-82D9-9D9B43575999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F9EB89E2-380F-4A2F-82D9-9D9B43575999}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F9EB89E2-380F-4A2F-82D9-9D9B43575999}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F9EB89E2-380F-4A2F-82D9-9D9B43575999}.Release|Any CPU.Build.0 = Release|Any CPU
-		{39DF3D68-7395-49AD-97E5-529B243768E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{39DF3D68-7395-49AD-97E5-529B243768E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{39DF3D68-7395-49AD-97E5-529B243768E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{39DF3D68-7395-49AD-97E5-529B243768E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7BA8B17-2F60-4444-9711-E7670B22CE12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7BA8B17-2F60-4444-9711-E7670B22CE12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7BA8B17-2F60-4444-9711-E7670B22CE12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7BA8B17-2F60-4444-9711-E7670B22CE12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5581739-32A8-4527-BDEA-F61B1E153627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5581739-32A8-4527-BDEA-F61B1E153627}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5581739-32A8-4527-BDEA-F61B1E153627}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5581739-32A8-4527-BDEA-F61B1E153627}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42A3214E-78E5-4416-AEAF-2C88F9100E3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42A3214E-78E5-4416-AEAF-2C88F9100E3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42A3214E-78E5-4416-AEAF-2C88F9100E3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42A3214E-78E5-4416-AEAF-2C88F9100E3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A936CB4-A4CE-455A-9F93-CE6705788B8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A936CB4-A4CE-455A-9F93-CE6705788B8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A936CB4-A4CE-455A-9F93-CE6705788B8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A936CB4-A4CE-455A-9F93-CE6705788B8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0262AAF0-9685-4BD0-95D0-F56C787B70F3} = {E871D6F0-64B4-4855-91E1-6677D25692A6}
-		{C4EE2C76-EC8B-4E85-A22E-1AA006AC5D19} = {0262AAF0-9685-4BD0-95D0-F56C787B70F3}
 		{8C235A7A-35D8-4C72-877B-C9398AC3E4C3} = {E871D6F0-64B4-4855-91E1-6677D25692A6}
 		{CE7F3C1D-8B6F-40FB-8DE2-6E2C3785AFC4} = {8C235A7A-35D8-4C72-877B-C9398AC3E4C3}
 		{952358B0-296B-444E-B952-E4F312DB8BB4} = {E871D6F0-64B4-4855-91E1-6677D25692A6}
-		{D6F6DBE7-93DD-48EF-B5F8-F62D819B453B} = {952358B0-296B-444E-B952-E4F312DB8BB4}
 		{AC60A371-71DA-4159-8EE0-2B514E2EEDDE} = {E871D6F0-64B4-4855-91E1-6677D25692A6}
-		{F9EB89E2-380F-4A2F-82D9-9D9B43575999} = {AC60A371-71DA-4159-8EE0-2B514E2EEDDE}
 		{9E4B5A01-FEBE-4C63-9984-7CE825F56EA3} = {E871D6F0-64B4-4855-91E1-6677D25692A6}
-		{39DF3D68-7395-49AD-97E5-529B243768E3} = {9E4B5A01-FEBE-4C63-9984-7CE825F56EA3}
 		{AD321D73-43BF-4C82-A0ED-8E51DF02F0E4} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
 		{5A19069E-0D36-4D30-8BC2-27FCC5F04A53} = {AD321D73-43BF-4C82-A0ED-8E51DF02F0E4}
 		{9640A684-C5AF-4904-8536-EEFA088EFD68} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
+		{12D415B3-D6C0-4664-9531-34581FA40254} = {AD321D73-43BF-4C82-A0ED-8E51DF02F0E4}
+		{0F6B2377-FC9C-43A7-B40A-9EAEDD76BF48} = {AD321D73-43BF-4C82-A0ED-8E51DF02F0E4}
+		{7584EB9E-0BE5-454D-99E9-4C48428E3B94} = {AD321D73-43BF-4C82-A0ED-8E51DF02F0E4}
+		{E7BA8B17-2F60-4444-9711-E7670B22CE12} = {0262AAF0-9685-4BD0-95D0-F56C787B70F3}
+		{A5581739-32A8-4527-BDEA-F61B1E153627} = {9E4B5A01-FEBE-4C63-9984-7CE825F56EA3}
+		{42A3214E-78E5-4416-AEAF-2C88F9100E3F} = {952358B0-296B-444E-B952-E4F312DB8BB4}
+		{5A936CB4-A4CE-455A-9F93-CE6705788B8E} = {AC60A371-71DA-4159-8EE0-2B514E2EEDDE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2B5A65A9-0857-4D6D-9876-59B6E417394B}

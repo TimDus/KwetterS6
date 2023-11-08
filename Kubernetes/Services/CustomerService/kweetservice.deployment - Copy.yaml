@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kweetapi
+  namespace: kwetter
+  labels:
+    app: kweetapi
+    service: kweetapi
+spec:
+  selector:
+    app: kweetapi-pod
+  ports:
+  - protocol: TCP
+    name: http
+    port: 80
+    targetPort: 80
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kweetapi
+  namespace: kwetter
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      app: kweetapi-pod
+      version: latest
+  template:
+    metadata:
+      labels:
+        app: kweetapi-pod
+        version: latest
+    spec:
+      containers:
+      - name: kweetapi-container
+        image: docker.io/timdus/kweetapi:latest
+        ports:
+        - containerPort: 7101
+        resources:
+          limits:   
+            memory: 512Mi
+            cpu: "1"

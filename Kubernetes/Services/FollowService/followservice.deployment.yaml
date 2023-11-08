@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: followapi-service
+spec:
+  selector:
+    app: api
+  ports:
+    - protocol: TCP
+      port: 7103
+      targetPort: 7103
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: followapi
+  namespace: kwetter
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      app: followapi-pod
+      version: latest
+  template:
+    metadata:
+      labels:
+        app: followapi-pod
+        version: latest
+    spec:
+      containers:
+      - name: followapi-container
+        image: docker.io/timdus/followapi:latest
+        ports:
+        - containerPort: 7103
+        resources:
+          limits:   
+            memory: 512Mi
+            cpu: "1"
