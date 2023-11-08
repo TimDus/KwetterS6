@@ -18,7 +18,7 @@ jobs:
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ env.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build and Push customerapi
       run: |
-        docker build -t ${{ env.DOCKERHUB_USERNAME }}/customerapi:latest -f ./Kwetter/Services/CustomerService/CustomerService.API/Dockerfile .
+        docker build -t ${{ env.DOCKERHUB_USERNAME }}/customerapi:latest -f ./Kwetter/Services/CustomerService/API/Dockerfile .
         docker push ${{ env.DOCKERHUB_USERNAME }}/customerapi:latest
 
   build_kweetapi:
@@ -30,7 +30,7 @@ jobs:
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ env.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build and Push kweetapi
       run: |
-        docker build -t ${{ env.DOCKERHUB_USERNAME }}/kweetapi:latest -f ./Kwetter/Services/KweetService/KweetService.API/Dockerfile .
+        docker build -t ${{ env.DOCKERHUB_USERNAME }}/kweetapi:latest -f ./Kwetter/Services/KweetService/API/Dockerfile .
         docker push ${{ env.DOCKERHUB_USERNAME }}/kweetapi:latest
 
   build_followapi:
@@ -42,7 +42,7 @@ jobs:
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ env.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build and Push followapi
       run: |
-        docker build -t ${{ env.DOCKERHUB_USERNAME }}/followapi:latest -f ./Kwetter/Services/FollowService/FollowService.API/Dockerfile .
+        docker build -t ${{ env.DOCKERHUB_USERNAME }}/followapi:latest -f ./Kwetter/Services/FollowService/API/Dockerfile .
         docker push ${{ env.DOCKERHUB_USERNAME }}/followapi:latest
 
   build_gateway:
