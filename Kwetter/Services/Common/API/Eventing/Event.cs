@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Common
+namespace Common.Eventing
 {
     public abstract class Event : IRequest
     {

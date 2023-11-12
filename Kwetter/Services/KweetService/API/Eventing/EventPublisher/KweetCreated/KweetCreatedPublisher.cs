@@ -1,11 +1,9 @@
-﻿using Common;
-using MediatR;
+﻿using MediatR;
 using RabbitMQ.Client;
 using System.Text.Json;
 using System.Text;
-using KweetService.API.EventPublisher.KweetCreated;
 
-namespace KweetService.API.EventPublisher.CreateKweet
+namespace KweetService.API.Eventing.EventPublisher.KweetCreated
 {
     public class KweetCreatedPublisher : IRequestHandler<KweetCreatedEvent>
     {
@@ -18,15 +16,7 @@ namespace KweetService.API.EventPublisher.CreateKweet
 
         public async Task Handle(KweetCreatedEvent request, CancellationToken cancellationToken)
         {
-            var @event = new KweetCreatedEvent
-            {
-                KweetId = request.KweetId,
-                Text = request.Text,
-                CustomerId = request.CustomerId,
-                KweetCreatedDate = request.KweetCreatedDate
-            };
-
-            await PublishEvent(@event);
+            await PublishEvent(request);
         }
 
         private async Task<bool> PublishEvent(KweetCreatedEvent @event)

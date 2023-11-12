@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace KweetService.API.EventPublisher.KweetUnliked
+namespace KweetService.API.Eventing.EventPublisher.KweetUnliked
 {
     public class KweetUnlikedEvent : IRequest
     {

@@ -16,17 +16,26 @@ namespace KweetService.API.Controllers
             _kweetLogic = kweetLogic;
         }
 
-        [HttpPost]
-        public ActionResult Create([FromBody] KweetDTO kweetDTO)
+        [HttpPost("Create")]
+        public async Task<ActionResult> Create([FromBody] KweetDTO kweetDTO)
         {
-            var kweetEntity = new KweetEntity
-            {
-                Text = kweetDTO.Text,
-                CustomerId = kweetDTO.CustomerId,
-                CreatedDate = kweetDTO.CreatedDate
-            };
+            await _kweetLogic.CreateKweetLogic(kweetDTO);
 
-            _kweetLogic.CreateKweetLogic(kweetEntity);
+            // Return a 200 OK response
+            return Ok();
+        }
+
+        [HttpPost("Like")]
+        public ActionResult Like([FromBody] KweetDTO kweetDTO)
+        {
+
+            // Return a 200 OK response
+            return Ok();
+        }
+
+        [HttpPost("Unlike")]
+        public ActionResult Unlike([FromBody] KweetDTO kweetDTO)
+        {
 
             // Return a 200 OK response
             return Ok();

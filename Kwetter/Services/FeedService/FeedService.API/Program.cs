@@ -1,11 +1,6 @@
-using KweetService.API;
-using KweetService.API.Eventing.EventPublisher.KweetCreated;
-using KweetService.API.Eventing.EventPublisher.KweetLiked;
-using KweetService.API.Eventing.EventPublisher.KweetUnliked;
-using KweetService.API.Eventing.EventReceiver.CustomerCreated;
-using KweetService.API.Logic;
-using KweetService.API.Repositories;
-using MediatR;
+using FeedService.API.Eventing.EventReceiver.KweetCreated;
+using FeedService.API.Logic;
+using FeedService.API.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Polly;
@@ -26,18 +21,15 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "KweetService",
-        Description = "KweetService API for Kwetter",
+        Title = "FeedService",
+        Description = "FeedService API for Kwetter",
 
     });
 });
 
 //Dependencies
-builder.Services.AddTransient<IRequestHandler<KweetCreatedEvent>, KweetCreatedPublisher>();
-builder.Services.AddTransient<IRequestHandler<KweetLikedEvent>, KweetLikedPublisher>();
-builder.Services.AddTransient<IRequestHandler<KweetUnlikedEvent>, KweetUnlikedPublisher>();
-builder.Services.AddTransient<IKweetLogic, KweetLogic>();
-builder.Services.AddScoped<IKweetRepository, KweetRepository>();
+builder.Services.AddTransient<IFeedLogic, FeedLogic>();
+builder.Services.AddScoped<IFeedRepository, FeedRepository>();
 
 //Messaging
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
@@ -47,7 +39,8 @@ string rmqName;
 if (builder.Environment.IsDevelopment())
 {
     rmqName = "localhost";
-} else
+}
+else
 {
     rmqName = "rabbitmq";
 }
@@ -56,7 +49,7 @@ builder.Services.AddSingleton<IConnection>(sp =>
 {
     var factory = new ConnectionFactory()
     {
-        HostName = rmqName, 
+        HostName = rmqName,
         Port = 5672,
         UserName = "guest",
         Password = "guest",
@@ -100,57 +93,42 @@ if (builder.Environment.IsDevelopment())
 }
 else
 {
-    #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
     dbHost = Environment.GetEnvironmentVariable("DB_HOST");
     dbName = Environment.GetEnvironmentVariable("DB_NAME");
     dbPassword = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
-    #pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 }
 
 var connectionString = $"Data Source={dbHost};Initial Catalog={dbName};User ID=sa;Password={dbPassword};TrustServerCertificate=true";
 
-builder.Services.AddDbContext<KweetDbContext>(opt => opt.UseSqlServer(connectionString));
+builder.Services.AddDbContext<FeedDbContext>(opt => opt.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
 //rabbitmq channels
 using (var scope = app.Services.CreateScope())
 {
-    //general settings
+    // Declare the exchange
     var connection = scope.ServiceProvider.GetRequiredService<IConnection>();
+    var channel = connection.CreateModel();
+    var exchangeName = "kweet-created-exchange";
+    var exchangeType = ExchangeType.Topic;
     var durable = true;
     var autoDelete = false;
-    var channel = connection.CreateModel();
+
+    channel.ExchangeDeclare(exchangeName, exchangeType, durable, autoDelete);
+
+    // Declare a queue and bind it to the exchange
+    var queueName = "kweet-created-queue";
     var exclusive = false;
     var arguments = new Dictionary<string, object>();
-    var exchangeType = ExchangeType.Topic;
 
-    //kweet created
-    var exchangeName = "kweet-created-exchange";
-    var queueName = "kweet-created-queue";
-    
-    channel.ExchangeDeclare(exchangeName, exchangeType, durable, autoDelete);
     channel.QueueDeclare(queueName, durable, exclusive, autoDelete, arguments);
     channel.QueueBind(queueName, exchangeName, "kweet.created");
 
-    //kweet liked
-    exchangeName = "kweet-liked-exchange";
-    queueName = "kweet-liked-queue";
-    
-    channel.ExchangeDeclare(exchangeName, exchangeType, durable, autoDelete);
-    channel.QueueDeclare(queueName, durable, exclusive, autoDelete, arguments);
-    channel.QueueBind(queueName, exchangeName, "kweet.liked");
-
-    //kweet unliked
-    exchangeName = "kweet-unliked-exchange";
-    queueName = "kweet-unliked-queue";
-
-    channel.ExchangeDeclare(exchangeName, exchangeType, durable, autoDelete);
-    channel.QueueDeclare(queueName, durable, exclusive, autoDelete, arguments);
-    channel.QueueBind(queueName, exchangeName, "kweet.unliked");
-
     // Declare consumer
-    var consumer = new CustomerCreatedConsumer(channel);
+    var consumer = new KweetCreatedConsumer(channel);
     channel.BasicConsume(queueName, autoAck: false, consumer);
 }
 

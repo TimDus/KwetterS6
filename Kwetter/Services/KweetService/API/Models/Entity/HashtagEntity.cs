@@ -3,7 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KweetService.API.Models.Entity
 {
-    public class KweetLikeEntity
+    [Table("Hashtag", Schema = "dbo")]
+    public class HashtagEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -12,13 +13,15 @@ namespace KweetService.API.Models.Entity
 
         [ForeignKey("kweet")]
         [Column("kweetid")]
-        public int KwetId { get; set; }
+        public int KweetId { get; set; }
 
-        [ForeignKey("customer")]
-        [Column("customerid")]
-        public int CustomerId { get; set; }
+        [Column("tag")]
+        public string Tag { get; set; }
 
-        [Column("likeddatetime")]
-        public DateTime LikedDateTime { get; set; }
+        public HashtagEntity(string tag, int kweetId)
+        {
+            Tag = tag;
+            KweetId = kweetId;
+        }
     }
 }

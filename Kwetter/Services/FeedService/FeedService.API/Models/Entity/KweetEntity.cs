@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace KweetService.API.Models.Entity
+namespace FeedService.API.Models.Entity
 {
     public class KweetEntity
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]
         public long Id { get; set; }
 
@@ -20,10 +19,10 @@ namespace KweetService.API.Models.Entity
         [Column("createddate")]
         public DateTime CreatedDate { get; set; }
 
-        public ICollection<HashtagEntity>? Hashtags { get; set; }
+        //public ICollection<HashtagEntity>? Hashtags { get; set; }
 
-        public ICollection<MentionEntity>? Mentions { get; set; }
+        //public ICollection<MentionEntity>? Mentions { get; set; }
 
-        public ICollection<KweetLikeEntity>? Likes { get; set; }
+        //public ICollection<KweetLikeEntity>? Likes { get; set; }
     }
 }

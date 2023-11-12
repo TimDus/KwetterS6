@@ -1,4 +1,3 @@
-using CustomerService.API.Temp;
 using Microsoft.OpenApi.Models;
 using Polly;
 using RabbitMQ.Client;
@@ -79,7 +78,7 @@ using (var scope = app.Services.CreateScope())
     var connection = scope.ServiceProvider.GetRequiredService<IConnection>();
     var channel = connection.CreateModel();
     var exchangeName = "kweet-created-exchange";
-    var exchangeType = ExchangeType.Direct;
+    var exchangeType = ExchangeType.Topic;
     var durable = true;
     var autoDelete = false;
 
@@ -92,10 +91,6 @@ using (var scope = app.Services.CreateScope())
 
     channel.QueueDeclare(queueName, durable, exclusive, autoDelete, arguments);
     channel.QueueBind(queueName, exchangeName, "kweet.created");
-
-    // Declare consumer
-    var consumer = new KweetCreatedEventConsumer(channel);
-    channel.BasicConsume(queueName, autoAck: false, consumer);
 }
 
 // Configure the HTTP request pipeline.

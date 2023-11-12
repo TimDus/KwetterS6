@@ -1,10 +1,9 @@
-﻿using KweetService.API.EventPublisher.KweetCreated;
-using MediatR;
+﻿using MediatR;
 using RabbitMQ.Client;
 using System.Text.Json;
 using System.Text;
 
-namespace KweetService.API.EventPublisher.KweetUnliked
+namespace KweetService.API.Eventing.EventPublisher.KweetUnliked
 {
     public class KweetUnlikedPublisher : IRequestHandler<KweetUnlikedEvent>
     {

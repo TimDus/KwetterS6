@@ -1,10 +1,9 @@
-﻿using KweetService.API.EventPublisher.KweetCreated;
-using MediatR;
+﻿using MediatR;
 using RabbitMQ.Client;
 using System.Text.Json;
 using System.Text;
 
-namespace KweetService.API.EventPublisher.Kweetliked
+namespace KweetService.API.Eventing.EventPublisher.KweetLiked
 {
     public class KweetLikedPublisher : IRequestHandler<KweetLikedEvent>
     {

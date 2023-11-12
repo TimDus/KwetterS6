@@ -1,6 +1,6 @@
-﻿using Common;
+﻿using Common.Eventing;
 
-namespace KweetService.API.EventPublisher.KweetCreated
+namespace FeedService.API.Eventing.EventReceiver.KweetCreated
 {
     public class KweetCreatedEvent : Event
     {

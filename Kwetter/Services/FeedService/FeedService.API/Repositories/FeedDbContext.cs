@@ -1,13 +1,13 @@
-﻿using KweetService.API.Models.Entity;
+﻿using FeedService.API.Models.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace KweetService.API
+namespace FeedService.API.Repositories
 {
-    public class KweetDbContext : DbContext
+    public class FeedDbContext : DbContext
     {
-        public KweetDbContext(DbContextOptions<KweetDbContext> dbContextOptions) : base(dbContextOptions)
+        public FeedDbContext(DbContextOptions<FeedDbContext> dbContextOptions) : base(dbContextOptions)
         {
             try
             {
@@ -26,12 +26,12 @@ namespace KweetService.API
 
         public DbSet<KweetEntity> Kweets { get; set; }
 
-        public DbSet<KweetLikeEntity> KweetLikes { get; set; }
+        //public DbSet<KweetLikeEntity> KweetLikes { get; set; }
 
-        public DbSet<CustomerEntity> Customers { get; set; }
+        //public DbSet<CustomerEntity> Customers { get; set; }
 
-        public DbSet<MentionEntity> Mentions { get; set; }
+        //public DbSet<MentionEntity> Mentions { get; set; }
 
-        public DbSet<HashtagEntity> Hashtags { get; set; }
+        //public DbSet<HashtagEntity> Hashtags { get; set; }
     }
 }
