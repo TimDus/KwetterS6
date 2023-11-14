@@ -1,10 +1,8 @@
 using BFF.Web.Config;
-using Microsoft.Extensions.Configuration;
 using MMLib.SwaggerForOcelot.DependencyInjection;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Provider.Polly;
-using Ocelot.Values;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +12,6 @@ if (builder.Environment.IsDevelopment())
 {
     routes = "Routes.Development";
 }
-
 
 builder.Configuration.AddOcelotWithSwaggerSupport(options =>
 {
@@ -42,7 +39,6 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseSwagger();
-
 
 app.UseHttpsRedirection();
 
