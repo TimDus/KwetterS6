@@ -8,7 +8,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "followapi",
-          "Port": 8103
+          "Port": 80
         }
       ],
       "DownstreamPathTemplate": "/api/Follow",
