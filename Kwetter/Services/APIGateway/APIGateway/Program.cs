@@ -8,11 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 var routes = "Routes";
 
-if (builder.Environment.IsDevelopment())
-{
-    routes = "Development";
-}
-
 builder.Configuration.AddOcelotWithSwaggerSupport(options =>
 {
     options.Folder = routes;
