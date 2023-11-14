@@ -94,6 +94,17 @@ services:
      - backend
     ports:
      - 8003:1433
+  
+  feedapi:
+    image: timdus/feedapi:latest
+    ports:
+      - 8104:80
+    networks:
+      - backend
+      - rabbitmq 
+    depends_on:
+      - rabbitmq
+      - feeddb
 
   feeddb:
     container_name: feed-db
