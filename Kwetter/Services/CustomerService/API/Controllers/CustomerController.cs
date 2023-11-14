@@ -7,9 +7,15 @@ namespace CustomerService.API.Controllers
     public class CustomerController : ControllerBase
     {
 
-        [HttpPost]
+        [HttpPost("Create")]
         public ActionResult Create(String customer)
         {
+            return Ok();
+        }
+
+        [HttpPut("Update")]
+        public ActionResult Update(String customer)
+        {   
             return Ok();
         }
     }

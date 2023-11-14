@@ -2,8 +2,21 @@
   "Routes": [
     //Customer
     {
-      "UpstreamPathTemplate": "/api/Customer",
-      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "UpstreamPathTemplate": "/api/Customer/Create",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8102
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Customer",
+      "SwaggerKey": "customer"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Customer/Update",
+      "UpstreamHttpMethod": [ "PUT" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
