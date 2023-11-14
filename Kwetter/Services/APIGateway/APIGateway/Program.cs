@@ -10,7 +10,7 @@ var routes = "Routes";
 
 if (builder.Environment.IsDevelopment())
 {
-    routes = "Routes.Development";
+    routes = "Development";
 }
 
 builder.Configuration.AddOcelotWithSwaggerSupport(options =>
