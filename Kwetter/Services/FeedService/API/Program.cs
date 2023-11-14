@@ -46,7 +46,7 @@ string dbHost;
 string dbName;
 string dbPassword;
 
-if (builder.Environment.IsDevelopment())
+if (builder.Environment.IsDevelopment() && Environment.GetEnvironmentVariable("DOCKER") != "Docker")
 {
     dbHost = builder.Configuration.GetValue<string>("Database:DB_HOST");
     dbName = builder.Configuration.GetValue<string>("Database:DB_NAME");
@@ -57,7 +57,7 @@ else
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
     dbHost = Environment.GetEnvironmentVariable("DB_HOST");
     dbName = Environment.GetEnvironmentVariable("DB_NAME");
-    dbPassword = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
+    dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
 #pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 }
 
