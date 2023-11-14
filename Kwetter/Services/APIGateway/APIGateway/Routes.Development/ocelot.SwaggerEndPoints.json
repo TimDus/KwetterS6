@@ -7,7 +7,7 @@
         {
           "Name": "kweet.API",
           "Version": "1.0",
-          "Url": "http://kweetapi-1:8101/swagger/v1/swagger.json"
+          "Url": "http://localhost:8101/swagger/v1/swagger.json"
         }
       ]
     },
@@ -18,7 +18,7 @@
         {
           "Name": "customer.API",
           "Version": "1.0",
-          "Url": "http://customerapi-1:8102/swagger/v1/swagger.json"
+          "Url": "http://localhost:8102/swagger/v1/swagger.json"
         }
       ]
     },
@@ -29,7 +29,7 @@
         {
           "Name": "follow.API",
           "Version": "1.0",
-          "Url": "http://followapi-1:8103/swagger/v1/swagger.json"
+          "Url": "http://localhost:8103/swagger/v1/swagger.json"
         }
       ]
     },
@@ -40,7 +40,7 @@
         {
           "Name": "feed.API",
           "Version": "1.0",
-          "Url": "http://feedapi-1:8104/swagger/v1/swagger.json"
+          "Url": "http://localhost:8104/swagger/v1/swagger.json"
         }
       ]
     }

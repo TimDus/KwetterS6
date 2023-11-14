@@ -95,6 +95,17 @@ services:
     ports:
      - 8003:1433
 
+  feeddb:
+    container_name: feed-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+     - ACCEPT_EULA=Y
+     - SA_PASSWORD=Test123!
+    networks:
+     - backend
+    ports:
+     - 8004:1433
+
   apigateway:
     image: timdus/kwettergateway:latest
     ports:

@@ -7,7 +7,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "feedapi-1",
+          "Host": "localhost",
           "Port": 8104
         }
       ],

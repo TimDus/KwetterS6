@@ -21,6 +21,7 @@
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Eventing\EventPublisher\" />
+    <Folder Include="Eventing\EventReceiver\Setup\" />
     <Folder Include="Models\DTO\" />
   </ItemGroup>
 
