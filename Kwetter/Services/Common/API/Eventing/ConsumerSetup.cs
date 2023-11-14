@@ -11,6 +11,7 @@ namespace Common.Eventing
         {
             _configuration = options.Value;
         }
+
         public IConnection CreateChannel()
         {
             ConnectionFactory connection = new ConnectionFactory()

@@ -45,6 +45,18 @@ jobs:
         docker build -t ${{ env.DOCKERHUB_USERNAME }}/followapi:latest -f ./Kwetter/Services/FollowService/API/Dockerfile .
         docker push ${{ env.DOCKERHUB_USERNAME }}/followapi:latest
 
+  build_feedapi:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ env.DOCKERHUB_USERNAME }} --password-stdin
+    - name: Build and Push feedapi
+      run: |
+        docker build -t ${{ env.DOCKERHUB_USERNAME }}/feedapi:latest -f ./Kwetter/Services/FeedService/API/Dockerfile .
+        docker push ${{ env.DOCKERHUB_USERNAME }}/feedapi:latest
+
   build_gateway:
     runs-on: ubuntu-latest
     steps:

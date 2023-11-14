@@ -24,6 +24,12 @@ services:
         interval: 10s
         timeout: 10s
         retries: 3
+    depends_on:
+      - followdb
+      - kweetdb
+      - customerdb
+      - feeddb
+
 
   kweetapi:
     image: timdus/kweetapi:latest
@@ -33,8 +39,8 @@ services:
       - backend
       - rabbitmq 
     depends_on:
-      - rabbitmq
-      - kweetdb
+      rabbitmq: 
+        condition: service_healthy
 
   kweetdb:
     container_name: kweet-db
@@ -59,8 +65,8 @@ services:
      - DB_NAME=customer
      - DB_SA_PASSWORD=Test123!
     depends_on:
-      - rabbitmq
-      - customerdb
+      rabbitmq: 
+        condition: service_healthy
 
   customerdb:
     container_name: customer-db
@@ -81,8 +87,8 @@ services:
       - backend
       - rabbitmq 
     depends_on:
-      - rabbitmq
-      - followdb
+      rabbitmq: 
+        condition: service_healthy
 
   followdb:
     container_name: follow-db
@@ -103,8 +109,8 @@ services:
       - backend
       - rabbitmq 
     depends_on:
-      - rabbitmq
-      - feeddb
+      rabbitmq: 
+        condition: service_healthy
 
   feeddb:
     container_name: feed-db

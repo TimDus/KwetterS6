@@ -1,5 +1,5 @@
 {
   "GlobalConfiguration": {
-    "BaseUrl": "http://apigateway-1:800"
+    "BaseUrl": "http://apigateway:800"
   }
 }
