@@ -1,5 +1,4 @@
 ﻿using Common.Interfaces;
-using KweetService.API.Eventing.EventPublisher.KweetCreated;
 
 namespace FeedService.API.Eventing.EventConsumer.KweetCreated
 {

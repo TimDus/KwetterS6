@@ -1,7 +1,6 @@
 ﻿using RabbitMQ.Client.Events;
 using RabbitMQ.Client;
 using Common.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
 using FeedService.API.Repositories;
 
 namespace FeedService.API.Eventing.EventConsumer.KweetLiked
