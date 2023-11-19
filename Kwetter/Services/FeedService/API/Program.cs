@@ -34,8 +34,8 @@ builder.Services.AddTransient<IFeedLogic, FeedLogic>();
 builder.Services.AddScoped<IFeedRepository, FeedRepository>();
 
 builder.Services.AddSingleton<IConsumerSetup, ConsumerSetup>();
-builder.Services.AddSingleton<IConsumer<KweetCreatedEvent>, KweetCreatedConsumer>();
-builder.Services.AddHostedService<KweetCreatedHosted>();
+builder.Services.AddSingleton<IConsumer<KweetLikedEvent>, KweetCreatedConsumer>();
+builder.Services.AddHostedService<KweetLikedHosted>();
 
 //Messaging
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));

@@ -1,5 +1,7 @@
-﻿using KweetService.API.Models.Entity;
+﻿using KweetService.API.Models.DTO;
+using KweetService.API.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace KweetService.API.Repositories
 {
@@ -28,9 +30,12 @@ namespace KweetService.API.Repositories
             return _kweetDbContext.Kweets.Where(a => a.Id == obj.Id).FirstOrDefault();
         }
 
-        public Task Delete(int id)
+        public async Task Delete(KweetEntity obj)
         {
-            throw new NotImplementedException();
+            _kweetDbContext.Kweets.Remove(obj);
+            await _kweetDbContext.SaveChangesAsync();
+
+            return;
         }
 
         public Task<KweetEntity> GetById(int id)
@@ -38,20 +43,35 @@ namespace KweetService.API.Repositories
             throw new NotImplementedException();
         }
 
-        public Task LikeKweet(int id)
+        public async Task<KweetLikeEntity> LikeKweet(KweetLikeEntity obj)
         {
-            throw new NotImplementedException();
+            await _kweetDbContext.KweetLikes.AddAsync(obj);
+            await _kweetDbContext.SaveChangesAsync();
+
+            try
+            {
+                return _kweetDbContext.KweetLikes.Where(a => a.Id == obj.Id).FirstOrDefault();
+            }
+            catch
+            {
+                return new KweetLikeEntity();
+            }
         }
 
-        public Task UnlikeKweet(int id)
+        public async Task<KweetLikeEntity> UnlikeKweet(KweetLikeEntity obj)
         {
-            throw new NotImplementedException();
-            //return Task.CompletedTask;
+            _kweetDbContext.KweetLikes.Remove(obj);
+            await _kweetDbContext.SaveChangesAsync();
+
+            return _kweetDbContext.KweetLikes.Where(a => a.Id == obj.Id).FirstOrDefault();
         }
 
-        public Task Update(KweetEntity obj)
+        public async Task<KweetEntity> Update(KweetEntity obj)
         {
-            throw new NotImplementedException();
+            _kweetDbContext.Kweets.Update(obj);
+            await _kweetDbContext.SaveChangesAsync();
+
+            return _kweetDbContext.Kweets.Where(a => a.Id == obj.Id).FirstOrDefault();
         }
     }
 }

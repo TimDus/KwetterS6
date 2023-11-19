@@ -3,22 +3,20 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KweetService.API.Models.Entity
 {
+    [Table("KweetLike", Schema = "dbo")]
     public class KweetLikeEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
         public int Id { get; set; }
 
-        [ForeignKey("kweet")]
-        [Column("kweetid")]
-        public int KwetId { get; set; }
+        public int CustomersId { get; set; }
+        public int KweetsId { get; set; }
 
-        [ForeignKey("customer")]
-        [Column("customerid")]
-        public int CustomerId { get; set; }
+        public CustomerEntity Customer { get; set; }
 
-        [Column("likeddatetime")]
+        public KweetEntity Kweet { get; set; }
+
         public DateTime LikedDateTime { get; set; }
     }
 }

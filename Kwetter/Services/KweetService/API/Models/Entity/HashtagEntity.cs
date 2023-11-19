@@ -8,20 +8,10 @@ namespace KweetService.API.Models.Entity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
         public int Id { get; set; }
 
-        [ForeignKey("kweet")]
-        [Column("kweetid")]
-        public int KweetId { get; set; }
+        public KweetEntity Kweet { get; set; }
 
-        [Column("tag")]
         public string Tag { get; set; }
-
-        public HashtagEntity(string tag, int kweetId)
-        {
-            Tag = tag;
-            KweetId = kweetId;
-        }
     }
 }

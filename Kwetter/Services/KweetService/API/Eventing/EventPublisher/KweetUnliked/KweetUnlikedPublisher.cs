@@ -14,20 +14,16 @@ namespace KweetService.API.Eventing.EventPublisher.KweetUnliked
             _connection = connection;
         }
 
-        public async Task Handle(KweetUnlikedEvent request, CancellationToken cancellationToken)
+        public async Task Handle(KweetUnlikedEvent @event, CancellationToken cancellationToken)
         {
-            var @event = new KweetUnlikedEvent
-            {
-            };
-
             await PublishEvent(@event);
         }
 
         private async Task<bool> PublishEvent(KweetUnlikedEvent @event)
         {
             var channel = _connection.CreateModel();
-            var exchangeName = "kweet-created-exchange";
-            var routingKey = "kweet.created";
+            var exchangeName = "kweet-unliked-exchange";
+            var routingKey = "kweet.unliked";
             var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(@event));
             channel.BasicPublish(exchangeName, routingKey, null, body);
 

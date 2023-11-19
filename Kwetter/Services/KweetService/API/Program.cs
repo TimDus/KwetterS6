@@ -1,8 +1,6 @@
-using KweetService.API;
 using KweetService.API.Eventing.EventPublisher.KweetCreated;
 using KweetService.API.Eventing.EventPublisher.KweetLiked;
 using KweetService.API.Eventing.EventPublisher.KweetUnliked;
-using KweetService.API.Eventing.EventReceiver.CustomerCreated;
 using KweetService.API.Logic;
 using KweetService.API.Repositories;
 using MediatR;
@@ -38,6 +36,7 @@ builder.Services.AddTransient<IRequestHandler<KweetLikedEvent>, KweetLikedPublis
 builder.Services.AddTransient<IRequestHandler<KweetUnlikedEvent>, KweetUnlikedPublisher>();
 builder.Services.AddTransient<IKweetLogic, KweetLogic>();
 builder.Services.AddScoped<IKweetRepository, KweetRepository>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //Messaging
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
@@ -148,10 +147,6 @@ using (var scope = app.Services.CreateScope())
     channel.ExchangeDeclare(exchangeName, exchangeType, durable, autoDelete);
     channel.QueueDeclare(queueName, durable, exclusive, autoDelete, arguments);
     channel.QueueBind(queueName, exchangeName, "kweet.unliked");
-
-    // Declare consumer
-    var consumer = new CustomerCreatedConsumer(channel);
-    channel.BasicConsume(queueName, autoAck: false, consumer);
 }
 
 // Configure the HTTP request pipeline.

@@ -2,8 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
+using System.Data;
 
-namespace KweetService.API
+namespace KweetService.API.Repositories
 {
     public class KweetDbContext : DbContext
     {
@@ -23,6 +24,20 @@ namespace KweetService.API
                 Console.WriteLine(ex.Message);
             }
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CustomerEntity>()
+                .HasMany(c => c.LikedKweets)
+                .WithOne(kl => kl.Customer)
+                .OnDelete(DeleteBehavior.ClientCascade);
+
+            modelBuilder.Entity<CustomerEntity>()
+                .HasMany(c => c.MentionedBy)
+                .WithOne(m => m.Customer)
+                .OnDelete(DeleteBehavior.ClientCascade);
+        }
+
 
         public DbSet<KweetEntity> Kweets { get; set; }
 

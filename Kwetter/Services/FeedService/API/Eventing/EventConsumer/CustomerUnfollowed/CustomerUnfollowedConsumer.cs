@@ -1,30 +1,29 @@
-﻿using RabbitMQ.Client.Events;
-using RabbitMQ.Client;
-using Common.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Common.Interfaces;
 using FeedService.API.Repositories;
+using RabbitMQ.Client.Events;
+using RabbitMQ.Client;
 
-namespace FeedService.API.Eventing.EventReceiver.KweetCreated
+namespace FeedService.API.Eventing.EventConsumer.CustomerUnfollowed
 {
-    public class KweetCreatedConsumer : IConsumer<KweetCreatedEvent>, IDisposable
+    public class CustomerUnfollowedConsumer : IConsumer<CustomerUnfollowedEvent>, IDisposable
     {
         private readonly IModel _model;
         private readonly IConnection _connection;
         private readonly IServiceProvider _serviceProvider;
 
-        public KweetCreatedConsumer(IConsumerSetup setup, IServiceProvider serviceProvider)
+        public CustomerUnfollowedConsumer(IConsumerSetup setup, IServiceProvider serviceProvider)
         {
             _connection = setup.CreateChannel();
             _model = _connection.CreateModel();
             _model.QueueDeclare(_queueName, durable: true, exclusive: false, autoDelete: false);
-            _model.ExchangeDeclare("kweet-created-exchange", ExchangeType.Topic, durable: true, autoDelete: false);
-            _model.QueueBind(_queueName, "kweet-created-exchange", string.Empty);
+            _model.ExchangeDeclare("customer-followed-exchange", ExchangeType.Topic, durable: true, autoDelete: false);
+            _model.QueueBind(_queueName, "customer-followed-exchange", string.Empty);
             _serviceProvider = serviceProvider;
         }
 
-        const string _queueName = "kweet-created-queue";
+        const string _queueName = "customer-followed-queue";
 
-        public async Task<KweetCreatedEvent> ReadMessages()
+        public async Task<CustomerUnfollowedEvent> ReadMessages()
         {
             using (var scope = _serviceProvider.CreateScope()) // this will use `IServiceScopeFactory` internally
             {
@@ -41,7 +40,7 @@ namespace FeedService.API.Eventing.EventReceiver.KweetCreated
             };
             _model.BasicConsume(_queueName, false, consumer);
             await Task.CompletedTask;
-            return new KweetCreatedEvent();
+            return new CustomerUnfollowedEvent();
         }
 
         public void Dispose()

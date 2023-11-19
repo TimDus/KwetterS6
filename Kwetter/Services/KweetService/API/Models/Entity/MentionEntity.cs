@@ -3,20 +3,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KweetService.API.Models.Entity
 {
+    [Table("Mention", Schema = "dbo")]
     public class MentionEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
         public int Id { get; set; }
-        
-        [ForeignKey("customer")]
-        [Column("customerid")]
-        public int CustomerId { get; set; }
 
-        [ForeignKey("kweet")]
-        [Column("kweetid")]
-        public int KweetId { get; set; }
+        public CustomerEntity Customer { get; set; }
+
+        public KweetEntity Kweet { get; set; }
 
     }
 }

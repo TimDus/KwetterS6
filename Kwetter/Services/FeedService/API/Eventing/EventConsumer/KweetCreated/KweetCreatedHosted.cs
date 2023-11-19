@@ -1,7 +1,7 @@
 ﻿using Common.Interfaces;
-using FeedService.API.Repositories;
+using KweetService.API.Eventing.EventPublisher.KweetCreated;
 
-namespace FeedService.API.Eventing.EventReceiver.KweetCreated
+namespace FeedService.API.Eventing.EventConsumer.KweetCreated
 {
     public class KweetCreatedHosted : BackgroundService
     {

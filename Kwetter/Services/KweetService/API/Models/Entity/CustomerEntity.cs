@@ -3,23 +3,25 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KweetService.API.Models.Entity
 {
+    [Table("Customer", Schema = "dbo")]
     public class CustomerEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
         public int Id { get; set; }
 
-        [Column("accountid")]
-        public int CustomerId { get; set; }
+        public int AccountId { get; set; }
+
+        public string DisplayName { get; set; }
+
+        public string CustomerName { get; set; }
+
+        public string CustomerProfilePicture { get; set; }
 
         public ICollection<KweetEntity>? Kweets { get; set; }
 
-        public ICollection<KweetLikeEntity>? Likes { get; set; }
+        public ICollection<KweetLikeEntity>? LikedKweets { get; set; }
 
-        public CustomerEntity(int customerId)
-        {
-            CustomerId = customerId;
-        }
+        public ICollection<MentionEntity>? MentionedBy { get; set; }
     }
 }

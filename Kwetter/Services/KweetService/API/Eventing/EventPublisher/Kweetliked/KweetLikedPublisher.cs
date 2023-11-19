@@ -14,12 +14,8 @@ namespace KweetService.API.Eventing.EventPublisher.KweetLiked
             _connection = connection;
         }
 
-        public async Task Handle(KweetLikedEvent request, CancellationToken cancellationToken)
+        public async Task Handle(KweetLikedEvent @event, CancellationToken cancellationToken)
         {
-            var @event = new KweetLikedEvent
-            {
-            };
-
             await PublishEvent(@event);
         }
 

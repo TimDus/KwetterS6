@@ -6,8 +6,10 @@ namespace KweetService.API.Logic
     {
         Task<KweetDTO> CreateKweetLogic(KweetDTO kweet);
 
-        Task<KweetDTO> LikeKweetLogic(KweetDTO kweet);
+        Task<KweetLikeDTO> LikeKweetLogic(KweetLikeDTO kweetLikeDTO);
 
-        Task<KweetDTO> UnlikeKweetLogic(KweetDTO kweet);
+        Task<KweetLikeDTO> UnlikeKweetLogic(KweetLikeDTO kweetLikeDTO);
+
+        Task AddUser();
     }
 }

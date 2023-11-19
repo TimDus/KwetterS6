@@ -17,25 +17,33 @@ namespace KweetService.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<ActionResult> Create([FromBody] KweetDTO kweetDTO)
+        public async Task<KweetDTO> Create([FromBody] KweetDTO kweetDTO)
         {
-            await _kweetLogic.CreateKweetLogic(kweetDTO);
-
-            // Return a 200 OK response
-            return Ok();
+            return await _kweetLogic.CreateKweetLogic(kweetDTO);
         }
 
         [HttpPost("Like")]
-        public ActionResult Like([FromBody] KweetDTO kweetDTO)
+        public async Task<ActionResult> Like([FromBody] KweetLikeDTO kweetLikeDTO)
         {
+            await _kweetLogic.LikeKweetLogic(kweetLikeDTO);
 
             // Return a 200 OK response
             return Ok();
         }
 
         [HttpPost("Unlike")]
-        public ActionResult Unlike([FromBody] KweetDTO kweetDTO)
+        public async Task<ActionResult> Unlike([FromBody] KweetLikeDTO kweetLikeDTO)
         {
+            await _kweetLogic.UnlikeKweetLogic(kweetLikeDTO);
+
+            // Return a 200 OK response
+            return Ok();
+        }
+
+        [HttpGet("DummyUser")]
+        public async Task<ActionResult> DummyUser()
+        {
+            await _kweetLogic.AddUser();
 
             // Return a 200 OK response
             return Ok();
