@@ -11,9 +11,9 @@ namespace FeedService.API.Eventing.EventConsumer.CustomerFollowed
         private readonly IConnection _connection;
         private readonly IServiceProvider _serviceProvider;
 
-        public CustomerFollowedConsumer(IConsumerSetup setup, IServiceProvider serviceProvider)
+        public CustomerFollowedConsumer(IServiceProvider serviceProvider)
         {
-            _connection = setup.CreateChannel();
+            _connection = serviceProvider.GetRequiredService<IConnection>();
             _model = _connection.CreateModel();
             _model.QueueDeclare(_queueName, durable: true, exclusive: false, autoDelete: false);
             _model.ExchangeDeclare("customer-followed-exchange", ExchangeType.Topic, durable: true, autoDelete: false);

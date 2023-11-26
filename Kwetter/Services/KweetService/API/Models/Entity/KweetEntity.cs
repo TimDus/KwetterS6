@@ -10,6 +10,7 @@ namespace KweetService.API.Models.Entity
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [ForeignKey("CustomerEntityId")]
         public CustomerEntity Customer { get; set; }
 
         public string Text { get; set; }

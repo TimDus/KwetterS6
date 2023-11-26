@@ -1,4 +1,4 @@
-﻿namespace KweetService.API.Eventing.EventReceiver.CustomerCreated
+﻿namespace FeedService.API.Eventing.EventConsumer.CustomerCreated
 {
     public class CustomerCreatedEvent
     {

@@ -1,9 +1,9 @@
-﻿using RabbitMQ.Client.Events;
+﻿using Common.Interfaces;
+using FeedService.API.Repositories;
 using RabbitMQ.Client;
-using KweetService.API.Repositories;
-using Common.Interfaces;
+using RabbitMQ.Client.Events;
 
-namespace KweetService.API.Eventing.EventReceiver.CustomerCreated
+namespace FeedService.API.Eventing.EventConsumer.CustomerCreated
 {
     public class CustomerCreatedConsumer : IConsumer<CustomerCreatedEvent>, IDisposable
     {
@@ -27,7 +27,7 @@ namespace KweetService.API.Eventing.EventReceiver.CustomerCreated
         {
             using (var scope = _serviceProvider.CreateScope()) // this will use `IServiceScopeFactory` internally
             {
-                var context = scope.ServiceProvider.GetService<IKweetRepository>();
+                var context = scope.ServiceProvider.GetService<IFeedRepository>();
             }
             var consumer = new AsyncEventingBasicConsumer(_model);
             consumer.Received += async (ch, ea) =>

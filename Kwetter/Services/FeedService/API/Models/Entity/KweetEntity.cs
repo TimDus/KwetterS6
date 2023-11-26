@@ -6,8 +6,12 @@ namespace FeedService.API.Models.Entity
     public class KweetEntity
     {
         [Key]
-        [Column("id")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
+
+        [Key]
+        [Column("id")]
+        public long KweetCreatedId { get; set; }
 
         [ForeignKey("customer")]
         [Column("customerid")]

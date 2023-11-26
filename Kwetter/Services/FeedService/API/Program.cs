@@ -1,13 +1,16 @@
 using Common.Eventing;
 using Common.Interfaces;
-using FeedService.API.Eventing.EventReceiver.KweetCreated;
+using FeedService.API.Eventing.EventConsumer.CustomerFollowed;
+using FeedService.API.Eventing.EventConsumer.CustomerUnfollowed;
+using FeedService.API.Eventing.EventConsumer.KweetCreated;
+using FeedService.API.Eventing.EventConsumer.KweetLiked;
 using FeedService.API.Logic;
 using FeedService.API.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Polly;
-using RabbitMQ.Client;
 using RabbitMQ.Client.Exceptions;
+using RabbitMQ.Client;
 using System.Net.Sockets;
 using System.Reflection;
 
@@ -33,13 +36,57 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddTransient<IFeedLogic, FeedLogic>();
 builder.Services.AddScoped<IFeedRepository, FeedRepository>();
 
-builder.Services.AddSingleton<IConsumerSetup, ConsumerSetup>();
-builder.Services.AddSingleton<IConsumer<KweetLikedEvent>, KweetCreatedConsumer>();
+builder.Services.AddSingleton<IConsumer<KweetCreatedEvent>, KweetCreatedConsumer>();
+builder.Services.AddHostedService<KweetCreatedHosted>();
+
+builder.Services.AddSingleton<IConsumer<KweetLikedEvent>, KweetLikedConsumer>();
 builder.Services.AddHostedService<KweetLikedHosted>();
+
+builder.Services.AddSingleton<IConsumer<CustomerFollowedEvent>, CustomerFollowedConsumer>();
+builder.Services.AddHostedService<CustomerFollowedHosted>();
+
+builder.Services.AddSingleton<IConsumer<CustomerUnfollowedEvent>, CustomerUnfollowedConsumer>();
+builder.Services.AddHostedService<CustomerUnfollowedHosted>();
 
 //Messaging
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.Configure<RabbitMqConfiguration>(builder.Configuration.GetSection("RabbitMqConfiguration"));
+
+builder.Services.AddSingleton<IConnection>(sp =>
+{
+    var factory = new ConnectionFactory()
+    {
+        VirtualHost = "mnidiotp",
+        HostName = "cow-01.rmq2.cloudamqp.com",
+        Port = 5672,
+        UserName = "mnidiotp",
+        Password = "k4l71JcIUK-t-Z2YSdOr1sr27eRCIH8T",
+        DispatchConsumersAsync = true
+    };
+
+    var retryPolicy = Policy.Handle<SocketException>()
+        .WaitAndRetry(new[]
+        {
+            TimeSpan.FromSeconds(1),
+            TimeSpan.FromSeconds(2),
+            TimeSpan.FromSeconds(3)
+        });
+
+    return retryPolicy.Execute(() =>
+    {
+        while (true)
+        {
+            try
+            {
+                return factory.CreateConnection();
+            }
+            catch (Exception ex) when (ex is SocketException || ex is BrokerUnreachableException)
+            {
+                Console.WriteLine("RabbitMQ Client is trying to connect...");
+            }
+        }
+    });
+});
 
 //Datbase Context
 string dbHost;

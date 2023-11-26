@@ -1,8 +1,14 @@
+using CustomerService.API.Eventing.EventPublisher.CustomerCreated;
+using CustomerService.API.Logic;
+using CustomerService.API.Repositories;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Polly;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Exceptions;
 using System.Net.Sockets;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,25 +28,24 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-string rmqName;
+//Dependencies
+builder.Services.AddTransient<IRequestHandler<CustomerCreatedEvent>, CustomerCreatedPublisher>();
+builder.Services.AddTransient<ICustomerLogic, CustomerLogic>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-if (builder.Environment.IsDevelopment())
-{
-    rmqName = "localhost";
-}
-else
-{
-    rmqName = "rabbitmq";
-}
+//Messaging
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
 builder.Services.AddSingleton<IConnection>(sp =>
 {
     var factory = new ConnectionFactory()
     {
-        HostName = rmqName,
+        VirtualHost = "mnidiotp",
+        HostName = "cow-01.rmq2.cloudamqp.com",
         Port = 5672,
-        UserName = "guest",
-        Password = "guest",
+        UserName = "mnidiotp",
+        Password = "k4l71JcIUK-t-Z2YSdOr1sr27eRCIH8T",
         DispatchConsumersAsync = true
     };
 
@@ -68,6 +73,29 @@ builder.Services.AddSingleton<IConnection>(sp =>
     });
 });
 
+//Datbase Context
+string dbHost;
+string dbName;
+string dbPassword;
+
+if (builder.Environment.IsDevelopment() && Environment.GetEnvironmentVariable("DOCKER") != "Docker")
+{
+    dbHost = builder.Configuration.GetValue<string>("Database:DB_HOST");
+    dbName = builder.Configuration.GetValue<string>("Database:DB_NAME");
+    dbPassword = builder.Configuration.GetValue<string>("Database:DB_PASSWORD");
+}
+else
+{
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+    dbHost = Environment.GetEnvironmentVariable("DB_HOST");
+    dbName = Environment.GetEnvironmentVariable("DB_NAME");
+    dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+}
+
+var connectionString = $"Data Source={dbHost};Initial Catalog={dbName};User ID=sa;Password={dbPassword};TrustServerCertificate=true";
+
+builder.Services.AddDbContext<CustomerDBContext>(opt => opt.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
@@ -77,7 +105,7 @@ using (var scope = app.Services.CreateScope())
     // Declare the exchange
     var connection = scope.ServiceProvider.GetRequiredService<IConnection>();
     var channel = connection.CreateModel();
-    var exchangeName = "kweet-created-exchange";
+    var exchangeName = "customer-created-exchange";
     var exchangeType = ExchangeType.Topic;
     var durable = true;
     var autoDelete = false;
@@ -85,12 +113,12 @@ using (var scope = app.Services.CreateScope())
     channel.ExchangeDeclare(exchangeName, exchangeType, durable, autoDelete);
 
     // Declare a queue and bind it to the exchange
-    var queueName = "kweet-created-queue";
+    var queueName = "customer-created-queue";
     var exclusive = false;
     var arguments = new Dictionary<string, object>();
 
     channel.QueueDeclare(queueName, durable, exclusive, autoDelete, arguments);
-    channel.QueueBind(queueName, exchangeName, "kweet.created");
+    channel.QueueBind(queueName, exchangeName, "customer.created");
 }
 
 // Configure the HTTP request pipeline.

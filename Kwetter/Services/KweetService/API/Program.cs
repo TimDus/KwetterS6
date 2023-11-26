@@ -41,24 +41,15 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 //Messaging
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
-string rmqName;
-
-if (builder.Environment.IsDevelopment())
-{
-    rmqName = "localhost";
-} else
-{
-    rmqName = "rabbitmq";
-}
-
 builder.Services.AddSingleton<IConnection>(sp =>
 {
     var factory = new ConnectionFactory()
     {
-        HostName = rmqName, 
+        VirtualHost = "mnidiotp",
+        HostName = "cow-01.rmq2.cloudamqp.com", 
         Port = 5672,
-        UserName = "guest",
-        Password = "guest",
+        UserName = "mnidiotp",
+        Password = "k4l71JcIUK-t-Z2YSdOr1sr27eRCIH8T",
         DispatchConsumersAsync = true
     };
 

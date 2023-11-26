@@ -34,7 +34,7 @@ services:
   kweetapi:
     image: timdus/kweetapi:latest
     ports:
-      - 8101:80
+      - 8102:80
     networks:
       - backend
       - rabbitmq 
@@ -56,12 +56,12 @@ services:
     networks:
      - backend
     ports:
-     - 8001:1433
+     - 8002:1433
 
   customerapi:
     image: timdus/customerapi:latest
     ports:
-      - 8102:80
+      - 8101:80
     networks:
       - backend
       - rabbitmq 
@@ -83,7 +83,7 @@ services:
     networks:
      - backend
     ports:
-     - 8002:1433
+     - 8001:1433
 
   followapi:
     image: timdus/followapi:latest

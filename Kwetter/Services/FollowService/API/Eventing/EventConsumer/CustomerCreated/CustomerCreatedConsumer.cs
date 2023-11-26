@@ -1,9 +1,9 @@
-﻿using RabbitMQ.Client.Events;
+﻿using Common.Interfaces;
+using RabbitMQ.Client.Events;
 using RabbitMQ.Client;
-using KweetService.API.Repositories;
-using Common.Interfaces;
+using FollowService.API.Repositories;
 
-namespace KweetService.API.Eventing.EventReceiver.CustomerCreated
+namespace FollowService.API.Eventing.EventConsumer.CustomerCreated
 {
     public class CustomerCreatedConsumer : IConsumer<CustomerCreatedEvent>, IDisposable
     {
@@ -16,8 +16,8 @@ namespace KweetService.API.Eventing.EventReceiver.CustomerCreated
             _connection = serviceProvider.GetRequiredService<IConnection>();
             _model = _connection.CreateModel();
             _model.QueueDeclare(_queueName, durable: true, exclusive: false, autoDelete: false);
-            _model.ExchangeDeclare("customer-followed-exchange", ExchangeType.Topic, durable: true, autoDelete: false);
-            _model.QueueBind(_queueName, "customer-followed-exchange", string.Empty);
+            _model.ExchangeDeclare("customer-created-exchange", ExchangeType.Topic, durable: true, autoDelete: false);
+            _model.QueueBind(_queueName, "customer-created-exchange", string.Empty);
             _serviceProvider = serviceProvider;
         }
 
@@ -25,10 +25,6 @@ namespace KweetService.API.Eventing.EventReceiver.CustomerCreated
 
         public async Task<CustomerCreatedEvent> ReadMessages()
         {
-            using (var scope = _serviceProvider.CreateScope()) // this will use `IServiceScopeFactory` internally
-            {
-                var context = scope.ServiceProvider.GetService<IKweetRepository>();
-            }
             var consumer = new AsyncEventingBasicConsumer(_model);
             consumer.Received += async (ch, ea) =>
             {

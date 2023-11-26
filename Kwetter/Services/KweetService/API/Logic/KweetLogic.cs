@@ -38,7 +38,7 @@ namespace KweetService.API.Logic
 
             await _mediator.Send(kweet);
 
-            return kweetDTO;
+            return _mapper.Map<KweetDTO>(kweetEntity);
         }
 
         public async Task<KweetLikeDTO> LikeKweetLogic(KweetLikeDTO kweetLikeDTO)
@@ -81,7 +81,7 @@ namespace KweetService.API.Logic
 
         public async Task AddUser()
         {
-            await _repository.AddCustomer(new CustomerEntity() { AccountId = 1 });
+            await _repository.AddCustomer(new CustomerEntity());
         }
     }
 }

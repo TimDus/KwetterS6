@@ -54,7 +54,7 @@ namespace FollowService.API.Repositories
             return await _followDbContext.Follows.Where(a => a.FollowerId == accountId).ToListAsync();
         }
 
-        public Task Update(FollowEntity obj)
+        public Task<FollowEntity> Update(FollowEntity obj)
         {
             throw new NotImplementedException();
         }

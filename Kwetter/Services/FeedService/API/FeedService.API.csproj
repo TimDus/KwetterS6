@@ -27,7 +27,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\API\Common.csproj" />
-    <ProjectReference Include="..\..\KweetService\API\KweetService.API.csproj" />
   </ItemGroup>
 
 </Project>

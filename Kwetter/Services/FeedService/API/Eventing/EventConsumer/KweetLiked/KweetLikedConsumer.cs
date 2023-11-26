@@ -11,9 +11,9 @@ namespace FeedService.API.Eventing.EventConsumer.KweetLiked
         private readonly IConnection _connection;
         private readonly IServiceProvider _serviceProvider;
 
-        public KweetLikedConsumer(IConsumerSetup setup, IServiceProvider serviceProvider)
+        public KweetLikedConsumer(IServiceProvider serviceProvider)
         {
-            _connection = setup.CreateChannel();
+            _connection = serviceProvider.GetRequiredService<IConnection>();
             _model = _connection.CreateModel();
             _model.QueueDeclare(_queueName, durable: true, exclusive: false, autoDelete: false);
             _model.ExchangeDeclare("kweet-liked-exchange", ExchangeType.Topic, durable: true, autoDelete: false);
