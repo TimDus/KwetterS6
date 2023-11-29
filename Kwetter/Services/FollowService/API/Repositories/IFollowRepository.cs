@@ -9,6 +9,8 @@ namespace FollowService.API.Repositories
 
         Task<List<FollowEntity>> GetFollowing(int accountId);
 
-        Task<CustomerEntity> AddCustomer(CustomerEntity obj);
+        Task<CustomerEntity> CreateCustomer(CustomerEntity obj);
+
+        Task<CustomerEntity> GetCustomer(int id);
     }
 }

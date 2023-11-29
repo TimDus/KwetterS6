@@ -11,61 +11,48 @@ namespace FeedService.API.Eventing.EventConsumer.KweetCreated
     public class KweetCreatedConsumer : IConsumer<KweetCreatedEvent>, IDisposable
     {
         private readonly IModel _model;
-        private readonly IConnection _connection;
         private readonly IServiceProvider _serviceProvider;
+        const string _queueName = "kweet-created-queue";
 
         public KweetCreatedConsumer(IServiceProvider serviceProvider)
         {
-            _connection = serviceProvider.GetRequiredService<IConnection>();
-            _model = _connection.CreateModel();
+            _model = serviceProvider.GetRequiredService<IConnection>().CreateModel();
             _model.QueueDeclare(_queueName, durable: true, exclusive: false, autoDelete: false);
             _model.ExchangeDeclare("kweet-created-exchange", ExchangeType.Topic, durable: true, autoDelete: false);
             _model.QueueBind(_queueName, "kweet-created-exchange", string.Empty);
             _serviceProvider = serviceProvider;
         }
 
-        const string _queueName = "kweet-created-queue";
-
         public async Task<KweetCreatedEvent> ReadMessages()
         {
-            IFeedRepository _repository;
-            using (var scope = _serviceProvider.CreateScope()) // this will use `IServiceScopeFactory` internally
-            {
-                _repository = scope.ServiceProvider.GetService<IFeedRepository>();
-            }
+            KweetCreatedEvent kweetCreatedEvent = new();
             var consumer = new AsyncEventingBasicConsumer(_model);
             consumer.Received += async (ch, ea) =>
             {
                 var body = ea.Body.ToArray();
-                var text = System.Text.Encoding.UTF8.GetString(body);
                 var json = Encoding.UTF8.GetString(body.ToArray());
-                var kweetCreatedEvent = JsonSerializer.Deserialize<KweetCreatedEvent>(json);
+                kweetCreatedEvent = JsonSerializer.Deserialize<KweetCreatedEvent>(json);
 
-                KweetEntity kweet = new KweetEntity()
+                KweetEntity kweet = new(kweetCreatedEvent.KweetId, kweetCreatedEvent.Text, kweetCreatedEvent.KweetCreatedDate);
+
+                using (var scope = _serviceProvider.CreateScope()) // this will use `IServiceScopeFactory` internally
                 {
-                    KweetCreatedId = kweetCreatedEvent.KweetId,
-                    CreatedDate = kweetCreatedEvent.KweetCreatedDate,
-                    CustomerId = kweetCreatedEvent.CustomerId,
-                    Text = kweetCreatedEvent.Text
-                };
+                    var _repository = scope.ServiceProvider.GetService<IFeedRepository>();
 
-                _repository.AddKweet(kweet);
+                    kweet.Customer = await _repository.GetCustomer(kweetCreatedEvent.CustomerId);
+                    await _repository.CreateKweet(kweet);
+                }
 
-                Console.WriteLine(text);
-                await Task.CompletedTask;
                 _model.BasicAck(ea.DeliveryTag, false);
             };
             _model.BasicConsume(_queueName, false, consumer);
-            await Task.CompletedTask;
-            return new KweetCreatedEvent();
+            return kweetCreatedEvent;
         }
 
         public void Dispose()
         {
             if (_model.IsOpen)
                 _model.Close();
-            if (_connection.IsOpen)
-                _connection.Close();
         }
     }
 }

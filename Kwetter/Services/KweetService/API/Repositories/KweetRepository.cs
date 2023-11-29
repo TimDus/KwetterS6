@@ -14,12 +14,12 @@ namespace KweetService.API.Repositories
             _kweetDbContext = kweetDbContext;
         }
 
-        public async Task<CustomerEntity> AddCustomer(CustomerEntity obj)
+        public async Task<CustomerEntity> CreateCustomer(CustomerEntity obj)
         {
             await _kweetDbContext.Customers.AddAsync(obj);
             await _kweetDbContext.SaveChangesAsync();
 
-            return _kweetDbContext.Customers.Where(a => a.Id == obj.Id).FirstOrDefault();
+            return await _kweetDbContext.Customers.Where(a => a.Id == obj.Id).FirstOrDefaultAsync();
         }
 
         public async Task<KweetEntity> Create(KweetEntity obj)
@@ -27,7 +27,7 @@ namespace KweetService.API.Repositories
             await _kweetDbContext.Kweets.AddAsync(obj);
             await _kweetDbContext.SaveChangesAsync();
 
-            return _kweetDbContext.Kweets.Where(a => a.Id == obj.Id).FirstOrDefault();
+            return await _kweetDbContext.Kweets.Where(a => a.Id == obj.Id).FirstOrDefaultAsync();
         }
 
         public async Task Delete(KweetEntity obj)
@@ -38,32 +38,31 @@ namespace KweetService.API.Repositories
             return;
         }
 
-        public Task<KweetEntity> GetById(int id)
+        public async Task<KweetEntity> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await _kweetDbContext.Kweets.Where(a => a.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<CustomerEntity> GetCustomer(int id)
+        {
+            return await _kweetDbContext.Customers.Where(a => a.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<KweetLikeEntity> LikeKweet(KweetLikeEntity obj)
         {
             await _kweetDbContext.KweetLikes.AddAsync(obj);
             await _kweetDbContext.SaveChangesAsync();
-
-            try
-            {
-                return _kweetDbContext.KweetLikes.Where(a => a.Id == obj.Id).FirstOrDefault();
-            }
-            catch
-            {
-                return new KweetLikeEntity();
-            }
+            
+            return await _kweetDbContext.KweetLikes.Where(a => a.Id == obj.Id).FirstOrDefaultAsync();
         }
 
         public async Task<KweetLikeEntity> UnlikeKweet(KweetLikeEntity obj)
         {
+            KweetLikeEntity kweetLikeEntity = await _kweetDbContext.KweetLikes.Where(a => a.Id == obj.Id).FirstOrDefaultAsync();
             _kweetDbContext.KweetLikes.Remove(obj);
             await _kweetDbContext.SaveChangesAsync();
 
-            return _kweetDbContext.KweetLikes.Where(a => a.Id == obj.Id).FirstOrDefault();
+            return kweetLikeEntity;
         }
 
         public async Task<KweetEntity> Update(KweetEntity obj)
@@ -71,7 +70,12 @@ namespace KweetService.API.Repositories
             _kweetDbContext.Kweets.Update(obj);
             await _kweetDbContext.SaveChangesAsync();
 
-            return _kweetDbContext.Kweets.Where(a => a.Id == obj.Id).FirstOrDefault();
+            return await _kweetDbContext.Kweets.Where(a => a.Id == obj.Id).FirstOrDefaultAsync();
+        }
+
+        public async Task<KweetLikeEntity> GetKweetLike(int kweetId, int customerId)
+        {
+            return await _kweetDbContext.KweetLikes.Where(kl => kl.Kweet.Id == kweetId & kl.Customer.Id == customerId).Include(kl => kl.Kweet).Include(kl => kl.Customer).FirstOrDefaultAsync();
         }
     }
 }

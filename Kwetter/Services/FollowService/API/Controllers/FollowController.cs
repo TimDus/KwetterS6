@@ -29,16 +29,16 @@ namespace FollowService.API.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public async Task<ActionResult<CustomerDTO>> GetFollowers(CustomerDTO customerDTO)
+        [HttpGet("GetFollowers")]
+        public async Task<ActionResult<FollowListDTO>> GetFollowers(int customerId)
         {
-            return await _followLogic.GetFollowersLogic(customerDTO);
+            return await _followLogic.GetFollowersLogic(customerId);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<CustomerDTO>> GetFollowing(CustomerDTO customerDTO)
+        [HttpGet("GetFollowing")]
+        public async Task<ActionResult<FollowListDTO>> GetFollowing(int customerId)
         {
-            return await _followLogic.GetFollowingLogic(customerDTO);
+            return await _followLogic.GetFollowingLogic(customerId);
         }
     }
 }

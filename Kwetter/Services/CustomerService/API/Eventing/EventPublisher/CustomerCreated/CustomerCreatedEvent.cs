@@ -9,7 +9,5 @@ namespace CustomerService.API.Eventing.EventPublisher.CustomerCreated
         public string DisplayName { get; set; }
 
         public string CustomerName { get; set; }
-
-        public string ProfilePicture { get; set; }
     }
 }

@@ -1,13 +1,13 @@
-﻿namespace FollowService.API.Eventing.EventConsumer.CustomerCreated
+﻿using Common.Eventing;
+
+namespace FollowService.API.Eventing.EventConsumer.CustomerCreated
 {
-    public class CustomerCreatedEvent
+    public class CustomerCreatedEvent : Event
     {
         public int CustomerId { get; set; }
 
         public string DisplayName { get; set; }
 
         public string CustomerName { get; set; }
-
-        public string CustomerProfilePicture { get; set; }
     }
 }

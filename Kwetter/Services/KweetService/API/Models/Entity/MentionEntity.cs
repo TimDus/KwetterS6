@@ -13,6 +13,5 @@ namespace KweetService.API.Models.Entity
         public CustomerEntity Customer { get; set; }
 
         public KweetEntity Kweet { get; set; }
-
     }
 }

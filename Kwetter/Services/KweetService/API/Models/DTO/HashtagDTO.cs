@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
 
-        public KweetDTO Kweet { get; set; }
+        public int KweetId { get; set; }
 
         public string Tag { get; set; }
     }

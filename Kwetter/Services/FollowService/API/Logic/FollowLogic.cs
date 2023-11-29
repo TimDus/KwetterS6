@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using FollowService.API.Eventing.EventPublisher.CustomerFollowed;
+﻿using FollowService.API.Eventing.EventPublisher.CustomerFollowed;
 using FollowService.API.Eventing.EventPublisher.CustomerUnfollowed;
 using FollowService.API.Models.DTO;
 using FollowService.API.Models.Entity;
@@ -12,25 +11,27 @@ namespace FollowService.API.Logic
     {
         private readonly IMediator _mediator;
         private readonly IFollowRepository _repository;
-        private readonly IMapper _mapper;
 
-        public FollowLogic(IMediator mediator, IFollowRepository repository, IMapper mapper)
+        public FollowLogic(IMediator mediator, IFollowRepository repository)
         {
             _mediator = mediator;
             _repository = repository;
-            _mapper = mapper;
         }
 
         public async Task<FollowDTO> CustomerFollowedLogic(FollowDTO kweetDTO)
         {
-            FollowEntity followEntity = _mapper.Map<FollowEntity>(kweetDTO);
+            FollowEntity followEntity = new()
+            {
+                Following = await _repository.GetCustomer(kweetDTO.FollowingId),
+                Follower = await _repository.GetCustomer(kweetDTO.FollowerId)
+            };
 
             followEntity = await _repository.Create(followEntity);
 
             var follow = new CustomerFollowedEvent
             {
-                FollowerId = followEntity.FollowerId,
-                FollowingId = followEntity.FollowingId,
+                FollowerId = followEntity.Follower.Id,
+                FollowingId = followEntity.Following.Id,
                 FollowedDateTime = followEntity.FollowedDateTime
             };
 
@@ -41,14 +42,18 @@ namespace FollowService.API.Logic
 
         public async Task<FollowDTO> CustomerUnfollowedLogic(FollowDTO kweetDTO)
         {
-            FollowEntity followEntity = _mapper.Map<FollowEntity>(kweetDTO);
+            FollowEntity followEntity = new()
+            {
+                Following = await _repository.GetCustomer(kweetDTO.FollowingId),
+                Follower = await _repository.GetCustomer(kweetDTO.FollowerId)
+            };
 
             await _repository.Delete(followEntity);
 
             var unfollow = new CustomerUnfollowedEvent
             {
-                FollowerId = followEntity.FollowerId,
-                FollowingId = followEntity.FollowingId,
+                FollowerId = followEntity.Follower.Id,
+                FollowingId = followEntity.Following.Id,
             };
 
             await _mediator.Send(unfollow);
@@ -56,22 +61,25 @@ namespace FollowService.API.Logic
             return kweetDTO;
         }
 
-        public async Task<CustomerDTO> GetFollowersLogic(CustomerDTO customerDTO)
+        public async Task<FollowListDTO> GetFollowersLogic(int customerId)
         {
-            CustomerEntity customerEntity = _mapper.Map<CustomerEntity>(customerDTO);
+            FollowListDTO followList = new()
+            {
+                Followers = await _repository.GetFollowers(customerId)
+            };
 
-            customerEntity.Followers = await _repository.GetFollowers(customerEntity.Id);
-
-            return _mapper.Map<CustomerDTO>(customerEntity);
+            
+            return followList;
         }
 
-        public async Task<CustomerDTO> GetFollowingLogic(CustomerDTO customerDTO)
+        public async Task<FollowListDTO> GetFollowingLogic(int customerId)
         {
-            CustomerEntity customerEntity = _mapper.Map<CustomerEntity>(customerDTO);
+            FollowListDTO followList = new()
+            {
+                Following = await _repository.GetFollowers(customerId)
+            };
 
-            customerEntity.Following = await _repository.GetFollowing(customerEntity.Id);
-
-            return _mapper.Map<CustomerDTO>(customerEntity);
+            return followList;
         }
     }
 }

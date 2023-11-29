@@ -30,12 +30,12 @@ namespace KweetService.API.Repositories
             modelBuilder.Entity<CustomerEntity>()
                 .HasMany(c => c.LikedKweets)
                 .WithOne(kl => kl.Customer)
-                .OnDelete(DeleteBehavior.ClientCascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<CustomerEntity>()
                 .HasMany(c => c.MentionedBy)
-                .WithOne(m => m.Customer)
-                .OnDelete(DeleteBehavior.ClientCascade);
+                .WithOne(mb => mb.Customer)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
 

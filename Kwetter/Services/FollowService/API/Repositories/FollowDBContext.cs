@@ -26,6 +26,15 @@ namespace FollowService.API.Repositories
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CustomerEntity>()
+                .HasMany(c => c.Followers)
+                .WithOne(f => f.Following)
+                .OnDelete(DeleteBehavior.ClientCascade);
+
+            modelBuilder.Entity<CustomerEntity>()
+                .HasMany(c => c.Following)
+                .WithOne(f => f.Follower)
+                .OnDelete(DeleteBehavior.ClientCascade);
         }
 
         public DbSet<CustomerEntity> Customers { get; set; }

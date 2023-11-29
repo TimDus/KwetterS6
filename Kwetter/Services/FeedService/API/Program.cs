@@ -13,6 +13,7 @@ using RabbitMQ.Client.Exceptions;
 using RabbitMQ.Client;
 using System.Net.Sockets;
 using System.Reflection;
+using FeedService.API.Eventing.EventConsumer.CustomerCreated;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,9 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddTransient<IFeedLogic, FeedLogic>();
 builder.Services.AddScoped<IFeedRepository, FeedRepository>();
 
+builder.Services.AddSingleton<IConsumer<CustomerCreatedEvent>, CustomerCreatedConsumer>();
+builder.Services.AddHostedService<CustomerCreatedHosted>();
+
 builder.Services.AddSingleton<IConsumer<KweetCreatedEvent>, KweetCreatedConsumer>();
 builder.Services.AddHostedService<KweetCreatedHosted>();
 
@@ -54,15 +58,31 @@ builder.Services.Configure<RabbitMqConfiguration>(builder.Configuration.GetSecti
 
 builder.Services.AddSingleton<IConnection>(sp =>
 {
-    var factory = new ConnectionFactory()
+    var factory = new ConnectionFactory();
+
+    if (builder.Environment.IsDevelopment() && Environment.GetEnvironmentVariable("DOCKER") != "Docker")
     {
-        VirtualHost = "mnidiotp",
-        HostName = "cow-01.rmq2.cloudamqp.com",
-        Port = 5672,
-        UserName = "mnidiotp",
-        Password = "k4l71JcIUK-t-Z2YSdOr1sr27eRCIH8T",
-        DispatchConsumersAsync = true
-    };
+        factory = new ConnectionFactory()
+        {
+            HostName = "localhost",
+            Port = 5672,
+            UserName = "guest",
+            Password = "guest",
+            DispatchConsumersAsync = true
+        };
+    }
+    else
+    {
+        factory = new ConnectionFactory()
+        {
+            VirtualHost = "mnidiotp",
+            HostName = "cow-01.rmq2.cloudamqp.com",
+            Port = 5672,
+            UserName = "mnidiotp",
+            Password = "k4l71JcIUK-t-Z2YSdOr1sr27eRCIH8T",
+            DispatchConsumersAsync = true
+        };
+    }
 
     var retryPolicy = Policy.Handle<SocketException>()
         .WaitAndRetry(new[]

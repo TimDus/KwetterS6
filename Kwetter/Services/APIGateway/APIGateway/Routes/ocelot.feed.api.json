@@ -11,7 +11,7 @@
           "Port": 80
         }
       ],
-      "DownstreamPathTemplate": "/api/Feed",
+      "DownstreamPathTemplate": "/api/Feed/Random",
       "SwaggerKey": "feed"
     },
     {
@@ -24,7 +24,7 @@
           "Port": 80
         }
       ],
-      "DownstreamPathTemplate": "/api/Feed",
+      "DownstreamPathTemplate": "/api/Feed/Followed",
       "SwaggerKey": "feed"
     }
   ]

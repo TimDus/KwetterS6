@@ -8,10 +8,10 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 8102
+          "Port": 8101
         }
       ],
-      "DownstreamPathTemplate": "/api/Customer",
+      "DownstreamPathTemplate": "/api/Customer/Create",
       "SwaggerKey": "customer"
     },
     {
@@ -21,10 +21,10 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 8102
+          "Port": 8101
         }
       ],
-      "DownstreamPathTemplate": "/api/Customer",
+      "DownstreamPathTemplate": "/api/Customer/Update",
       "SwaggerKey": "customer"
     }
   ]

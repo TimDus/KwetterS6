@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using KweetService.API.Eventing.EventPublisher.KweetCreated;
+﻿using KweetService.API.Eventing.EventPublisher.KweetCreated;
 using KweetService.API.Eventing.EventPublisher.KweetLiked;
 using KweetService.API.Eventing.EventPublisher.KweetUnliked;
 using KweetService.API.Models.DTO;
@@ -13,37 +12,63 @@ namespace KweetService.API.Logic
     {
         private readonly IMediator _mediator;
         private readonly IKweetRepository _repository;
-        private readonly IMapper _mapper;
 
-        public KweetLogic(IMediator mediator, IKweetRepository repository, IMapper mapper)
+        public KweetLogic(IMediator mediator, IKweetRepository repository)
         {
             _mediator = mediator;
             _repository = repository;
-            _mapper = mapper;
         }
 
-        public async Task<KweetDTO> CreateKweetLogic(KweetDTO kweetDTO)
+        public async Task<KweetCreateDTO> CreateKweetLogic(KweetCreateDTO kweetDTO)
         {
-            KweetEntity kweetEntity = _mapper.Map<KweetEntity>(kweetDTO);
+            kweetDTO.CreatedDate = DateTime.Now;
+            KweetEntity kweetEntity = new(kweetDTO.Text, kweetDTO.CreatedDate);
+
+            if(kweetDTO.Hashtags != null)
+            {
+                foreach (HashtagDTO hashtag in kweetDTO.Hashtags)
+                {
+                    kweetEntity.Hashtags.Add(new HashtagEntity(hashtag.Tag));
+                };
+            }
+
+            if(kweetDTO.Mentions != null)
+            {
+                foreach (MentionDTO mention in kweetDTO.Mentions)
+                {
+                    kweetEntity.Mentions.Add(new MentionEntity() { Customer = await _repository.GetCustomer(mention.MentionedCustomerId) });
+                };
+            }
+
+
+            kweetEntity.Customer = await _repository.GetCustomer(kweetDTO.CustomerId);
 
             kweetEntity = await _repository.Create(kweetEntity);
 
-            var kweet = new KweetCreatedEvent
+            var kweetEvent = new KweetCreatedEvent
             {
                 KweetId = kweetEntity.Id,
                 CustomerId = kweetEntity.Customer.Id,
                 Text = kweetEntity.Text,
-                KweetCreatedDate = kweetEntity.CreatedDate
+                KweetCreatedDate = kweetEntity.CreatedDate,
+                Hashtags = kweetDTO.Hashtags
             };
 
-            await _mediator.Send(kweet);
+            await _mediator.Send(kweetEvent);
 
-            return _mapper.Map<KweetDTO>(kweetEntity);
+            kweetDTO.Id = kweetEntity.Id;
+
+            return kweetDTO;
         }
 
         public async Task<KweetLikeDTO> LikeKweetLogic(KweetLikeDTO kweetLikeDTO)
         {
-            KweetLikeEntity kweetLikeEntity = _mapper.Map<KweetLikeEntity>(kweetLikeDTO);
+            KweetLikeEntity kweetLikeEntity = new(
+                kweetLikeDTO.LikedDateTime,
+                await _repository.GetCustomer(kweetLikeDTO.CustomerId),
+                await _repository.GetById(kweetLikeDTO.KweetId)
+                );
+
 
             KweetLikeEntity like = await _repository.LikeKweet(kweetLikeEntity);
 
@@ -57,12 +82,14 @@ namespace KweetService.API.Logic
 
             await _mediator.Send(kweet);
 
+            kweetLikeDTO.Id = kweetLikeEntity.Id;
+
             return kweetLikeDTO;
         }
 
         public async Task<KweetLikeDTO> UnlikeKweetLogic(KweetLikeDTO kweetLikeDTO)
         {
-            KweetLikeEntity kweetLikeEntity = _mapper.Map<KweetLikeEntity>(kweetLikeDTO);
+            KweetLikeEntity kweetLikeEntity = await _repository.GetKweetLike(kweetLikeDTO.KweetId, kweetLikeDTO.CustomerId);
 
             KweetLikeEntity like = await _repository.UnlikeKweet(kweetLikeEntity);
 
@@ -71,17 +98,13 @@ namespace KweetService.API.Logic
                 LikeId = like.Id,
                 CustomerId = like.Customer.Id,
                 KweetId = like.Kweet.Id,
-                LikedDateTime = like.LikedDateTime
             };
+
+            kweetLikeDTO.Id = kweetLikeEntity.Id;
 
             await _mediator.Send(kweet);
 
             return kweetLikeDTO;
-        }
-
-        public async Task AddUser()
-        {
-            await _repository.AddCustomer(new CustomerEntity());
         }
     }
 }

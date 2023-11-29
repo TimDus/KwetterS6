@@ -1,6 +1,4 @@
-﻿using KweetService.API.Models.Entity;
-
-namespace KweetService.API.Models.DTO
+﻿namespace KweetService.API.Models.DTO
 {
     public class CustomerDTO
     {
@@ -14,10 +12,10 @@ namespace KweetService.API.Models.DTO
 
         public string? ProfilePicture { get; set; }
 
-        public ICollection<KweetDTO>? Kweets { get; set; }
+        public List<KweetCreateDTO>? Kweets { get; set; }
 
-        public ICollection<KweetLikeDTO>? LikedKweets { get; set; }
+        public List<KweetLikeDTO>? LikedKweets { get; set; }
 
-        public ICollection<MentionDTO>? MentionedBy { get; set; }
+        public List<MentionDTO>? MentionedBy { get; set; }
     }
 }

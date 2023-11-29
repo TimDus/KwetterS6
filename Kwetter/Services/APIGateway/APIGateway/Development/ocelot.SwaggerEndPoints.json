@@ -1,22 +1,22 @@
 {
   "SwaggerEndPoints": [
     {
-      "Key": "kweet",
+      "Key": "customer",
       "TransformByOcelotConfig": false,
       "Config": [
         {
-          "Name": "kweet.API",
+          "Name": "customer.API",
           "Version": "1.0",
           "Url": "http://localhost:8101/swagger/v1/swagger.json"
         }
       ]
     },
     {
-      "Key": "customer",
+      "Key": "kweet",
       "TransformByOcelotConfig": false,
       "Config": [
         {
-          "Name": "customer.API",
+          "Name": "kweet.API",
           "Version": "1.0",
           "Url": "http://localhost:8102/swagger/v1/swagger.json"
         }

@@ -11,6 +11,10 @@ namespace KweetService.API.Repositories
 
         Task<KweetLikeEntity> UnlikeKweet(KweetLikeEntity obj);
 
-        Task<CustomerEntity> AddCustomer(CustomerEntity obj);
+        Task<CustomerEntity> CreateCustomer(CustomerEntity obj);
+
+        Task<CustomerEntity> GetCustomer(int id);
+
+        Task<KweetLikeEntity> GetKweetLike(int kweetId, int customerId);
     }
 }

@@ -8,8 +8,8 @@ namespace FollowService.API.Logic
 
         public Task<FollowDTO> CustomerUnfollowedLogic(FollowDTO kweetDTO);
 
-        public Task<CustomerDTO> GetFollowersLogic(CustomerDTO customerDTO);
+        public Task<FollowListDTO> GetFollowersLogic(int customerId);
 
-        public Task<CustomerDTO> GetFollowingLogic(CustomerDTO customerDTO);
+        public Task<FollowListDTO> GetFollowingLogic(int customerId);
     }
 }

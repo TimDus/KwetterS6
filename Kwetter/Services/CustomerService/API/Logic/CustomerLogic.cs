@@ -11,18 +11,16 @@ namespace CustomerService.API.Logic
     {
         private readonly IMediator _mediator;
         private readonly ICustomerRepository _repository;
-        private readonly IMapper _mapper;
 
-        public CustomerLogic(IMediator mediator, ICustomerRepository repository, IMapper mapper)
+        public CustomerLogic(IMediator mediator, ICustomerRepository repository)
         {
             _mediator = mediator;
             _repository = repository;
-            _mapper = mapper;
         }
 
-        public async Task<CustomerDTO> CreateCustomerLogic(CustomerDTO customerDTO)
+        public async Task<CustomerCreateDTO> CreateCustomerLogic(CustomerCreateDTO customerDTO)
         {
-            CustomerEntity customerEntity = _mapper.Map<CustomerEntity>(customerDTO);
+            CustomerEntity customerEntity = new(customerDTO.AccountId, customerDTO.DisplayName, customerDTO.CustomerName);
 
             customerEntity = await _repository.Create(customerEntity);
 
@@ -31,12 +29,13 @@ namespace CustomerService.API.Logic
                 CustomerId = customerEntity.Id,
                 CustomerName = customerEntity.CustomerName,
                 DisplayName = customerEntity.DisplayName,
-                ProfilePicture = customerEntity.ProfilePicture
             };
 
             await _mediator.Send(customer);
 
-            return _mapper.Map<CustomerDTO>(customerEntity);
+            customerDTO.Id = customerEntity.Id;
+
+            return customerDTO;
         }
     }
 }

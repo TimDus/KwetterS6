@@ -23,5 +23,14 @@ namespace KweetService.API.Models.Entity
         public ICollection<KweetLikeEntity>? LikedKweets { get; set; }
 
         public ICollection<MentionEntity>? MentionedBy { get; set; }
+
+        public CustomerEntity() { }
+
+        public CustomerEntity(int customerId, string displayName, string customerName)
+        {
+            CustomerId = customerId;
+            DisplayName = displayName;
+            CustomerName = customerName;
+        }
     }
 }

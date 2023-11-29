@@ -32,22 +32,37 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddTransient<IRequestHandler<CustomerCreatedEvent>, CustomerCreatedPublisher>();
 builder.Services.AddTransient<ICustomerLogic, CustomerLogic>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //Messaging
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
 builder.Services.AddSingleton<IConnection>(sp =>
 {
-    var factory = new ConnectionFactory()
+    var factory = new ConnectionFactory();
+
+    if (builder.Environment.IsDevelopment() && Environment.GetEnvironmentVariable("DOCKER") != "Docker")
     {
-        VirtualHost = "mnidiotp",
-        HostName = "cow-01.rmq2.cloudamqp.com",
-        Port = 5672,
-        UserName = "mnidiotp",
-        Password = "k4l71JcIUK-t-Z2YSdOr1sr27eRCIH8T",
-        DispatchConsumersAsync = true
-    };
+        factory = new ConnectionFactory()
+        {
+            HostName = "localhost",
+            Port = 5672,
+            UserName = "guest",
+            Password = "guest",
+            DispatchConsumersAsync = true
+        };
+    }
+    else
+    {
+        factory = new ConnectionFactory()
+        {
+            VirtualHost = "mnidiotp",
+            HostName = "cow-01.rmq2.cloudamqp.com",
+            Port = 5672,
+            UserName = "mnidiotp",
+            Password = "k4l71JcIUK-t-Z2YSdOr1sr27eRCIH8T",
+            DispatchConsumersAsync = true
+        };
+    }
 
     var retryPolicy = Policy.Handle<SocketException>()
         .WaitAndRetry(new[]
@@ -113,10 +128,18 @@ using (var scope = app.Services.CreateScope())
     channel.ExchangeDeclare(exchangeName, exchangeType, durable, autoDelete);
 
     // Declare a queue and bind it to the exchange
-    var queueName = "customer-created-queue";
     var exclusive = false;
     var arguments = new Dictionary<string, object>();
 
+    var queueName = "kweet-customer-created-queue";
+    channel.QueueDeclare(queueName, durable, exclusive, autoDelete, arguments);
+    channel.QueueBind(queueName, exchangeName, "customer.created");
+
+    queueName = "feed-customer-created-queue";
+    channel.QueueDeclare(queueName, durable, exclusive, autoDelete, arguments);
+    channel.QueueBind(queueName, exchangeName, "customer.created");
+
+    queueName = "follow-customer-created-queue";
     channel.QueueDeclare(queueName, durable, exclusive, autoDelete, arguments);
     channel.QueueBind(queueName, exchangeName, "customer.created");
 }

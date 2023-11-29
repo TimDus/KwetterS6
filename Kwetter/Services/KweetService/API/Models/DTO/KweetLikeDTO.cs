@@ -1,14 +1,12 @@
-﻿using KweetService.API.Models.Entity;
-
-namespace KweetService.API.Models.DTO
+﻿namespace KweetService.API.Models.DTO
 {
     public class KweetLikeDTO
     {
         public int Id { get; set; }
 
-        public KweetDTO Kweet { get; set; }
+        public int KweetId { get; set; }
 
-        public CustomerDTO Customer { get; set; }
+        public int CustomerId { get; set; }
 
         public DateTime LikedDateTime { get; set; }
     }

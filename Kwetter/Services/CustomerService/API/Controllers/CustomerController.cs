@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CustomerService.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerLogic _customerlogic;
@@ -16,7 +16,7 @@ namespace CustomerService.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<CustomerDTO> Create(CustomerDTO customerDTO)
+        public async Task<CustomerCreateDTO> Create(CustomerCreateDTO customerDTO)
         {
             return await _customerlogic.CreateCustomerLogic(customerDTO);
         }

@@ -19,5 +19,14 @@ namespace CustomerService.API.Models.Entity
         public string? ProfilePicture { get; set; }
 
         public string? ProfileBio { get; set; }
+
+        public CustomerEntity() { }
+
+        public CustomerEntity(int accountId, string displayName, string customerName)
+        {
+            AccountId = accountId;
+            DisplayName = displayName;
+            CustomerName = customerName;
+        }
     }
 }

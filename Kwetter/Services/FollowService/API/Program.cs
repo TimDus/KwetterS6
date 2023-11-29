@@ -1,3 +1,5 @@
+using Common.Interfaces;
+using FollowService.API.Eventing.EventConsumer.CustomerCreated;
 using FollowService.API.Eventing.EventPublisher.CustomerFollowed;
 using FollowService.API.Eventing.EventPublisher.CustomerUnfollowed;
 using FollowService.API.Logic;
@@ -34,22 +36,40 @@ builder.Services.AddTransient<IRequestHandler<CustomerFollowedEvent>, CustomerFo
 builder.Services.AddTransient<IRequestHandler<CustomerUnfollowedEvent>, CustomerUnfollowedPublisher>();
 builder.Services.AddTransient<IFollowLogic, FollowLogic>();
 builder.Services.AddScoped<IFollowRepository, FollowRepository>();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddSingleton<IConsumer<CustomerCreatedEvent>, CustomerCreatedConsumer>();
+builder.Services.AddHostedService<CustomerCreatedHosted>();
 
 //Messaging
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
 builder.Services.AddSingleton<IConnection>(sp =>
 {
-    var factory = new ConnectionFactory()
+    var factory = new ConnectionFactory();
+
+    if (builder.Environment.IsDevelopment() && Environment.GetEnvironmentVariable("DOCKER") != "Docker")
     {
-        VirtualHost = "mnidiotp",
-        HostName = "cow-01.rmq2.cloudamqp.com",
-        Port = 5672,
-        UserName = "mnidiotp",
-        Password = "k4l71JcIUK-t-Z2YSdOr1sr27eRCIH8T",
-        DispatchConsumersAsync = true
-    };
+        factory = new ConnectionFactory()
+        {
+            HostName = "localhost",
+            Port = 5672,
+            UserName = "guest",
+            Password = "guest",
+            DispatchConsumersAsync = true
+        };
+    }
+    else
+    {
+        factory = new ConnectionFactory()
+        {
+            VirtualHost = "mnidiotp",
+            HostName = "cow-01.rmq2.cloudamqp.com",
+            Port = 5672,
+            UserName = "mnidiotp",
+            Password = "k4l71JcIUK-t-Z2YSdOr1sr27eRCIH8T",
+            DispatchConsumersAsync = true
+        };
+    }
 
     var retryPolicy = Policy.Handle<SocketException>()
         .WaitAndRetry(new[]

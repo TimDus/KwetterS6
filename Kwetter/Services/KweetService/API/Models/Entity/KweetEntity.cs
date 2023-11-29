@@ -10,26 +10,24 @@ namespace KweetService.API.Models.Entity
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [ForeignKey("CustomerEntityId")]
-        public CustomerEntity Customer { get; set; }
+        public CustomerEntity Customer { get; set; } = new CustomerEntity();
 
         public string Text { get; set; }
 
         public DateTime CreatedDate { get; set; }
 
-        public ICollection<HashtagEntity>? Hashtags { get; set; }
+        public ICollection<HashtagEntity> Hashtags { get; set; } = new List<HashtagEntity>();
 
         public ICollection<MentionEntity>? Mentions { get; set; }
 
         public ICollection<KweetLikeEntity>? Likes { get; set; }
 
-        public KweetEntity(CustomerEntity customer, string text, DateTime dateTime) 
+        public KweetEntity(string text, DateTime dateTime) 
         {
-            this.Customer = customer;
-            this.Text = text;
-            this.CreatedDate = dateTime;
+            Text = text;
+            CreatedDate = dateTime;
         }
 
-        public KweetEntity(){}
+        public KweetEntity() { }
     }
 }

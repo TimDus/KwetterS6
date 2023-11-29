@@ -15,7 +15,7 @@ namespace FollowService.API.Repositories
             _followDbContext = followDbContext;
         }
 
-        public async Task<CustomerEntity> AddCustomer(CustomerEntity obj)
+        public async Task<CustomerEntity> CreateCustomer(CustomerEntity obj)
         {
             await _followDbContext.Customers.AddAsync(obj);
             await _followDbContext.SaveChangesAsync();
@@ -28,7 +28,7 @@ namespace FollowService.API.Repositories
             await _followDbContext.Follows.AddAsync(obj);
             await _followDbContext.SaveChangesAsync();
 
-            return _followDbContext.Follows.Where(a => a.FollowerId == obj.FollowerId).FirstOrDefault();
+            return _followDbContext.Follows.Where(a => a.Id == obj.Id).FirstOrDefault();
         }
 
         public async Task Delete(FollowEntity obj)
@@ -46,17 +46,22 @@ namespace FollowService.API.Repositories
 
         public async Task<List<FollowEntity>> GetFollowers(int accountId)
         {
-            return await _followDbContext.Follows.Where(a => a.FollowingId == accountId).ToListAsync();
+            return await _followDbContext.Follows.Where(a => a.Following.Id == accountId).ToListAsync();
         }
 
         public async Task<List<FollowEntity>> GetFollowing(int accountId)
         {
-            return await _followDbContext.Follows.Where(a => a.FollowerId == accountId).ToListAsync();
+            return await _followDbContext.Follows.Where(a => a.Follower.Id == accountId).ToListAsync();
         }
 
         public Task<FollowEntity> Update(FollowEntity obj)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<CustomerEntity> GetCustomer(int id)
+        {
+            return await Task.FromResult<CustomerEntity>(_followDbContext.Customers.Where(a => a.Id == id).FirstOrDefault());
         }
     }
 }
