@@ -2,6 +2,9 @@
 using FeedService.API.Repositories;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client;
+using System.Text.Json;
+using System.Text;
+using FeedService.API.Models.Entity;
 
 namespace FeedService.API.Eventing.EventConsumer.CustomerFollowed
 {
@@ -25,22 +28,31 @@ namespace FeedService.API.Eventing.EventConsumer.CustomerFollowed
 
         public async Task<CustomerFollowedEvent> ReadMessages()
         {
-            using (var scope = _serviceProvider.CreateScope()) // this will use `IServiceScopeFactory` internally
-            {
-                var context = scope.ServiceProvider.GetService<IFeedRepository>();
-            }
+            CustomerFollowedEvent followedEvent = new();
             var consumer = new AsyncEventingBasicConsumer(_model);
             consumer.Received += async (ch, ea) =>
             {
                 var body = ea.Body.ToArray();
-                var text = System.Text.Encoding.UTF8.GetString(body);
-                Console.WriteLine(text);
-                await Task.CompletedTask;
+                var json = Encoding.UTF8.GetString(body.ToArray());
+                followedEvent = JsonSerializer.Deserialize<CustomerFollowedEvent>(json);
+
+                using (var scope = _serviceProvider.CreateScope()) // this will use `IServiceScopeFactory` internally
+                {
+                    var _repository = scope.ServiceProvider.GetService<IFeedRepository>();
+
+                    FollowEntity followEntity = new(
+                        await _repository.GetCustomer(followedEvent.FollowerId),
+                        await _repository.GetCustomer(followedEvent.FollowingId),
+                        followedEvent.FollowedDateTime
+                        );
+
+                    await _repository.FollowCustomer(followEntity);
+                }
                 _model.BasicAck(ea.DeliveryTag, false);
             };
             _model.BasicConsume(_queueName, false, consumer);
             await Task.CompletedTask;
-            return new CustomerFollowedEvent();
+            return followedEvent;
         }
 
         public void Dispose()

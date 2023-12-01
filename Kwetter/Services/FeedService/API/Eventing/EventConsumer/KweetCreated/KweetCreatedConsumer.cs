@@ -46,6 +46,7 @@ namespace FeedService.API.Eventing.EventConsumer.KweetCreated
                 _model.BasicAck(ea.DeliveryTag, false);
             };
             _model.BasicConsume(_queueName, false, consumer);
+            await Task.CompletedTask;
             return kweetCreatedEvent;
         }
 

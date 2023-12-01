@@ -16,17 +16,15 @@ namespace FollowService.API.Controllers
         }
 
         [HttpPost("Follow")]
-        public async Task<ActionResult> Follow([FromBody] FollowDTO followDTO)
+        public async Task<ActionResult<FollowDTO>> Follow([FromBody] FollowDTO followDTO)
         {
-            await _followLogic.CustomerFollowedLogic(followDTO);
-            return Ok();
+            return await _followLogic.CustomerFollowedLogic(followDTO);
         }
 
         [HttpPost("Unfollow")]
-        public async Task<ActionResult> Unfollow([FromBody] FollowDTO followDTO)
+        public async Task<ActionResult<FollowDTO>> Unfollow(int followId)
         {
-            await _followLogic.CustomerUnfollowedLogic(followDTO);
-            return Ok();
+            return await _followLogic.CustomerUnfollowedLogic(followId);
         }
 
         [HttpGet("GetFollowers")]

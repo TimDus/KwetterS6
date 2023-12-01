@@ -11,6 +11,6 @@ namespace Common.Interfaces
         Task<T> Create(T obj);
         Task<T> GetById(int id);
         Task<T> Update(T obj);
-        Task Delete(T obj);
+        Task<T> Delete(int id);
     }
 }

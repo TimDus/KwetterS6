@@ -12,14 +12,26 @@ namespace FeedService.API.Repositories
 
         Task<KweetLikeEntity> LikeKweet(KweetLikeEntity obj);
 
-        Task<KweetLikeEntity> UnlikeKweet(KweetLikeEntity obj);
+        Task<KweetLikeEntity> UnlikeKweet(int id);
 
         Task<FollowEntity> FollowCustomer(FollowEntity obj);
 
-        Task<FollowEntity> UnfollowCustomer(FollowEntity obj);
+        Task<FollowEntity> UnfollowCustomer(int id);
 
         Task<CustomerEntity> GetCustomer(int id);
 
         Task<KweetEntity> GetKweet(int id);
+
+        Task<KweetLikeEntity> GetKweetLike(int id);
+
+        Task<FollowEntity> GetFollow(int id);
+
+        Task<List<KweetEntity>> GetRandomKweetsFeed();
+
+        Task<List<KweetEntity>> GetRandomKweetsFeedExtension(DateTime time);
+
+        Task<List<KweetEntity>> GetFollowedKweetsFeed(int id);
+
+        Task<List<KweetEntity>> GetFollowedKweetsFeedExtension(int id, DateTime time);
     }
 }

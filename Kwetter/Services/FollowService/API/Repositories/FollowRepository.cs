@@ -20,7 +20,7 @@ namespace FollowService.API.Repositories
             await _followDbContext.Customers.AddAsync(obj);
             await _followDbContext.SaveChangesAsync();
 
-            return _followDbContext.Customers.Where(a => a.Id == obj.Id).FirstOrDefault();
+            return await _followDbContext.Customers.Where(c => c.Id == obj.Id).FirstOrDefaultAsync();
         }
 
         public async Task<FollowEntity> Create(FollowEntity obj)
@@ -28,15 +28,16 @@ namespace FollowService.API.Repositories
             await _followDbContext.Follows.AddAsync(obj);
             await _followDbContext.SaveChangesAsync();
 
-            return _followDbContext.Follows.Where(a => a.Id == obj.Id).FirstOrDefault();
+            return await _followDbContext.Follows.Where(f => f.Id == obj.Id).FirstOrDefaultAsync();
         }
 
-        public async Task Delete(FollowEntity obj)
+        public async Task<FollowEntity> Delete(int id)
         {
-            _followDbContext.Follows.Remove(obj);
+            FollowEntity follow =  await _followDbContext.Follows.Where(f => f.Id == id).Include(f => f.Follower).Include(f => f.Following).FirstOrDefaultAsync();
+            _followDbContext.Follows.Remove(follow);
             await _followDbContext.SaveChangesAsync();
 
-            return;
+            return follow;
         }
 
         public Task<FollowEntity> GetById(int id)
@@ -46,12 +47,12 @@ namespace FollowService.API.Repositories
 
         public async Task<List<FollowEntity>> GetFollowers(int accountId)
         {
-            return await _followDbContext.Follows.Where(a => a.Following.Id == accountId).ToListAsync();
+            return await _followDbContext.Follows.Where(f => f.Following.Id == accountId).ToListAsync();
         }
 
         public async Task<List<FollowEntity>> GetFollowing(int accountId)
         {
-            return await _followDbContext.Follows.Where(a => a.Follower.Id == accountId).ToListAsync();
+            return await _followDbContext.Follows.Where(f => f.Follower.Id == accountId).ToListAsync();
         }
 
         public Task<FollowEntity> Update(FollowEntity obj)
@@ -61,7 +62,7 @@ namespace FollowService.API.Repositories
 
         public async Task<CustomerEntity> GetCustomer(int id)
         {
-            return await Task.FromResult<CustomerEntity>(_followDbContext.Customers.Where(a => a.Id == id).FirstOrDefault());
+            return await _followDbContext.Customers.Where(c => c.Id == id).FirstOrDefaultAsync();
         }
     }
 }

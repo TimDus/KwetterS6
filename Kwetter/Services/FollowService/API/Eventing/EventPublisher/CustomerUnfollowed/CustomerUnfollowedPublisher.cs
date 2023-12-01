@@ -26,7 +26,7 @@ namespace FollowService.API.Eventing.EventPublisher.CustomerUnfollowed
             var routingKey = "customer.unfollowed";
             var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(@event));
             channel.BasicPublish(exchangeName, routingKey, null, body);
-
+            await Task.CompletedTask;
             return true;
         }
     }

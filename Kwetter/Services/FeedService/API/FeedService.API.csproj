@@ -21,11 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Eventing\EventConsumer\KweetUnliked\" />
-    <Folder Include="Models\DTO\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Common\API\Common.csproj" />
   </ItemGroup>
 

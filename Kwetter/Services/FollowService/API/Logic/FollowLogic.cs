@@ -18,18 +18,18 @@ namespace FollowService.API.Logic
             _repository = repository;
         }
 
-        public async Task<FollowDTO> CustomerFollowedLogic(FollowDTO kweetDTO)
+        public async Task<FollowDTO> CustomerFollowedLogic(FollowDTO followDTO)
         {
-            FollowEntity followEntity = new()
-            {
-                Following = await _repository.GetCustomer(kweetDTO.FollowingId),
-                Follower = await _repository.GetCustomer(kweetDTO.FollowerId)
-            };
+            FollowEntity followEntity = new(
+                await _repository.GetCustomer(followDTO.FollowerId),
+                await _repository.GetCustomer(followDTO.FollowingId),
+                DateTime.Now);
 
             followEntity = await _repository.Create(followEntity);
 
             var follow = new CustomerFollowedEvent
             {
+                FollowId = followEntity.Id,
                 FollowerId = followEntity.Follower.Id,
                 FollowingId = followEntity.Following.Id,
                 FollowedDateTime = followEntity.FollowedDateTime
@@ -37,28 +37,29 @@ namespace FollowService.API.Logic
 
             await _mediator.Send(follow);
 
-            return kweetDTO;
+            return followDTO;
         }
 
-        public async Task<FollowDTO> CustomerUnfollowedLogic(FollowDTO kweetDTO)
+        public async Task<FollowDTO> CustomerUnfollowedLogic(int id)
         {
-            FollowEntity followEntity = new()
-            {
-                Following = await _repository.GetCustomer(kweetDTO.FollowingId),
-                Follower = await _repository.GetCustomer(kweetDTO.FollowerId)
-            };
+            FollowEntity followEntity = await _repository.Delete(id);
 
-            await _repository.Delete(followEntity);
-
-            var unfollow = new CustomerUnfollowedEvent
+            CustomerUnfollowedEvent unfollow = new()
             {
+                FollowId = id,
                 FollowerId = followEntity.Follower.Id,
                 FollowingId = followEntity.Following.Id,
             };
 
             await _mediator.Send(unfollow);
 
-            return kweetDTO;
+            FollowDTO followDTO = new()
+            {
+                FollowerId = followEntity.Follower.Id,
+                FollowingId = followEntity.Following.Id
+            };
+
+            return followDTO;
         }
 
         public async Task<FollowListDTO> GetFollowersLogic(int customerId)

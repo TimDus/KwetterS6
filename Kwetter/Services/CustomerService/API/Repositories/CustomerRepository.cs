@@ -1,4 +1,5 @@
 ﻿using CustomerService.API.Models.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace CustomerService.API.Repositories
 {
@@ -16,22 +17,25 @@ namespace CustomerService.API.Repositories
             await _customerDBContext.Customers.AddAsync(obj);
             await _customerDBContext.SaveChangesAsync();
 
-            return _customerDBContext.Customers.Where(a => a.Id == obj.Id).FirstOrDefault();
+            return await _customerDBContext.Customers.Where(a => a.Id == obj.Id).FirstOrDefaultAsync();
         }
 
-        public async Task Delete(CustomerEntity obj)
+        public Task<CustomerEntity> Delete(int id)
         {
             throw new NotImplementedException();
         }
 
         public async Task<CustomerEntity> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await _customerDBContext.Customers.Where(a => a.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<CustomerEntity> Update(CustomerEntity obj)
         {
-            throw new NotImplementedException();
+            _customerDBContext.Customers.Update(obj);
+            await _customerDBContext.SaveChangesAsync();
+
+            return await _customerDBContext.Customers.Where(a => a.Id == obj.Id).FirstOrDefaultAsync();
         }
     }
 }

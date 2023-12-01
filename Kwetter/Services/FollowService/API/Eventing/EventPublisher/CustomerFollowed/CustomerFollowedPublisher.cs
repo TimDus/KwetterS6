@@ -24,7 +24,7 @@ namespace FollowService.API.Eventing.EventPublisher.CustomerFollowed
             var channel = _connection.CreateModel();
             var exchangeName = "customer-followed-exchange";
             var routingKey = "customer.followed";
-            var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(@event));
+            var body = await Task.Run(() => Encoding.UTF8.GetBytes(JsonSerializer.Serialize(@event)));
             channel.BasicPublish(exchangeName, routingKey, null, body);
 
             return true;

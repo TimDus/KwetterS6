@@ -1,8 +1,8 @@
 ﻿using Common.Eventing;
 
-namespace FeedService.API.Eventing.EventConsumer.KweetLiked
+namespace FeedService.API.Eventing.EventConsumer.KweetUnliked
 {
-    public class KweetLikedEvent : Event
+    public class KweetUnlikedEvent : Event
     {
         public int LikeId { get; set; }
         public int KweetId { get; set; }

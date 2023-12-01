@@ -9,6 +9,8 @@ namespace FeedService.API.Models.Entity
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        public int KweetLikeServiceId { get; set; }
+
         public CustomerEntity Customer { get; set; }
 
         public KweetEntity Kweet { get; set; }
@@ -17,9 +19,12 @@ namespace FeedService.API.Models.Entity
 
         public KweetLikeEntity() { }
 
-        public KweetLikeEntity(DateTime likedDatedTime)
+        public KweetLikeEntity(int kweetLikeServiceId, CustomerEntity customer, KweetEntity kweet, DateTime likedDateTime)
         {
-            LikedDateTime = likedDatedTime;
+            KweetLikeServiceId = kweetLikeServiceId;
+            Customer = customer;
+            Kweet = kweet;
+            LikedDateTime = likedDateTime;
         }
     }
 }

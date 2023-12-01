@@ -30,12 +30,13 @@ namespace KweetService.API.Repositories
             return await _kweetDbContext.Kweets.Where(a => a.Id == obj.Id).FirstOrDefaultAsync();
         }
 
-        public async Task Delete(KweetEntity obj)
+        public async Task<KweetEntity> Delete(int id)
         {
-            _kweetDbContext.Kweets.Remove(obj);
+            KweetEntity kweet = await _kweetDbContext.Kweets.Where(a => a.Id == id).FirstOrDefaultAsync();
+            _kweetDbContext.Kweets.Remove(kweet);
             await _kweetDbContext.SaveChangesAsync();
 
-            return;
+            return kweet;
         }
 
         public async Task<KweetEntity> GetById(int id)

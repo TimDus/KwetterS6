@@ -4,7 +4,8 @@ namespace FollowService.API.Eventing.EventPublisher.CustomerUnfollowed
 {
     public class CustomerUnfollowedEvent : Event
     {
-        public long FollowerId { get; set; }
-        public long FollowingId { get; set; }
+        public int FollowId { get; set; }
+        public int FollowerId { get; set; }
+        public int FollowingId { get; set; }
     }
 }

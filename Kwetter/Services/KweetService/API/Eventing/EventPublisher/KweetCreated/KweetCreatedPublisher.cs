@@ -26,7 +26,7 @@ namespace KweetService.API.Eventing.EventPublisher.KweetCreated
             var routingKey = "kweet.created";
             var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(@event));
             channel.BasicPublish(exchangeName, routingKey, null, body);
-
+            await Task.CompletedTask;
             return true;
         }
     }
