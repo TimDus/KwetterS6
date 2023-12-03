@@ -1,10 +1,10 @@
 ﻿using Common.Interfaces;
-using FeedService.API.Repositories;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client;
 using System.Text;
 using System.Text.Json;
 using FeedService.API.Models.Entity;
+using FeedService.API.Repositories.Interfaces;
 
 namespace FeedService.API.Eventing.EventConsumer.CustomerUnfollowed
 {
@@ -35,9 +35,9 @@ namespace FeedService.API.Eventing.EventConsumer.CustomerUnfollowed
 
                 using (var scope = _serviceProvider.CreateScope()) // this will use `IServiceScopeFactory` internally
                 {
-                    var _repository = scope.ServiceProvider.GetService<IFeedRepository>();
+                    var _repository = scope.ServiceProvider.GetService<IFollowRepository>();
 
-                    await _repository.UnfollowCustomer(unfollowedEvent.FollowId);
+                    await _repository.Delete(unfollowedEvent.FollowServiceId);
                 }
 
                 _model.BasicAck(ea.DeliveryTag, false);

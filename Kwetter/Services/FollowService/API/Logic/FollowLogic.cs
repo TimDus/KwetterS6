@@ -29,7 +29,7 @@ namespace FollowService.API.Logic
 
             var follow = new CustomerFollowedEvent
             {
-                FollowId = followEntity.Id,
+                FollowServiceId = followEntity.Id,
                 FollowerId = followEntity.Follower.Id,
                 FollowingId = followEntity.Following.Id,
                 FollowedDateTime = followEntity.FollowedDateTime
@@ -46,7 +46,7 @@ namespace FollowService.API.Logic
 
             CustomerUnfollowedEvent unfollow = new()
             {
-                FollowId = id,
+                FollowServiceId = id,
                 FollowerId = followEntity.Follower.Id,
                 FollowingId = followEntity.Following.Id,
             };

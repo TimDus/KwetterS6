@@ -1,10 +1,11 @@
 ﻿using RabbitMQ.Client.Events;
 using RabbitMQ.Client;
 using Common.Interfaces;
-using FeedService.API.Repositories;
 using System.Text;
 using System.Text.Json;
 using FeedService.API.Models.Entity;
+using FeedService.API.Repositories.Interfaces;
+using FeedService.API.Models.DTO;
 
 namespace FeedService.API.Eventing.EventConsumer.KweetCreated
 {
@@ -35,12 +36,23 @@ namespace FeedService.API.Eventing.EventConsumer.KweetCreated
 
                 KweetEntity kweet = new(kweetCreatedEvent.KweetId, kweetCreatedEvent.Text, kweetCreatedEvent.KweetCreatedDate);
 
+                foreach(HashtagDTO hashtag in kweetCreatedEvent.Hashtags)
+                {
+                    kweet.Hashtags.Add(new HashtagEntity(hashtag.Id, hashtag.Tag));
+                }
+
                 using (var scope = _serviceProvider.CreateScope()) // this will use `IServiceScopeFactory` internally
                 {
-                    var _repository = scope.ServiceProvider.GetService<IFeedRepository>();
+                    var _kweetRepository = scope.ServiceProvider.GetService<IKweetRepository>();
+                    var _customerRepository = scope.ServiceProvider.GetService<ICustomerRepository>();
 
-                    kweet.Customer = await _repository.GetCustomer(kweetCreatedEvent.CustomerId);
-                    await _repository.CreateKweet(kweet);
+                    foreach (MentionDTO mention in kweetCreatedEvent.Mentions)
+                    {
+                        kweet.Mentions.Add(new MentionEntity(mention.Id, await _customerRepository.GetById(mention.MentionedCustomerId)));
+                    }
+
+                    kweet.Customer = await _customerRepository.GetById(kweetCreatedEvent.CustomerId);
+                    await _kweetRepository.Create(kweet);
                 }
 
                 _model.BasicAck(ea.DeliveryTag, false);

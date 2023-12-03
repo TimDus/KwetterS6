@@ -14,6 +14,7 @@ using RabbitMQ.Client;
 using System.Net.Sockets;
 using System.Reflection;
 using FeedService.API.Eventing.EventConsumer.CustomerCreated;
+using FeedService.API.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,10 @@ builder.Services.AddSwaggerGen(c =>
 //Dependencies
 builder.Services.AddTransient<IFeedLogic, FeedLogic>();
 builder.Services.AddScoped<IFeedRepository, FeedRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IKweetRepository, KweetRepository>();
+builder.Services.AddScoped<IKweetLikeRepository, KweetLikeRepository>();
+builder.Services.AddScoped<IFollowRepository, FollowRepository>();
 
 builder.Services.AddSingleton<IConsumer<CustomerCreatedEvent>, CustomerCreatedConsumer>();
 builder.Services.AddHostedService<CustomerCreatedHosted>();

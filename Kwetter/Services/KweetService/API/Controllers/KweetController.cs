@@ -17,7 +17,7 @@ namespace KweetService.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<KweetCreateDTO> Create([FromBody] KweetCreateDTO kweetDTO)
+        public async Task<KweetCreatedDTO> Create([FromBody] KweetCreatedDTO kweetDTO)
         {
             return await _kweetLogic.CreateKweetLogic(kweetDTO);
         }

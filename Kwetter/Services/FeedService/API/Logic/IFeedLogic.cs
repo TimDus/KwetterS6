@@ -4,9 +4,9 @@ namespace FeedService.API.Logic
 {
     public interface IFeedLogic
     {
-        Task<List<KweetDTO>> GetRandomKweetsFeed();
+        Task<List<KweetDTO>> GetRandomKweetsFeed(int customerId);
 
-        Task<List<KweetDTO>> GetRandomKweetsFeedExtension(DateTime time);
+        Task<List<KweetDTO>> GetRandomKweetsFeedExtension(int customerId, DateTime time);
 
         Task<List<KweetDTO>> GetFollowedKweetsFeed(int customerId);
 

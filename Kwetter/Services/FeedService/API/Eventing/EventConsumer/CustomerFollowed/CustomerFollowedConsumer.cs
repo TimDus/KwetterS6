@@ -1,10 +1,10 @@
 ﻿using Common.Interfaces;
-using FeedService.API.Repositories;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client;
 using System.Text.Json;
 using System.Text;
 using FeedService.API.Models.Entity;
+using FeedService.API.Repositories.Interfaces;
 
 namespace FeedService.API.Eventing.EventConsumer.CustomerFollowed
 {
@@ -38,15 +38,17 @@ namespace FeedService.API.Eventing.EventConsumer.CustomerFollowed
 
                 using (var scope = _serviceProvider.CreateScope()) // this will use `IServiceScopeFactory` internally
                 {
-                    var _repository = scope.ServiceProvider.GetService<IFeedRepository>();
+                    var _followRepository = scope.ServiceProvider.GetService<IFollowRepository>();
+                    var _customerRepository = scope.ServiceProvider.GetService<ICustomerRepository>();
 
                     FollowEntity followEntity = new(
-                        await _repository.GetCustomer(followedEvent.FollowerId),
-                        await _repository.GetCustomer(followedEvent.FollowingId),
+                        followedEvent.FollowServiceId,
+                        await _customerRepository.GetById(followedEvent.FollowerId),
+                        await _customerRepository.GetById(followedEvent.FollowingId),
                         followedEvent.FollowedDateTime
                         );
 
-                    await _repository.FollowCustomer(followEntity);
+                    await _followRepository.Create(followEntity);
                 }
                 _model.BasicAck(ea.DeliveryTag, false);
             };

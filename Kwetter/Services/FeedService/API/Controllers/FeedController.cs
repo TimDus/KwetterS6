@@ -16,15 +16,15 @@ namespace FeedService.API.Controllers
         }
 
         [HttpGet("Random")]
-        public async Task<List<KweetDTO>> Random()
+        public async Task<List<KweetDTO>> Random(int id)
         {
-            return await _feedLogic.GetRandomKweetsFeed();
+            return await _feedLogic.GetRandomKweetsFeed(id);
         }
 
         [HttpGet("RandomExtension")]
-        public async Task<List<KweetDTO>> RandomExtension(DateTime time)
+        public async Task<List<KweetDTO>> RandomExtension(int id, DateTime time)
         {
-            return await _feedLogic.GetRandomKweetsFeedExtension(time);
+            return await _feedLogic.GetRandomKweetsFeedExtension(id, time);
         }
 
         [HttpGet("Followed")]

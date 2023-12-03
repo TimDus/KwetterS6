@@ -19,7 +19,7 @@ namespace KweetService.API.Logic
             _repository = repository;
         }
 
-        public async Task<KweetCreateDTO> CreateKweetLogic(KweetCreateDTO kweetDTO)
+        public async Task<KweetCreatedDTO> CreateKweetLogic(KweetCreatedDTO kweetDTO)
         {
             kweetDTO.CreatedDate = DateTime.Now;
             KweetEntity kweetEntity = new(kweetDTO.Text, kweetDTO.CreatedDate);
@@ -51,8 +51,17 @@ namespace KweetService.API.Logic
                 CustomerId = kweetEntity.Customer.Id,
                 Text = kweetEntity.Text,
                 KweetCreatedDate = kweetEntity.CreatedDate,
-                Hashtags = kweetDTO.Hashtags
             };
+
+            foreach(MentionEntity mention in kweetEntity.Mentions)
+            {
+                kweetEvent.Mentions.Add(new MentionDTO(mention.Id, mention.Customer.Id, mention.Kweet.Id));
+            }
+
+            foreach(HashtagEntity hashtag in kweetEntity.Hashtags)
+            {
+                kweetEvent.Hashtags.Add(new HashtagDTO(hashtag.Id, hashtag.Kweet.Id, hashtag.Tag));
+            }
 
             await _mediator.Send(kweetEvent);
 

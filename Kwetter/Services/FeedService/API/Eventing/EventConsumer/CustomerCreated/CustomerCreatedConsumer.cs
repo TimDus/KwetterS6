@@ -1,6 +1,6 @@
 ﻿using Common.Interfaces;
 using FeedService.API.Models.Entity;
-using FeedService.API.Repositories;
+using FeedService.API.Repositories.Interfaces;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
@@ -37,9 +37,9 @@ namespace FeedService.API.Eventing.EventConsumer.CustomerCreated
 
                 using (var scope = _serviceProvider.CreateScope()) // this will use `IServiceScopeFactory` internally
                 {
-                    var _repository = scope.ServiceProvider.GetService<IFeedRepository>();
+                    var _repository = scope.ServiceProvider.GetService<ICustomerRepository>();
 
-                    await _repository.CreateCustomer(customer);
+                    await _repository.Create(customer);
                 }
                 _model.BasicAck(ea.DeliveryTag, false);
             };

@@ -9,6 +9,8 @@ namespace FeedService.API.Models.Entity
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        public int FollowServiceId { get; set; }
+
         public CustomerEntity Follower { get; set; }
 
         public CustomerEntity Following { get; set; }
@@ -17,8 +19,9 @@ namespace FeedService.API.Models.Entity
 
         public FollowEntity() { }
 
-        public FollowEntity(CustomerEntity follower, CustomerEntity following, DateTime followedDateTime)
+        public FollowEntity(int followServiceId, CustomerEntity follower, CustomerEntity following, DateTime followedDateTime)
         {
+            FollowServiceId = followServiceId;
             Follower = follower;
             Following = following;
             FollowedDateTime = followedDateTime;

@@ -1,4 +1,4 @@
-﻿namespace KweetService.API.Models.DTO
+﻿namespace FeedService.API.Models.DTO
 {
     public class HashtagDTO
     {
@@ -10,9 +10,9 @@
 
         public HashtagDTO() { }
 
-        public HashtagDTO(int id, int kweetId, string tag)
+        public HashtagDTO(int kweetServiceId, int kweetId, string tag)
         {
-            Id = id;
+            Id = kweetServiceId;
             KweetId = kweetId;
             Tag = tag;
         }

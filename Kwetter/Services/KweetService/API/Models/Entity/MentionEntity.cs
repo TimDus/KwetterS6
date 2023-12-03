@@ -13,5 +13,13 @@ namespace KweetService.API.Models.Entity
         public CustomerEntity Customer { get; set; }
 
         public KweetEntity Kweet { get; set; }
+
+        public MentionEntity() { }
+
+        public MentionEntity(int kweetServiceId, CustomerEntity customer, KweetEntity kweet)
+        {
+            Customer = customer;
+            Kweet = kweet;
+        }
     }
 }

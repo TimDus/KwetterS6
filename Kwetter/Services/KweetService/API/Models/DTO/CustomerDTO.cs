@@ -12,7 +12,7 @@
 
         public string? ProfilePicture { get; set; }
 
-        public List<KweetCreateDTO>? Kweets { get; set; }
+        public List<KweetCreatedDTO>? Kweets { get; set; }
 
         public List<KweetLikeDTO>? LikedKweets { get; set; }
 

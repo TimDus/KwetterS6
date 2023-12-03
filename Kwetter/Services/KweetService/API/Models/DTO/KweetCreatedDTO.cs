@@ -1,6 +1,6 @@
 ﻿namespace KweetService.API.Models.DTO
 {
-    public class KweetCreateDTO
+    public class KweetCreatedDTO
     {
         public int Id { get; set; }
 

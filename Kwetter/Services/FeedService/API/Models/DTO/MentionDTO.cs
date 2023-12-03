@@ -1,4 +1,4 @@
-﻿namespace KweetService.API.Models.DTO
+﻿namespace FeedService.API.Models.DTO
 {
     public class MentionDTO
     {
@@ -8,13 +8,13 @@
 
         public int KweetId { get; set; }
 
-        public MentionDTO(int id, int mentionedCustomerId, int kweetId)
+        public MentionDTO() { } 
+
+        public MentionDTO(int kweetServiceId, int mentionedCustomerId, int kweetId)
         {
-            Id = id;
+            Id = kweetServiceId;
             MentionedCustomerId = mentionedCustomerId;
             KweetId = kweetId;
         }
-
-        public MentionDTO() { }
     }
 }

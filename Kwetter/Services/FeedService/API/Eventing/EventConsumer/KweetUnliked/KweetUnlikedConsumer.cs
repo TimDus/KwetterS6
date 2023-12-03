@@ -1,6 +1,6 @@
 ﻿using Common.Interfaces;
 using FeedService.API.Models.Entity;
-using FeedService.API.Repositories;
+using FeedService.API.Repositories.Interfaces;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
@@ -35,9 +35,9 @@ namespace FeedService.API.Eventing.EventConsumer.KweetUnliked
 
                 using (var scope = _serviceProvider.CreateScope()) // this will use `IServiceScopeFactory` internally
                 {
-                    var _repository = scope.ServiceProvider.GetService<IFeedRepository>();
+                    var _repository = scope.ServiceProvider.GetService<IKweetLikeRepository>();
 
-                    await _repository.UnlikeKweet(kweetUnlikedEvent.LikeId);
+                    await _repository.Delete(kweetUnlikedEvent.LikeId);
                 }
                 _model.BasicAck(ea.DeliveryTag, false);
             };

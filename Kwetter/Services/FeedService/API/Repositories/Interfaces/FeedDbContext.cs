@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace FeedService.API.Repositories
+namespace FeedService.API.Repositories.Interfaces
 {
     public class FeedDbContext : DbContext
     {

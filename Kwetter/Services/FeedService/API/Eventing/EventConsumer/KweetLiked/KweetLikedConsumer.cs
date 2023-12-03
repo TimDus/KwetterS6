@@ -1,10 +1,10 @@
 ﻿using RabbitMQ.Client.Events;
 using RabbitMQ.Client;
 using Common.Interfaces;
-using FeedService.API.Repositories;
 using System.Text;
 using FeedService.API.Models.Entity;
 using System.Text.Json;
+using FeedService.API.Repositories.Interfaces;
 
 namespace FeedService.API.Eventing.EventConsumer.KweetLiked
 {
@@ -35,16 +35,18 @@ namespace FeedService.API.Eventing.EventConsumer.KweetLiked
 
                 using (var scope = _serviceProvider.CreateScope()) // this will use `IServiceScopeFactory` internally
                 {
-                    var _repository = scope.ServiceProvider.GetService<IFeedRepository>();
+                    var _kweetLikeRepository = scope.ServiceProvider.GetService<IKweetLikeRepository>();
+                    var _kweetRepository = scope.ServiceProvider.GetService<IKweetRepository>();
+                    var _customerRepository = scope.ServiceProvider.GetService<ICustomerRepository>();
 
                     KweetLikeEntity kweetLike = new(
                         kweetLikedEvent.LikeId,
-                        await _repository.GetCustomer(kweetLikedEvent.CustomerId),
-                        await _repository.GetKweet(kweetLikedEvent.CustomerId),
+                        await _customerRepository.GetById(kweetLikedEvent.CustomerId),
+                        await _kweetRepository.GetById(kweetLikedEvent.CustomerId),
                         kweetLikedEvent.LikedDateTime
                         );
 
-                    await _repository.LikeKweet(kweetLike);
+                    await _kweetLikeRepository.Create(kweetLike);
                 }
                 _model.BasicAck(ea.DeliveryTag, false);
             };

@@ -4,7 +4,7 @@ namespace KweetService.API.Logic
 {
     public interface IKweetLogic
     {
-        Task<KweetCreateDTO> CreateKweetLogic(KweetCreateDTO kweet);
+        Task<KweetCreatedDTO> CreateKweetLogic(KweetCreatedDTO kweet);
 
         Task<KweetLikeDTO> LikeKweetLogic(KweetLikeDTO kweetLikeDTO);
 

@@ -18,9 +18,9 @@ namespace FeedService.API.Models.Entity
 
         public DateTime CreatedDate { get; set; }
 
-        public ICollection<HashtagEntity>? Hashtags { get; set; }
+        public ICollection<HashtagEntity> Hashtags { get; set; } = new List<HashtagEntity>();
 
-        public ICollection<MentionEntity>? Mentions { get; set; }
+        public ICollection<MentionEntity>? Mentions { get; set; } = new List<MentionEntity>();
 
         public ICollection<KweetLikeEntity>? Likes { get; set; }
 

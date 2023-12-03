@@ -9,7 +9,7 @@ namespace FeedService.API.Models.Entity
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public int MentionServiceId { get; set; }
+        public int KweetServiceId { get; set; }
 
         public CustomerEntity Customer { get; set; }
 
@@ -17,11 +17,10 @@ namespace FeedService.API.Models.Entity
 
         public MentionEntity() { }
 
-        public MentionEntity(int mentionServiceId, CustomerEntity customer, KweetEntity kweet)
+        public MentionEntity(int kweetServiceId, CustomerEntity customer)
         {
-            MentionServiceId = mentionServiceId;
+            KweetServiceId = kweetServiceId;
             Customer = customer;
-            Kweet = kweet;
         }
     }
 }
