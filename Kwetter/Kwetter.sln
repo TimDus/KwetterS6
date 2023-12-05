@@ -49,12 +49,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rabbitmq", "rabbitmq", "{96
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FollowService", "FollowService", "{12D415B3-D6C0-4664-9531-34581FA40254}"
 	ProjectSection(SolutionItems) = preProject
-		..\Kubernetes\Services\FollowService\followservice.deployment.yaml = ..\Kubernetes\Services\FollowService\followservice.deployment.yaml
+		..\Kubernetes\Services\FollowService\followserviceapi.deployment.yaml = ..\Kubernetes\Services\FollowService\followserviceapi.deployment.yaml
+		..\Kubernetes\Services\FollowService\followservicedb.deployment.yaml = ..\Kubernetes\Services\FollowService\followservicedb.deployment.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CustomerService", "CustomerService", "{0F6B2377-FC9C-43A7-B40A-9EAEDD76BF48}"
 	ProjectSection(SolutionItems) = preProject
-		..\Kubernetes\Services\CustomerService\customerservice.deployment.yaml = ..\Kubernetes\Services\CustomerService\customerservice.deployment.yaml
+		..\Kubernetes\Services\CustomerService\customerserviceapi.deployment.yaml = ..\Kubernetes\Services\CustomerService\customerserviceapi.deployment.yaml
+		..\Kubernetes\Services\CustomerService\customerservicedb.deployment.yaml = ..\Kubernetes\Services\CustomerService\customerservicedb.deployment.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIGateway", "APIGateway", "{7584EB9E-0BE5-454D-99E9-4C48428E3B94}"
@@ -82,6 +84,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FeedService", "FeedService", "{DF0D42CA-B437-4EFE-8956-C97F3729CFA2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedService.API", "Services\FeedService\API\FeedService.API.csproj", "{D89DA17D-6D72-4A3B-8FE9-44285C1068E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FeedService", "FeedService", "{35EBA636-7846-44B3-BE42-591CB7B59DB3}"
+	ProjectSection(SolutionItems) = preProject
+		..\Kubernetes\Services\FeedService\feedserviceapi.deployment.yaml = ..\Kubernetes\Services\FeedService\feedserviceapi.deployment.yaml
+		..\Kubernetes\Services\FeedService\feedservicedb.deployment.yaml = ..\Kubernetes\Services\FeedService\feedservicedb.deployment.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -136,6 +144,7 @@ Global
 		{5A936CB4-A4CE-455A-9F93-CE6705788B8E} = {AC60A371-71DA-4159-8EE0-2B514E2EEDDE}
 		{DF0D42CA-B437-4EFE-8956-C97F3729CFA2} = {E871D6F0-64B4-4855-91E1-6677D25692A6}
 		{D89DA17D-6D72-4A3B-8FE9-44285C1068E8} = {DF0D42CA-B437-4EFE-8956-C97F3729CFA2}
+		{35EBA636-7846-44B3-BE42-591CB7B59DB3} = {AD321D73-43BF-4C82-A0ED-8E51DF02F0E4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2B5A65A9-0857-4D6D-9876-59B6E417394B}

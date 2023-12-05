@@ -32,7 +32,7 @@ spec:
       - name: followapi-container
         image: docker.io/timdus/followapi:latest
         ports:
-        - containerPort: 7103
+        - containerPort: 7102
         resources:
           limits:   
             memory: 512Mi

@@ -24,6 +24,7 @@ namespace FeedService.API.Repositories
                 .ThenInclude(k => k.Hashtags)
                 .Include(f => f.Following.Kweets.OrderByDescending(f => f.CreatedDate).Take(5))
                 .ThenInclude(k => k.Likes.Where(kl => kl.Customer.CustomerId == id))
+                .OrderByDescending(f => f.Following.Kweets.First().CreatedDate).Take(5)
                 .ToListAsync();
         }
 
@@ -38,6 +39,7 @@ namespace FeedService.API.Repositories
                 .ThenInclude(k => k.Hashtags)
                 .Include(f => f.Following.Kweets.Where(k => k.CreatedDate < time).OrderByDescending(k => k.CreatedDate).Take(5))
                 .ThenInclude(k => k.Likes.Where(kl => kl.Customer.CustomerId == id))
+                .OrderByDescending(f => f.Following.Kweets.First().CreatedDate).Take(5)
                 .ToListAsync();
         }
 
@@ -51,6 +53,7 @@ namespace FeedService.API.Repositories
                 .ThenInclude(k => k.Hashtags)
                 .Include(c => c.Kweets.OrderByDescending(k => k.CreatedDate).Take(5))
                 .ThenInclude(k => k.Likes.Where(kl => kl.Customer.CustomerId == id))
+                .OrderByDescending(c => c.Kweets.First().CreatedDate).Take(5)
                 .ToListAsync();
         }
 
@@ -64,6 +67,7 @@ namespace FeedService.API.Repositories
                 .ThenInclude(k => k.Hashtags)
                 .Include(c => c.Kweets.Where(k => k.CreatedDate < time).OrderByDescending(k => k.CreatedDate).Take(5))
                 .ThenInclude(k => k.Likes.Where(kl => kl.Customer.CustomerId == id))
+                .OrderByDescending(c => c.Kweets.First().CreatedDate).Take(5)
                 .ToListAsync();
         }
     }
