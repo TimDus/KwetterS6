@@ -8,8 +8,8 @@ spec:
     app: followdb
   ports:
     - protocol: TCP
-      port: 7003
-      targetPort: 7003
+      port: 8003
+      targetPort: 8003
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -30,4 +30,9 @@ spec:
         - name: followdb
           image: mcr.microsoft.com/mssql/server:2019-latest
           ports:
-            - containerPort: 7003
+            - containerPort: 8003
+          env:
+          - name: ACCEPT_EULA
+            value: "Y"
+          - name: MSSQL_SA_PASSWORD
+            value: "Test123!"

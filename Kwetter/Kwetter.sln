@@ -42,11 +42,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KweetService", "KweetServic
 		..\Kubernetes\Services\KweetService\kweetservicedb.deployment.yaml = ..\Kubernetes\Services\KweetService\kweetservicedb.deployment.yaml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rabbitmq", "rabbitmq", "{9640A684-C5AF-4904-8536-EEFA088EFD68}"
-	ProjectSection(SolutionItems) = preProject
-		..\Kubernetes\rabbitmq\rabbitmq.deployment.yaml = ..\Kubernetes\rabbitmq\rabbitmq.deployment.yaml
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FollowService", "FollowService", "{12D415B3-D6C0-4664-9531-34581FA40254}"
 	ProjectSection(SolutionItems) = preProject
 		..\Kubernetes\Services\FollowService\followserviceapi.deployment.yaml = ..\Kubernetes\Services\FollowService\followserviceapi.deployment.yaml
@@ -134,7 +129,6 @@ Global
 		{9E4B5A01-FEBE-4C63-9984-7CE825F56EA3} = {E871D6F0-64B4-4855-91E1-6677D25692A6}
 		{AD321D73-43BF-4C82-A0ED-8E51DF02F0E4} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
 		{5A19069E-0D36-4D30-8BC2-27FCC5F04A53} = {AD321D73-43BF-4C82-A0ED-8E51DF02F0E4}
-		{9640A684-C5AF-4904-8536-EEFA088EFD68} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
 		{12D415B3-D6C0-4664-9531-34581FA40254} = {AD321D73-43BF-4C82-A0ED-8E51DF02F0E4}
 		{0F6B2377-FC9C-43A7-B40A-9EAEDD76BF48} = {AD321D73-43BF-4C82-A0ED-8E51DF02F0E4}
 		{7584EB9E-0BE5-454D-99E9-4C48428E3B94} = {AD321D73-43BF-4C82-A0ED-8E51DF02F0E4}

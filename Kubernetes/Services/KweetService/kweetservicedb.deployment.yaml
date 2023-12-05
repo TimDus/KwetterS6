@@ -30,4 +30,9 @@ spec:
         - name: kweetdb
           image: mcr.microsoft.com/mssql/server:2019-latest
           ports:
-            - containerPort: 7002
+            - containerPort: 8002
+          env:
+          - name: ACCEPT_EULA
+            value: "Y"
+          - name: MSSQL_SA_PASSWORD
+            value: "Test123!"

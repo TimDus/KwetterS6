@@ -8,8 +8,8 @@ spec:
     app: feeddb
   ports:
     - protocol: TCP
-      port: 7004
-      targetPort: 7004
+      port: 8004
+      targetPort: 8004
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -30,4 +30,9 @@ spec:
         - name: feeddb
           image: mcr.microsoft.com/mssql/server:2019-latest
           ports:
-            - containerPort: 7004
+            - containerPort: 8004
+          env:
+          - name: ACCEPT_EULA
+            value: "Y"
+          - name: MSSQL_SA_PASSWORD
+            value: "Test123!"

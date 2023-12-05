@@ -7,8 +7,8 @@ spec:
     app: api
   ports:
     - protocol: TCP
-      port: 7101
-      targetPort: 7101
+      port: 8101
+      targetPort: 8101
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -32,7 +32,7 @@ spec:
       - name: customerapi-container
         image: docker.io/timdus/customerapi:latest
         ports:
-        - containerPort: 7101
+        - containerPort: 8101
         resources:
           limits:   
             memory: 512Mi

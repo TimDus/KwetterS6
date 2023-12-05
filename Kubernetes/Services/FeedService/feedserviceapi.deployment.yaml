@@ -7,8 +7,8 @@ spec:
     app: api
   ports:
     - protocol: TCP
-      port: 7104
-      targetPort: 7104
+      port: 8104
+      targetPort: 8104
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -32,7 +32,7 @@ spec:
       - name: feedapi-container
         image: docker.io/timdus/feedapi:latest
         ports:
-        - containerPort: 7104
+        - containerPort: 8104
         resources:
           limits:   
             memory: 512Mi
