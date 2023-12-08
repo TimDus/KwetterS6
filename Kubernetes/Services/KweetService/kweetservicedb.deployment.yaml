@@ -8,8 +8,8 @@ spec:
     app: kweetdb
   ports:
     - protocol: TCP
-      port: 7002
-      targetPort: 7002
+      port: 8002
+      targetPort: 8002
 ---
 apiVersion: apps/v1
 kind: Deployment

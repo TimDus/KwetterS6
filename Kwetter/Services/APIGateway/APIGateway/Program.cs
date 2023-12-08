@@ -26,6 +26,11 @@ builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
     .AddOcelot(routes, builder.Environment)
     .AddEnvironmentVariables();
 
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(8100);
+});
+
 // Add services to the container.
 builder.Services.AddControllers();
 

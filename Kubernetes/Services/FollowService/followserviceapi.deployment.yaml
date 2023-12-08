@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: followapi-service
+  namespace: kwetter
 spec:
   selector:
     app: api
@@ -33,6 +34,7 @@ spec:
         image: docker.io/timdus/followapi:latest
         ports:
         - containerPort: 8103
+        imagePullPolicy: Always
         resources:
           limits:   
             memory: 512Mi

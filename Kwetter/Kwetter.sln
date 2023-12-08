@@ -57,6 +57,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIGateway", "APIGateway", "{7584EB9E-0BE5-454D-99E9-4C48428E3B94}"
 	ProjectSection(SolutionItems) = preProject
 		..\Kubernetes\Services\APIGateway\apigateway.deployment.yaml = ..\Kubernetes\Services\APIGateway\apigateway.deployment.yaml
+		..\Kubernetes\Services\APIGateway\apigateway.ingress.yaml = ..\Kubernetes\Services\APIGateway\apigateway.ingress.yaml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KweetService.API", "Services\KweetService\API\KweetService.API.csproj", "{E7BA8B17-2F60-4444-9711-E7670B22CE12}"
