@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FeedService.API.Models.Entity
 {
+    [Table("Hashtags", Schema = "dbo")]
     public class HashtagEntity
     {
         [Key]

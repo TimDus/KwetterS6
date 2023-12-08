@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KweetService.API.Models.Entity
 {
-    [Table("Kweet", Schema = "dbo")]
+    [Table("Kweets", Schema = "dbo")]
     public class KweetEntity
     {
         [Key]

@@ -1,7 +1,13 @@
-﻿namespace FeedService.API.Models.Entity
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace FeedService.API.Models.Entity
 {
+    [Table("Customers", Schema = "dbo")]
     public class CustomerEntity
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public int CustomerId { get; set; }

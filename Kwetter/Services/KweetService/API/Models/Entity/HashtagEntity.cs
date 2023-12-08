@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KweetService.API.Models.Entity
 {
-    [Table("Hashtag", Schema = "dbo")]
+    [Table("Hashtags", Schema = "dbo")]
     public class HashtagEntity
     {
         [Key]

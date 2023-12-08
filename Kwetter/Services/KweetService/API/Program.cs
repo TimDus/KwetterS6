@@ -105,24 +105,9 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
 });
 
 //Datbase Context
-string dbHost;
-string dbName;
-string dbPassword;
-
-if (builder.Environment.IsDevelopment() && Environment.GetEnvironmentVariable("DOCKER") != "Docker")
-{
-    dbHost = builder.Configuration.GetValue<string>("Database:DB_HOST");
-    dbName = builder.Configuration.GetValue<string>("Database:DB_NAME");
-    dbPassword = builder.Configuration.GetValue<string>("Database:DB_PASSWORD");
-}
-else
-{
-    #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-    dbHost = Environment.GetEnvironmentVariable("DB_HOST");
-    dbName = Environment.GetEnvironmentVariable("DB_NAME");
-    dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
-    #pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
-}
+string dbHost = builder.Configuration.GetValue<string>("Database:DB_HOST");
+string dbName = builder.Configuration.GetValue<string>("Database:DB_NAME");
+string dbPassword = builder.Configuration.GetValue<string>("Database:DB_PASSWORD");
 
 var connectionString = $"Data Source={dbHost};Initial Catalog={dbName};User ID=sa;Password={dbPassword};TrustServerCertificate=true";
 

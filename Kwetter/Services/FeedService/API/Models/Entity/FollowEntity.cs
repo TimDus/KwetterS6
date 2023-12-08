@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FeedService.API.Models.Entity
 {
+    [Table("Follows", Schema = "dbo")]
     public class FollowEntity
     {
         [Key]

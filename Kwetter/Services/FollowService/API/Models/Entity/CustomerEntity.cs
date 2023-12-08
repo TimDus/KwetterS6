@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FollowService.API.Models.Entity
 {
+    [Table("Customers", Schema = "dbo")]
     public class CustomerEntity
     {
         [Key]

@@ -40,9 +40,6 @@ services:
       - rabbitmq 
     environment:
      - DOCKER=Docker
-     - DB_HOST=kweetdb
-     - DB_NAME=kweet
-     - DB_PASSWORD=Test123!
     depends_on:
       rabbitmq: 
         condition: service_healthy
@@ -67,9 +64,6 @@ services:
       - rabbitmq 
     environment:
      - DOCKER=Docker
-     - DB_HOST=customerdb
-     - DB_NAME=customer
-     - DB_PASSWORD=Test123!
     depends_on:
       rabbitmq: 
         condition: service_healthy
@@ -94,9 +88,6 @@ services:
       - rabbitmq 
     environment:
      - DOCKER=Docker
-     - DB_HOST=followdb
-     - DB_NAME=follow
-     - DB_PASSWORD=Test123!
     depends_on:
       rabbitmq: 
         condition: service_healthy
@@ -121,9 +112,6 @@ services:
       - rabbitmq 
     environment:
      - DOCKER=Docker
-     - DB_HOST=feeddb
-     - DB_NAME=feed
-     - DB_PASSWORD=Test123!
     depends_on:
       rabbitmq: 
         condition: service_healthy

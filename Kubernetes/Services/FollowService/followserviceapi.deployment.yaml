@@ -19,6 +19,11 @@ metadata:
 spec:
   replicas: 1
   minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   selector:
     matchLabels:
       app: followapi
@@ -30,8 +35,8 @@ spec:
         version: latest
     spec:
       containers:
-      - name: followapi-container
-        image: docker.io/timdus/followapi:latest
+      - name: followapi
+        image: timdus/followapi:latest
         ports:
         - containerPort: 8103
         imagePullPolicy: Always

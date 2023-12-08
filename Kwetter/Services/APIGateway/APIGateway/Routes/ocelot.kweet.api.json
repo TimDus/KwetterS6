@@ -8,7 +8,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "kweetapi",
-          "Port": 80
+          "Port": 8102
         }
       ],
       "DownstreamPathTemplate": "/api/Kweet/Create",
@@ -21,7 +21,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "kweetapi",
-          "Port": 80
+          "Port": 8102
         }
       ],
       "DownstreamPathTemplate": "/api/Kweet/Like",
@@ -34,7 +34,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "kweetapi",
-          "Port": 80
+          "Port": 8102
         }
       ],
       "DownstreamPathTemplate": "/api/Kweet/Unlike",

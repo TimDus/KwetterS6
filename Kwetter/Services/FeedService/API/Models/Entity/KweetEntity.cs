@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FeedService.API.Models.Entity
 {
+    [Table("Kweets", Schema = "dbo")]
     public class KweetEntity
     {
         [Key]

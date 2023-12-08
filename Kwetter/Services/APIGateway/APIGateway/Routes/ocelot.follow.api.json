@@ -8,7 +8,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "followapi",
-          "Port": 80
+          "Port": 8103
         }
       ],
       "DownstreamPathTemplate": "/api/Follow/Follow",
@@ -21,7 +21,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "followapi",
-          "Port": 80
+          "Port": 8103
         }
       ],
       "DownstreamPathTemplate": "/api/Follow/Unfollow",
@@ -34,7 +34,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "followapi",
-          "Port": 80
+          "Port": 8103
         }
       ],
       "DownstreamPathTemplate": "/api/Follow/GetFollowers",
@@ -47,7 +47,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "followapi",
-          "Port": 80
+          "Port": 8103
         }
       ],
       "DownstreamPathTemplate": "/api/Follow/GetFollowing",

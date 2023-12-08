@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: feedapi-service
+  name: feedapi
   namespace: kwetter
 spec:
   selector:
-    app: api
+    app: feedapi
   ports:
     - protocol: TCP
       port: 8104
@@ -19,19 +19,24 @@ metadata:
 spec:
   replicas: 1
   minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   selector:
     matchLabels:
-      app: feedapi-pod
+      app: feedapi
       version: latest
   template:
     metadata:
       labels:
-        app: feedapi-pod
+        app: feedapi
         version: latest
     spec:
       containers:
-      - name: feedapi-container
-        image: docker.io/timdus/feedapi:latest
+      - name: feedapi
+        image: timdus/feedapi:latest
         ports:
         - containerPort: 8104
         imagePullPolicy: Always

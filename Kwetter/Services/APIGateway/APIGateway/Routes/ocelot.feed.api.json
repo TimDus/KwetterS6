@@ -8,7 +8,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "feedapi",
-          "Port": 80
+          "Port": 8104
         }
       ],
       "DownstreamPathTemplate": "/api/Feed/Random",
@@ -21,7 +21,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "feedapi",
-          "Port": 80
+          "Port": 8104
         }
       ],
       "DownstreamPathTemplate": "/api/Feed/Followed",
