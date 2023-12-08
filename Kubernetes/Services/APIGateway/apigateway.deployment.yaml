@@ -11,6 +11,7 @@ spec:
     app: apigateway-pod
   ports:
   - protocol: TCP
+    name: http
     port: 80
     targetPort: 8100
   type: NodePort

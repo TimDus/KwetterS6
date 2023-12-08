@@ -113,6 +113,11 @@ builder.Services.AddSingleton<IConnection>(sp =>
     });
 });
 
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(8104);
+});
+
 //Datbase Context
 string dbHost;
 string dbName;
