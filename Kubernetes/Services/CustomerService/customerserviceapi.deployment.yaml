@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: customerapi-service
+  name: customerapi
   namespace: kwetter
   labels:
     app: customerapi
-    service: customerapi-service
+    service: customerapi
 spec:
   selector:
-    app: customerapi-pod
+    app: customerapi
   ports:
     - protocol: TCP
       name: http
@@ -25,16 +25,16 @@ spec:
   minReadySeconds: 10
   selector:
     matchLabels:
-      app: customerapi-pod
+      app: customerapi
       version: latest
   template:
     metadata:
       labels:
-        app: customerapi-pod
+        app: customerapi
         version: latest
     spec:
       containers:
-      - name: customerapi-container
+      - name: customerapi
         image: timdus/customerapi:latest
         ports:
         - containerPort: 8101

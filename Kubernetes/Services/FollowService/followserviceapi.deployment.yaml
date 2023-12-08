@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: followapi-service
+  name: followapi
   namespace: kwetter
 spec:
   selector:
-    app: api
+    app: followapi
   ports:
     - protocol: TCP
       port: 8103
@@ -21,12 +21,12 @@ spec:
   minReadySeconds: 10
   selector:
     matchLabels:
-      app: followapi-pod
+      app: followapi
       version: latest
   template:
     metadata:
       labels:
-        app: followapi-pod
+        app: followapi
         version: latest
     spec:
       containers:
