@@ -47,5 +47,10 @@ namespace ModerationService.API.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public async Task<List<KweetEntity>> GetPendingList()
+        {
+            return await _moderationDbContext.Kweets.Where(k => k.Status == 0).ToListAsync();
+        }
     }
 }

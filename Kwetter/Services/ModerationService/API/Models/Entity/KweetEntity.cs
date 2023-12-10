@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ModerationService.API.Models.Enum;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModerationService.API.Models.Entity
@@ -18,11 +19,14 @@ namespace ModerationService.API.Models.Entity
 
         public DateTime CreatedDate { get; set; }
 
-        public KweetEntity(int kweetServiceId, string text, DateTime dateTime)
+        public Status Status { get; set; }
+
+        public KweetEntity(int kweetServiceId, string text, DateTime dateTime, Status status)
         {
             KweetServiceId = kweetServiceId;
             Text = text;
             CreatedDate = dateTime;
+            Status = status;
         }
 
         public KweetEntity() { }

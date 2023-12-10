@@ -8,5 +8,7 @@ namespace ModerationService.API.Repositories
         Task<CustomerEntity> GetCustomer(int id);
 
         Task<CustomerEntity> CreateCustomer(CustomerEntity obj);
+
+        Task<List<KweetEntity>> GetPendingList();
     }
 }

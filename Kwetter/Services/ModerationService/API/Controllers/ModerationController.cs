@@ -16,10 +16,10 @@ namespace ModerationService.API.Controllers
             _moderationLogic = moderationLogic;
         }
 
-        [HttpGet("GetList")]
-        public async Task<List<KweetDTO>> GetList()
+        [HttpGet("GetPendingList")]
+        public async Task<List<KweetDTO>> GetPendingList()
         {
-            return await _moderationLogic.GetList();
+            return await _moderationLogic.GetPendingList();
         }
 
         [HttpPost("CheckKweet")]

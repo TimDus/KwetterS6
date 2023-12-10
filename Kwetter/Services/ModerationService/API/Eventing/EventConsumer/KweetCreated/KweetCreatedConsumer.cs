@@ -33,7 +33,7 @@ namespace ModerationService.API.Eventing.EventConsumer.KweetCreated
                 var json = Encoding.UTF8.GetString(body.ToArray());
                 kweetCreatedEvent = JsonSerializer.Deserialize<KweetCreatedEvent>(json);
 
-                KweetEntity kweet = new(kweetCreatedEvent.KweetId, kweetCreatedEvent.Text, kweetCreatedEvent.KweetCreatedDate);
+                KweetEntity kweet = new(kweetCreatedEvent.KweetId, kweetCreatedEvent.Text, kweetCreatedEvent.KweetCreatedDate, 0);
 
                 using (var scope = _serviceProvider.CreateScope()) // this will use `IServiceScopeFactory` internally
                 {

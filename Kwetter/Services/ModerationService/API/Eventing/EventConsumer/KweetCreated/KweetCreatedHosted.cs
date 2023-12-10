@@ -1,4 +1,6 @@
-﻿namespace ModerationService.API.Eventing.EventConsumer.KweetCreated
+﻿using Common.Interfaces;
+
+namespace ModerationService.API.Eventing.EventConsumer.KweetCreated
 {
     public class KweetCreatedHosted : BackgroundService
     {
