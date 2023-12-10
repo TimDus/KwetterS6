@@ -11,5 +11,16 @@
         public string Text { get; set; }
 
         public DateTime CreatedDate { get; set; }
+
+        public KweetDTO() { }
+
+        public KweetDTO(int kweetServiceId, int customerId, string customerName, string text, DateTime createdDate)
+        {
+            KweetServiceId = kweetServiceId;
+            CustomerId = customerId;
+            CustomerName = customerName;
+            Text = text;
+            CreatedDate = createdDate;
+        }
     }
 }
