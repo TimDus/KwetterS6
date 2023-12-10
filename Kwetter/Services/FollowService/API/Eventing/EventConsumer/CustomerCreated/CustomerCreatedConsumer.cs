@@ -1,10 +1,10 @@
 ﻿using Common.Interfaces;
-using RabbitMQ.Client.Events;
-using RabbitMQ.Client;
-using FollowService.API.Repositories;
 using FollowService.API.Models.Entity;
-using System.Text.Json;
+using FollowService.API.Repositories;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System.Text;
+using System.Text.Json;
 
 namespace FollowService.API.Eventing.EventConsumer.CustomerCreated
 {

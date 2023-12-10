@@ -24,7 +24,7 @@ namespace KweetService.API.Logic
             kweetDTO.CreatedDate = DateTime.Now;
             KweetEntity kweetEntity = new(kweetDTO.Text, kweetDTO.CreatedDate);
 
-            if(kweetDTO.Hashtags != null)
+            if (kweetDTO.Hashtags != null)
             {
                 foreach (HashtagDTO hashtag in kweetDTO.Hashtags)
                 {
@@ -32,7 +32,7 @@ namespace KweetService.API.Logic
                 };
             }
 
-            if(kweetDTO.Mentions != null)
+            if (kweetDTO.Mentions != null)
             {
                 foreach (MentionDTO mention in kweetDTO.Mentions)
                 {
@@ -53,12 +53,12 @@ namespace KweetService.API.Logic
                 KweetCreatedDate = kweetEntity.CreatedDate,
             };
 
-            foreach(MentionEntity mention in kweetEntity.Mentions)
+            foreach (MentionEntity mention in kweetEntity.Mentions)
             {
                 kweetEvent.Mentions.Add(new MentionDTO(mention.Id, mention.Customer.Id, mention.Kweet.Id));
             }
 
-            foreach(HashtagEntity hashtag in kweetEntity.Hashtags)
+            foreach (HashtagEntity hashtag in kweetEntity.Hashtags)
             {
                 kweetEvent.Hashtags.Add(new HashtagDTO(hashtag.Id, hashtag.Kweet.Id, hashtag.Tag));
             }

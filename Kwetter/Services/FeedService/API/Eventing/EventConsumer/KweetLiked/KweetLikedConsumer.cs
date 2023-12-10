@@ -1,10 +1,10 @@
-﻿using RabbitMQ.Client.Events;
-using RabbitMQ.Client;
-using Common.Interfaces;
-using System.Text;
+﻿using Common.Interfaces;
 using FeedService.API.Models.Entity;
-using System.Text.Json;
 using FeedService.API.Repositories.Interfaces;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
+using System.Text;
+using System.Text.Json;
 
 namespace FeedService.API.Eventing.EventConsumer.KweetLiked
 {

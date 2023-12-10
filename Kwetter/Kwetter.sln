@@ -35,6 +35,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", 
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AD321D73-43BF-4C82-A0ED-8E51DF02F0E4}"
+	ProjectSection(SolutionItems) = preProject
+		..\Kubernetes\Services\kwetter-secret.yaml = ..\Kubernetes\Services\kwetter-secret.yaml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KweetService", "KweetService", "{5A19069E-0D36-4D30-8BC2-27FCC5F04A53}"
 	ProjectSection(SolutionItems) = preProject
@@ -87,6 +90,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FeedService", "FeedService"
 		..\Kubernetes\Services\FeedService\feedservicedb.deployment.yaml = ..\Kubernetes\Services\FeedService\feedservicedb.deployment.yaml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModerationService", "ModerationService", "{35E3CA67-D0AE-46F0-9BE8-E902B1D4B2BA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModerationService.API", "Services\ModerationService\API\ModerationService.API.csproj", "{2D87135E-ECCD-4555-9962-6B6E5B0E88ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +124,10 @@ Global
 		{D89DA17D-6D72-4A3B-8FE9-44285C1068E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D89DA17D-6D72-4A3B-8FE9-44285C1068E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D89DA17D-6D72-4A3B-8FE9-44285C1068E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D87135E-ECCD-4555-9962-6B6E5B0E88ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D87135E-ECCD-4555-9962-6B6E5B0E88ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D87135E-ECCD-4555-9962-6B6E5B0E88ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D87135E-ECCD-4555-9962-6B6E5B0E88ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -140,6 +151,8 @@ Global
 		{DF0D42CA-B437-4EFE-8956-C97F3729CFA2} = {E871D6F0-64B4-4855-91E1-6677D25692A6}
 		{D89DA17D-6D72-4A3B-8FE9-44285C1068E8} = {DF0D42CA-B437-4EFE-8956-C97F3729CFA2}
 		{35EBA636-7846-44B3-BE42-591CB7B59DB3} = {AD321D73-43BF-4C82-A0ED-8E51DF02F0E4}
+		{35E3CA67-D0AE-46F0-9BE8-E902B1D4B2BA} = {E871D6F0-64B4-4855-91E1-6677D25692A6}
+		{2D87135E-ECCD-4555-9962-6B6E5B0E88ED} = {35E3CA67-D0AE-46F0-9BE8-E902B1D4B2BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2B5A65A9-0857-4D6D-9876-59B6E417394B}

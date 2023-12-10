@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using RabbitMQ.Client;
-using System.Text.Json;
 using System.Text;
+using System.Text.Json;
 
 namespace KweetService.API.Eventing.EventPublisher.KweetCreated
 {
@@ -22,7 +22,7 @@ namespace KweetService.API.Eventing.EventPublisher.KweetCreated
         private async Task<bool> PublishEvent(KweetCreatedEvent @event)
         {
             var channel = _connection.CreateModel();
-            var exchangeName = "kweet-created-exchange"; 
+            var exchangeName = "kweet-created-exchange";
             var routingKey = "kweet.created";
             var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(@event));
             channel.BasicPublish(exchangeName, routingKey, null, body);

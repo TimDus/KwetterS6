@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KweetService.API.Models.Entity
 {
@@ -22,7 +22,7 @@ namespace KweetService.API.Models.Entity
 
         public ICollection<KweetLikeEntity>? Likes { get; set; }
 
-        public KweetEntity(string text, DateTime dateTime) 
+        public KweetEntity(string text, DateTime dateTime)
         {
             Text = text;
             CreatedDate = dateTime;

@@ -1,5 +1,4 @@
 ﻿using Common.Interfaces;
-using FeedService.API.Models.Entity;
 using FeedService.API.Repositories.Interfaces;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;

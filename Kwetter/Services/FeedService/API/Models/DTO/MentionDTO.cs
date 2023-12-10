@@ -8,7 +8,7 @@
 
         public int KweetId { get; set; }
 
-        public MentionDTO() { } 
+        public MentionDTO() { }
 
         public MentionDTO(int kweetServiceId, int mentionedCustomerId, int kweetId)
         {

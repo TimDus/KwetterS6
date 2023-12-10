@@ -2,14 +2,13 @@
 using FeedService.API.Models.Entity;
 using FeedService.API.Repositories.Interfaces;
 using Microsoft.IdentityModel.Tokens;
-using System.Linq;
 
 namespace FeedService.API.Logic
 {
     public class FeedLogic : IFeedLogic
     {
         private readonly IFeedRepository _repository;
-        public FeedLogic(IFeedRepository repository) 
+        public FeedLogic(IFeedRepository repository)
         {
             _repository = repository;
         }

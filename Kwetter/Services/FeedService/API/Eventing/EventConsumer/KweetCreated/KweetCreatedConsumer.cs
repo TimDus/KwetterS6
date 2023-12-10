@@ -1,11 +1,11 @@
-﻿using RabbitMQ.Client.Events;
-using RabbitMQ.Client;
-using Common.Interfaces;
-using System.Text;
-using System.Text.Json;
+﻿using Common.Interfaces;
+using FeedService.API.Models.DTO;
 using FeedService.API.Models.Entity;
 using FeedService.API.Repositories.Interfaces;
-using FeedService.API.Models.DTO;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
+using System.Text;
+using System.Text.Json;
 
 namespace FeedService.API.Eventing.EventConsumer.KweetCreated
 {
@@ -13,7 +13,7 @@ namespace FeedService.API.Eventing.EventConsumer.KweetCreated
     {
         private readonly IModel _model;
         private readonly IServiceProvider _serviceProvider;
-        const string _queueName = "kweet-created-queue";
+        const string _queueName = "feed-kweet-created-queue";
 
         public KweetCreatedConsumer(IServiceProvider serviceProvider)
         {
@@ -36,7 +36,7 @@ namespace FeedService.API.Eventing.EventConsumer.KweetCreated
 
                 KweetEntity kweet = new(kweetCreatedEvent.KweetId, kweetCreatedEvent.Text, kweetCreatedEvent.KweetCreatedDate);
 
-                foreach(HashtagDTO hashtag in kweetCreatedEvent.Hashtags)
+                foreach (HashtagDTO hashtag in kweetCreatedEvent.Hashtags)
                 {
                     kweet.Hashtags.Add(new HashtagEntity(hashtag.Id, hashtag.Tag));
                 }

@@ -1,6 +1,4 @@
-﻿using KweetService.API.Models.DTO;
-using KweetService.API.Models.Entity;
-using Microsoft.AspNetCore.Mvc;
+﻿using KweetService.API.Models.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace KweetService.API.Repositories
@@ -57,7 +55,7 @@ namespace KweetService.API.Repositories
         {
             await _kweetDbContext.KweetLikes.AddAsync(obj);
             await _kweetDbContext.SaveChangesAsync();
-            
+
             return await _kweetDbContext.KweetLikes.Where(a => a.Id == obj.Id).FirstOrDefaultAsync();
         }
 

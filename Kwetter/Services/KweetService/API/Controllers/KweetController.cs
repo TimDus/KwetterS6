@@ -1,6 +1,5 @@
 using KweetService.API.Logic;
 using KweetService.API.Models.DTO;
-using KweetService.API.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KweetService.API.Controllers

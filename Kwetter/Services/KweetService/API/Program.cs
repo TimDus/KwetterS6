@@ -39,7 +39,6 @@ builder.Services.AddTransient<IRequestHandler<KweetLikedEvent>, KweetLikedPublis
 builder.Services.AddTransient<IRequestHandler<KweetUnlikedEvent>, KweetUnlikedPublisher>();
 builder.Services.AddTransient<IKweetLogic, KweetLogic>();
 builder.Services.AddScoped<IKweetRepository, KweetRepository>();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddSingleton<IConsumer<CustomerCreatedEvent>, CustomerCreatedConsumer>();
 builder.Services.AddHostedService<CustomerCreatedHosted>();
@@ -129,16 +128,20 @@ using (var scope = app.Services.CreateScope())
 
     //kweet created
     var exchangeName = "kweet-created-exchange";
-    var queueName = "kweet-created-queue";
-    
+    var queueName = "moderation-kweet-created-queue";
+
     channel.ExchangeDeclare(exchangeName, exchangeType, durable, autoDelete);
+    channel.QueueDeclare(queueName, durable, exclusive, autoDelete, arguments);
+    channel.QueueBind(queueName, exchangeName, "kweet.created");
+
+    queueName = "feed-kweet-created-queue";
     channel.QueueDeclare(queueName, durable, exclusive, autoDelete, arguments);
     channel.QueueBind(queueName, exchangeName, "kweet.created");
 
     //kweet liked
     exchangeName = "kweet-liked-exchange";
     queueName = "kweet-liked-queue";
-    
+
     channel.ExchangeDeclare(exchangeName, exchangeType, durable, autoDelete);
     channel.QueueDeclare(queueName, durable, exclusive, autoDelete, arguments);
     channel.QueueBind(queueName, exchangeName, "kweet.liked");

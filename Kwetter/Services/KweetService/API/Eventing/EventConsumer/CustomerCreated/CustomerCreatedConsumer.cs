@@ -1,10 +1,10 @@
-﻿using RabbitMQ.Client.Events;
-using RabbitMQ.Client;
-using KweetService.API.Repositories;
-using Common.Interfaces;
-using System.Text.Json;
-using System.Text;
+﻿using Common.Interfaces;
 using KweetService.API.Models.Entity;
+using KweetService.API.Repositories;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
+using System.Text;
+using System.Text.Json;
 
 namespace KweetService.API.Eventing.EventReceiver.CustomerCreated
 {

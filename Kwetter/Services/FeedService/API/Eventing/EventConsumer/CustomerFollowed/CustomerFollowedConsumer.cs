@@ -1,10 +1,10 @@
 ﻿using Common.Interfaces;
-using RabbitMQ.Client.Events;
-using RabbitMQ.Client;
-using System.Text.Json;
-using System.Text;
 using FeedService.API.Models.Entity;
 using FeedService.API.Repositories.Interfaces;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
+using System.Text;
+using System.Text.Json;
 
 namespace FeedService.API.Eventing.EventConsumer.CustomerFollowed
 {

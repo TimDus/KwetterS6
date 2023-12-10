@@ -1,10 +1,9 @@
 ﻿using Common.Interfaces;
-using RabbitMQ.Client.Events;
+using FeedService.API.Repositories.Interfaces;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System.Text;
 using System.Text.Json;
-using FeedService.API.Models.Entity;
-using FeedService.API.Repositories.Interfaces;
 
 namespace FeedService.API.Eventing.EventConsumer.CustomerUnfollowed
 {

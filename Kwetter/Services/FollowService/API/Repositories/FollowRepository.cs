@@ -1,8 +1,5 @@
 ﻿using FollowService.API.Models.Entity;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Collections.ObjectModel;
 
 namespace FollowService.API.Repositories
 {
@@ -33,7 +30,7 @@ namespace FollowService.API.Repositories
 
         public async Task<FollowEntity> Delete(int id)
         {
-            FollowEntity follow =  await _followDbContext.Follows.Where(f => f.Id == id).Include(f => f.Follower).Include(f => f.Following).FirstOrDefaultAsync();
+            FollowEntity follow = await _followDbContext.Follows.Where(f => f.Id == id).Include(f => f.Follower).Include(f => f.Following).FirstOrDefaultAsync();
             _followDbContext.Follows.Remove(follow);
             await _followDbContext.SaveChangesAsync();
 

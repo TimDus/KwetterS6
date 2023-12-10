@@ -69,7 +69,7 @@ namespace FollowService.API.Logic
                 Followers = await _repository.GetFollowers(customerId)
             };
 
-            
+
             return followList;
         }
 

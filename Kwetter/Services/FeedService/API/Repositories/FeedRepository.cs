@@ -8,7 +8,7 @@ namespace FeedService.API.Repositories
     {
         private readonly FeedDbContext _feedDbContext;
 
-        public FeedRepository(FeedDbContext dbContext) 
+        public FeedRepository(FeedDbContext dbContext)
         {
             _feedDbContext = dbContext;
         }

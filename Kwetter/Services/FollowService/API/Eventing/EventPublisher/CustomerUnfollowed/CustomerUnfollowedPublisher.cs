@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using RabbitMQ.Client;
-using System.Text.Json;
 using System.Text;
+using System.Text.Json;
 
 namespace FollowService.API.Eventing.EventPublisher.CustomerUnfollowed
 {

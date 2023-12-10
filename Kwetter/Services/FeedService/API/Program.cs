@@ -1,20 +1,20 @@
 using Common.Eventing;
 using Common.Interfaces;
+using FeedService.API.Eventing.EventConsumer.CustomerCreated;
 using FeedService.API.Eventing.EventConsumer.CustomerFollowed;
 using FeedService.API.Eventing.EventConsumer.CustomerUnfollowed;
 using FeedService.API.Eventing.EventConsumer.KweetCreated;
 using FeedService.API.Eventing.EventConsumer.KweetLiked;
 using FeedService.API.Logic;
 using FeedService.API.Repositories;
+using FeedService.API.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Polly;
-using RabbitMQ.Client.Exceptions;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Exceptions;
 using System.Net.Sockets;
 using System.Reflection;
-using FeedService.API.Eventing.EventConsumer.CustomerCreated;
-using FeedService.API.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -132,6 +132,10 @@ using (var scope = app.Services.CreateScope())
     queueName = "follow-customer-created-queue";
     channel.QueueDeclare(queueName, durable, exclusive, autoDelete, arguments);
     channel.QueueBind(queueName, exchangeName, "customer.created");
+
+    queueName = "moderation-customer-created-queue";
+    channel.QueueDeclare(queueName, durable, exclusive, autoDelete, arguments);
+    channel.QueueBind(queueName, exchangeName, "customer.created");
 }
 
 // Configure the HTTP request pipeline.

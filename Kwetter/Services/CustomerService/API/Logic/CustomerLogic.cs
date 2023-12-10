@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using CustomerService.API.Eventing.EventPublisher.CustomerCreated;
+﻿using CustomerService.API.Eventing.EventPublisher.CustomerCreated;
 using CustomerService.API.Models.DTO;
 using CustomerService.API.Models.Entity;
 using CustomerService.API.Repositories;
