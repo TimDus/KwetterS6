@@ -29,7 +29,7 @@ services:
       - kweetdb
       - customerdb
       - feeddb
-
+      - moderationdb
 
   kweetapi:
     image: timdus/kweetapi:latest
