@@ -7,7 +7,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "customerapi-service",
+          "Host": "customerapi",
           "Port": 8101
         }
       ],
@@ -20,7 +20,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "customerapi-service",
+          "Host": "customerapi",
           "Port": 8101
         }
       ],

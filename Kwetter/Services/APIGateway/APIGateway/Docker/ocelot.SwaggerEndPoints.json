@@ -1,0 +1,48 @@
+{
+  "SwaggerEndPoints": [
+    {
+      "Key": "customer",
+      "TransformByOcelotConfig": false,
+      "Config": [
+        {
+          "Name": "customer.API",
+          "Version": "1.0",
+          "Url": "http://customerapi:8101/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "kweet",
+      "TransformByOcelotConfig": false,
+      "Config": [
+        {
+          "Name": "kweet.API",
+          "Version": "1.0",
+          "Url": "http://kweetapi:8102/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "follow",
+      "TransformByOcelotConfig": false,
+      "Config": [
+        {
+          "Name": "follow.API",
+          "Version": "1.0",
+          "Url": "http://followapi:8103/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "feed",
+      "TransformByOcelotConfig": false,
+      "Config": [
+        {
+          "Name": "feed.API",
+          "Version": "1.0",
+          "Url": "http://feedapi:8104/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}
