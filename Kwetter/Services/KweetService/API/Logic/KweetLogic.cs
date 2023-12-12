@@ -40,7 +40,7 @@ namespace KweetService.API.Logic
                 };
             }
 
-
+            CustomerEntity customer = await _repository.GetCustomer(kweetDTO.CustomerId);
             kweetEntity.Customer = await _repository.GetCustomer(kweetDTO.CustomerId);
 
             kweetEntity = await _repository.Create(kweetEntity);

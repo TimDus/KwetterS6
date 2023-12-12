@@ -1,6 +1,8 @@
-﻿using MediatR;
+﻿using Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using ModerationService.API.Eventing.EventConsumer.CustomerCreated;
+using ModerationService.API.Eventing.EventConsumer.KweetCreated;
 using ModerationService.API.Logic;
 using ModerationService.API.Repositories;
 using Polly;
@@ -94,7 +96,7 @@ builder.Services.AddSingleton<IConnection>(sp =>
 
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {
-    serverOptions.ListenAnyIP(8102);
+    serverOptions.ListenAnyIP(8105);
 });
 
 //Datbase Context

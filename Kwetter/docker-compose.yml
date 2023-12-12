@@ -127,6 +127,30 @@ services:
     ports:
      - 8004:1433
 
+  moderationapi:
+    image: timdus/moderationapi:latest
+    ports:
+      - 8105:80
+    networks:
+      - backend
+      - rabbitmq 
+    environment:
+     - DOCKER=Docker
+    depends_on:
+      rabbitmq: 
+        condition: service_healthy
+
+  moderationdb:
+    container_name: moderation-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+     - ACCEPT_EULA=Y
+     - SA_PASSWORD=Test123!
+    networks:
+     - backend
+    ports:
+     - 8005:1433
+
   apigateway:
     image: timdus/kwettergateway:latest
     ports:
