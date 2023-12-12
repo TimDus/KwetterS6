@@ -11,14 +11,14 @@ namespace FeedService.API.Eventing.EventConsumer.CustomerUnfollowed
     {
         private readonly IModel _model;
         private readonly IServiceProvider _serviceProvider;
-        const string _queueName = "kweet-created-queue";
+        const string _queueName = "customer-unfollowed-queue";
 
         public CustomerUnfollowedConsumer(IServiceProvider serviceProvider)
         {
             _model = serviceProvider.GetRequiredService<IConnection>().CreateModel();
             _model.QueueDeclare(_queueName, durable: true, exclusive: false, autoDelete: false);
-            _model.ExchangeDeclare("kweet-created-exchange", ExchangeType.Topic, durable: true, autoDelete: false);
-            _model.QueueBind(_queueName, "kweet-created-exchange", string.Empty);
+            _model.ExchangeDeclare("customer-unfollowed-exchange", ExchangeType.Topic, durable: true, autoDelete: false);
+            _model.QueueBind(_queueName, "customer-unfollowed-exchange", string.Empty);
             _serviceProvider = serviceProvider;
         }
 
