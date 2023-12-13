@@ -2,16 +2,17 @@
 using RabbitMQ.Client;
 using System.Text;
 using System.Text.Json;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace CustomerService.API.Eventing.EventPublisher.CustomerCreated
 {
     public class CustomerCreatedPublisher : IRequestHandler<CustomerCreatedEvent>
     {
-        private readonly IModel _model;
+        private readonly IConnection _connection;
 
         public CustomerCreatedPublisher(IConnection connection)
         {
-            _model = connection.CreateModel();
+            _connection = connection;
         }
 
         public async Task Handle(CustomerCreatedEvent request, CancellationToken cancellationToken)
@@ -24,15 +25,13 @@ namespace CustomerService.API.Eventing.EventPublisher.CustomerCreated
             var exchangeName = "customer-created-exchange";
             var routingKey = "customer.created";
             var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(@event));
-            _model.BasicPublish(exchangeName, routingKey, null, body);
-
+            using (var channel = _connection.CreateModel())
+            {
+                channel.BasicPublish(exchangeName, routingKey, null, body);
+            }
+            await Task.CompletedTask;
             return true;
         }
 
-        public void Dispose()
-        {
-            if (_model.IsOpen)
-                _model.Close();
-        }
     }
 }
