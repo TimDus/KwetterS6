@@ -94,6 +94,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModerationService", "Modera
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModerationService.API", "Services\ModerationService\API\ModerationService.API.csproj", "{2D87135E-ECCD-4555-9962-6B6E5B0E88ED}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModerationService", "ModerationService", "{687927B4-CDCC-4D82-A997-DCFA6489C559}"
+	ProjectSection(SolutionItems) = preProject
+		..\Kubernetes\Services\ModerationService\moderationserviceapi.deployment.yaml = ..\Kubernetes\Services\ModerationService\moderationserviceapi.deployment.yaml
+		..\Kubernetes\Services\ModerationService\moderationservicedb.deployment.yaml = ..\Kubernetes\Services\ModerationService\moderationservicedb.deployment.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +159,7 @@ Global
 		{35EBA636-7846-44B3-BE42-591CB7B59DB3} = {AD321D73-43BF-4C82-A0ED-8E51DF02F0E4}
 		{35E3CA67-D0AE-46F0-9BE8-E902B1D4B2BA} = {E871D6F0-64B4-4855-91E1-6677D25692A6}
 		{2D87135E-ECCD-4555-9962-6B6E5B0E88ED} = {35E3CA67-D0AE-46F0-9BE8-E902B1D4B2BA}
+		{687927B4-CDCC-4D82-A997-DCFA6489C559} = {AD321D73-43BF-4C82-A0ED-8E51DF02F0E4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2B5A65A9-0857-4D6D-9876-59B6E417394B}

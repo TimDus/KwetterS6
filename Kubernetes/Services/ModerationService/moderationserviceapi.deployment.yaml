@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: moderationapi-service
+  labels:
+    app: moderationapi
+    service: moderationapi-service
+spec:
+  selector:
+    app: moderationapi-pod
+  ports:
+    - protocol: TCP
+      name: http
+      port: 8105
+      targetPort: 8105
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moderationapi
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: moderationapi-pod
+      version: latest
+  template:
+    metadata:
+      labels:
+        app: moderationapi-pod
+        version: latest
+    spec:
+      containers:
+      - name: moderationapi-container
+        image: timdus/moderationapi:latest
+        ports:
+        - containerPort: 8105
+        imagePullPolicy: Always
+        resources:
+          limits:   
+            memory: 512Mi
+            cpu: "1"
