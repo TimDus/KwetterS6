@@ -8,11 +8,11 @@ namespace FollowService.API.Eventing.EventPublisher.CustomerFollowed
 {
     public class CustomerFollowedPublisher : IRequestHandler<CustomerFollowedEvent>
     {
-        private readonly IModel _model;
+        private readonly IConnection _connection;
 
         public CustomerFollowedPublisher(IConnection connection)
         {
-            _model = connection.CreateModel();
+            _connection = connection;
         }
 
         public async Task Handle(CustomerFollowedEvent request, CancellationToken cancellationToken)
@@ -25,15 +25,12 @@ namespace FollowService.API.Eventing.EventPublisher.CustomerFollowed
             var exchangeName = "customer-followed-exchange";
             var routingKey = "customer.followed";
             var body = await Task.Run(() => Encoding.UTF8.GetBytes(JsonSerializer.Serialize(@event)));
-            _model.BasicPublish(exchangeName, routingKey, null, body);
-
+            using (var channel = _connection.CreateModel())
+            {
+                channel.BasicPublish(exchangeName, routingKey, null, body);
+            }
+            await Task.CompletedTask;
             return true;
-        }
-
-        public void Dispose()
-        {
-            if (_model.IsOpen)
-                _model.Close();
         }
     }
 }
