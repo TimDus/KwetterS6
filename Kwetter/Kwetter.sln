@@ -100,6 +100,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModerationService", "Modera
 		..\Kubernetes\Services\ModerationService\moderationservicedb.deployment.yaml = ..\Kubernetes\Services\ModerationService\moderationservicedb.deployment.yaml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LoadTesting", "LoadTesting", "{0F7FF60D-208E-4FA1-8D95-841E47EF0CC6}"
+	ProjectSection(SolutionItems) = preProject
+		..\Kubernetes\LoadTesting\CreateKweet.js = ..\Kubernetes\LoadTesting\CreateKweet.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RabbitMQ", "RabbitMQ", "{39161C76-11FA-415E-9048-B49825EEB8FB}"
+	ProjectSection(SolutionItems) = preProject
+		..\Kubernetes\RabbitMQ\rabbitmq.deployment.yaml = ..\Kubernetes\RabbitMQ\rabbitmq.deployment.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -160,6 +170,8 @@ Global
 		{35E3CA67-D0AE-46F0-9BE8-E902B1D4B2BA} = {E871D6F0-64B4-4855-91E1-6677D25692A6}
 		{2D87135E-ECCD-4555-9962-6B6E5B0E88ED} = {35E3CA67-D0AE-46F0-9BE8-E902B1D4B2BA}
 		{687927B4-CDCC-4D82-A997-DCFA6489C559} = {AD321D73-43BF-4C82-A0ED-8E51DF02F0E4}
+		{0F7FF60D-208E-4FA1-8D95-841E47EF0CC6} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
+		{39161C76-11FA-415E-9048-B49825EEB8FB} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2B5A65A9-0857-4D6D-9876-59B6E417394B}

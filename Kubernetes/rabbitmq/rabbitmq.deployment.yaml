@@ -1,11 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: rabbitmq
-  namespace: kwetter
+  name: rabbitmq-service
 spec:
   selector:
-    app: rabbitmq
+    app: rabbitmq-pod
   ports:
     - name: management
       protocol: TCP
@@ -20,19 +19,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: rabbitmq
-  namespace: kwetter
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: rabbitmq
+      app: rabbitmq-pod
   template:
     metadata:
       labels:
-        app: rabbitmq
+        app: rabbitmq-pod
     spec:
       containers:
-        - name: rabbitmq
+        - name: rabbitmq-container
           image: rabbitmq:3-management
           ports:
             - containerPort: 15672

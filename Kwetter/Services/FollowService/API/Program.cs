@@ -67,6 +67,15 @@ builder.Services.AddSingleton<IConnection>(sp =>
     {
         factory = new ConnectionFactory()
         {
+            HostName = "rabbitmq-service",
+            Port = 5672,
+            UserName = "guest",
+            Password = "guest",
+            DispatchConsumersAsync = true
+        };
+        /* cloud connection
+        factory = new ConnectionFactory()
+        {
             VirtualHost = "mnidiotp",
             HostName = "cow-01.rmq2.cloudamqp.com",
             Port = 5672,
@@ -74,6 +83,7 @@ builder.Services.AddSingleton<IConnection>(sp =>
             Password = "k4l71JcIUK-t-Z2YSdOr1sr27eRCIH8T",
             DispatchConsumersAsync = true
         };
+        */
     }
 
     var retryPolicy = Policy.Handle<SocketException>()
