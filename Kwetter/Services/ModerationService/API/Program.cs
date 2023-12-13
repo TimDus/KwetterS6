@@ -46,11 +46,16 @@ builder.Services.AddSingleton<IConnection>(sp =>
 {
     var factory = new ConnectionFactory();
 
-    if (builder.Environment.IsDevelopment() && Environment.GetEnvironmentVariable("DOCKER") != "Docker")
+    if (builder.Environment.IsDevelopment())
     {
+        string name = "localhost";
+        if (Environment.GetEnvironmentVariable("DOCKER") != "Docker")
+        {
+            name = "rabbitmq";
+        }
         factory = new ConnectionFactory()
         {
-            HostName = "localhost",
+            HostName = name,
             Port = 5672,
             UserName = "guest",
             Password = "guest",
