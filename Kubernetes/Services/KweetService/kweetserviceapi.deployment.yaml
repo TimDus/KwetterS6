@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
       - name: kweetapi-container
-        image: timdus/followapi:latest
+        image: timdus/kweetapi:latest
         ports:
         - containerPort: 8102
         imagePullPolicy: Always
