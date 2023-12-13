@@ -7,11 +7,11 @@ namespace FollowService.API.Eventing.EventPublisher.CustomerUnfollowed
 {
     public class CustomerUnfollowedPublisher : IRequestHandler<CustomerUnfollowedEvent>
     {
-        private readonly IConnection _connection;
+        private readonly IModel _model;
 
         public CustomerUnfollowedPublisher(IConnection connection)
         {
-            _connection = connection;
+            _model = connection.CreateModel();
         }
 
         public async Task Handle(CustomerUnfollowedEvent request, CancellationToken cancellationToken)
@@ -21,13 +21,18 @@ namespace FollowService.API.Eventing.EventPublisher.CustomerUnfollowed
 
         private async Task<bool> PublishEvent(CustomerUnfollowedEvent @event)
         {
-            var channel = _connection.CreateModel();
             var exchangeName = "customer-unfollowed-exchange";
             var routingKey = "customer.unfollowed";
             var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(@event));
-            channel.BasicPublish(exchangeName, routingKey, null, body);
+            _model.BasicPublish(exchangeName, routingKey, null, body);
             await Task.CompletedTask;
             return true;
+        }
+
+        public void Dispose()
+        {
+            if (_model.IsOpen)
+                _model.Close();
         }
     }
 }

@@ -7,11 +7,11 @@ namespace KweetService.API.Eventing.EventPublisher.KweetLiked
 {
     public class KweetLikedPublisher : IRequestHandler<KweetLikedEvent>
     {
-        private readonly IConnection _connection;
+        private readonly IModel _model;
 
         public KweetLikedPublisher(IConnection connection)
         {
-            _connection = connection;
+            _model = connection.CreateModel();
         }
 
         public async Task Handle(KweetLikedEvent @event, CancellationToken cancellationToken)
@@ -21,13 +21,18 @@ namespace KweetService.API.Eventing.EventPublisher.KweetLiked
 
         private async Task<bool> PublishEvent(KweetLikedEvent @event)
         {
-            var channel = _connection.CreateModel();
             var exchangeName = "kweet-liked-exchange";
             var routingKey = "kweet.liked";
             var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(@event));
-            channel.BasicPublish(exchangeName, routingKey, null, body);
-
+            _model.BasicPublish(exchangeName, routingKey, null, body);
+            await Task.CompletedTask;
             return true;
+        }
+
+        public void Dispose()
+        {
+            if (_model.IsOpen)
+                _model.Close();
         }
     }
 }

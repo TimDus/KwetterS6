@@ -1,13 +1,11 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 
-export const GATEWAY_API_URL = "http://kwetter.localhost:9080/api";
-
 export let options = {
     stages: [
-        { duration: '1m', target: 100 }, // simulate ramp-up of traffic from 1 to 100 users over 1 minute.
-        { duration: '2m', target: 100 }, // stay at 100 users for 2 minutes
-        { duration: '1m', target: 0 },   // ramp-down to 0 users
+        { duration: '10s', target: 10 }, // simulate ramp-up of traffic from 1 to 100 users over 1 minute.
+        { duration: '10s', target: 10 }, // stay at 100 users for 2 minutes
+        { duration: '10s', target: 0 },   // ramp-down to 0 users
     ],
     thresholds: {
         http_req_duration: ['avg < 400', 'p(99) < 2000'],
@@ -15,9 +13,9 @@ export let options = {
     }
 };
 
-function verifyUserNameUniqueness() {
-    const url = `${GATEWAY_API_URL}/Kweet/Create`;
-    const payload = JSON.stringify({ "customerId": 1, "text": "Today is a nice day" });
+function kweetCreate() {
+    const url = "http://kwetter.localhost:9080/api/Kweet/Create";
+    const payload = JSON.stringify({ "customerId": 1, "text": "today is a nice day" });
     const params = {
         headers: {
             'Content-Type': 'application/json'
@@ -30,6 +28,6 @@ function verifyUserNameUniqueness() {
 }
 
 export default function () {
-    verifyUserNameUniqueness();
+    kweetCreate();
     sleep(1);
 }

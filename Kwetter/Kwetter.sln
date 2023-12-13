@@ -103,6 +103,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LoadTesting", "LoadTesting", "{0F7FF60D-208E-4FA1-8D95-841E47EF0CC6}"
 	ProjectSection(SolutionItems) = preProject
 		..\Kubernetes\LoadTesting\CreateKweet.js = ..\Kubernetes\LoadTesting\CreateKweet.js
+		..\Kubernetes\LoadTesting\Test.js = ..\Kubernetes\LoadTesting\Test.js
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RabbitMQ", "RabbitMQ", "{39161C76-11FA-415E-9048-B49825EEB8FB}"
