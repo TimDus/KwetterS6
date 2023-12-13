@@ -41,6 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KweetService", "KweetService", "{5A19069E-0D36-4D30-8BC2-27FCC5F04A53}"
 	ProjectSection(SolutionItems) = preProject
+		..\Kubernetes\Services\KweetService\kweetserviceapi.autoscaler.yaml = ..\Kubernetes\Services\KweetService\kweetserviceapi.autoscaler.yaml
 		..\Kubernetes\Services\KweetService\kweetserviceapi.deployment.yaml = ..\Kubernetes\Services\KweetService\kweetserviceapi.deployment.yaml
 		..\Kubernetes\Services\KweetService\kweetservicedb.deployment.yaml = ..\Kubernetes\Services\KweetService\kweetservicedb.deployment.yaml
 	EndProjectSection
