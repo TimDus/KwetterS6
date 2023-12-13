@@ -49,7 +49,7 @@ builder.Services.AddSingleton<IConnection>(sp =>
     if (builder.Environment.IsDevelopment())
     {
         string name = "localhost";
-        if (Environment.GetEnvironmentVariable("DOCKER") != "Docker")
+        if (Environment.GetEnvironmentVariable("DOCKER") == "Docker")
         {
             name = "rabbitmq";
         }
