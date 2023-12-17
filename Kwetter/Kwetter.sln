@@ -112,6 +112,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RabbitMQ", "RabbitMQ", "{39
 		..\Kubernetes\RabbitMQ\rabbitmq.deployment.yaml = ..\Kubernetes\RabbitMQ\rabbitmq.deployment.yaml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dashboard", "Dashboard", "{2B4B45C8-13E4-4457-B9C8-7EE407EAC865}"
+	ProjectSection(SolutionItems) = preProject
+		..\Kubernetes\Dashboard\dashboard-adminuser.yaml = ..\Kubernetes\Dashboard\dashboard-adminuser.yaml
+		..\Kubernetes\Dashboard\datadog-agent.yaml = ..\Kubernetes\Dashboard\datadog-agent.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -174,6 +180,7 @@ Global
 		{687927B4-CDCC-4D82-A997-DCFA6489C559} = {AD321D73-43BF-4C82-A0ED-8E51DF02F0E4}
 		{0F7FF60D-208E-4FA1-8D95-841E47EF0CC6} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
 		{39161C76-11FA-415E-9048-B49825EEB8FB} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
+		{2B4B45C8-13E4-4457-B9C8-7EE407EAC865} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2B5A65A9-0857-4D6D-9876-59B6E417394B}
