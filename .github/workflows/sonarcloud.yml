@@ -37,5 +37,5 @@ jobs:
       run: |
         dotnet tool install --global dotnet-sonarscanner
         dotnet sonarscanner begin /k:"TimDus_KwetterS6" /o:"timdussonar" /d:sonar.login="${SONAR_TOKEN}" /d:sonar.host.url="https://sonarcloud.io"
-        dotnet build
+        dotnet build Kwetter/
         dotnet sonarscanner end /d:sonar.login="${SONAR_TOKEN}"
