@@ -12,8 +12,8 @@ namespace ModerationService.API.Logic
 
         public ModerationLogic(IMediator mediator, IModerationRepository repository)
         {
-            _mediator = mediator;
-            //_repository = repository;
+            //_mediator = mediator;
+            _repository = repository;
         }
 
         public Task<KweetDTO> CheckKweet(KweetDTO kweetDTO)
