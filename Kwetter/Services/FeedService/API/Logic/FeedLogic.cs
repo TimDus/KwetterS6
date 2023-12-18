@@ -41,16 +41,16 @@ namespace FeedService.API.Logic
             return kweetDTOs;
         }
 
-        public async Task<List<KweetDTO>> GetRandomKweetsFeed(int id)
+        public async Task<List<KweetDTO>> GetRandomKweetsFeed(int customerId)
         {
-            List<KweetDTO> kweetDTOs = MakeFeed(await _repository.GetRandomKweetsFeed(id));
+            List<KweetDTO> kweetDTOs = MakeFeed(await _repository.GetRandomKweetsFeed(customerId));
 
             return kweetDTOs;
         }
 
-        public async Task<List<KweetDTO>> GetRandomKweetsFeedExtension(int id, DateTime time)
+        public async Task<List<KweetDTO>> GetRandomKweetsFeedExtension(int customerId, DateTime time)
         {
-            List<KweetDTO> kweetDTOs = MakeFeed(await _repository.GetRandomKweetsFeedExtension(id, time));
+            List<KweetDTO> kweetDTOs = MakeFeed(await _repository.GetRandomKweetsFeedExtension(customerId, time));
 
             return kweetDTOs;
         }

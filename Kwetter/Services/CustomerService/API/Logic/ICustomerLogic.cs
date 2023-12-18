@@ -4,6 +4,6 @@ namespace CustomerService.API.Logic
 {
     public interface ICustomerLogic
     {
-        Task<CustomerCreateDTO> CreateCustomerLogic(CustomerCreateDTO customer);
+        Task<CustomerCreateDTO> CreateCustomerLogic(CustomerCreateDTO customerDTO);
     }
 }

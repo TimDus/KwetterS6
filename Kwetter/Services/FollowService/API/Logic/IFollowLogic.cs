@@ -4,7 +4,7 @@ namespace FollowService.API.Logic
 {
     public interface IFollowLogic
     {
-        public Task<FollowDTO> CustomerFollowedLogic(FollowDTO kweetDTO);
+        public Task<FollowDTO> CustomerFollowedLogic(FollowDTO followDTO);
 
         public Task<FollowDTO> CustomerUnfollowedLogic(int followId);
 

@@ -59,7 +59,6 @@ builder.Services.AddHostedService<CustomerUnfollowedHosted>();
 
 //Messaging
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-builder.Services.Configure<RabbitMqConfiguration>(builder.Configuration.GetSection("RabbitMqConfiguration"));
 
 builder.Services.AddSingleton<IConnection>(sp =>
 {

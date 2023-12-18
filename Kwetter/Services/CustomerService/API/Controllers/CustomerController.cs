@@ -24,6 +24,7 @@ namespace CustomerService.API.Controllers
         [HttpPut("Update")]
         public async Task<ActionResult> Update(String customer)
         {
+            await Task.CompletedTask;
             return Ok();
         }
     }

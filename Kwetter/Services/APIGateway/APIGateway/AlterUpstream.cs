@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 
 namespace BFF.Web.Config
 {
-    public class AlterUpstream
+    public static class AlterUpstream
     {
         public static string AlterUpstreamSwaggerJson(HttpContext context, string swaggerJson)
         {

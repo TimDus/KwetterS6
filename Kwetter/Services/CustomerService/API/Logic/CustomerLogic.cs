@@ -19,7 +19,7 @@ namespace CustomerService.API.Logic
 
         public async Task<CustomerCreateDTO> CreateCustomerLogic(CustomerCreateDTO customerDTO)
         {
-            //dit is een comment
+
             CustomerEntity customerEntity = new(customerDTO.AccountId, customerDTO.DisplayName, customerDTO.CustomerName);
 
             customerEntity = await _repository.Create(customerEntity);

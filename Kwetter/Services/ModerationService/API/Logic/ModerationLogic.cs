@@ -7,13 +7,13 @@ namespace ModerationService.API.Logic
 {
     public class ModerationLogic : IModerationLogic
     {
-        private readonly IMediator _mediator;
+        //private readonly IMediator _mediator;
         private readonly IModerationRepository _repository;
 
         public ModerationLogic(IMediator mediator, IModerationRepository repository)
         {
             _mediator = mediator;
-            _repository = repository;
+            //_repository = repository;
         }
 
         public Task<KweetDTO> CheckKweet(KweetDTO kweetDTO)

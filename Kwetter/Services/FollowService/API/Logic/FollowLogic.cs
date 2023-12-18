@@ -40,13 +40,13 @@ namespace FollowService.API.Logic
             return followDTO;
         }
 
-        public async Task<FollowDTO> CustomerUnfollowedLogic(int id)
+        public async Task<FollowDTO> CustomerUnfollowedLogic(int followId)
         {
-            FollowEntity followEntity = await _repository.Delete(id);
+            FollowEntity followEntity = await _repository.Delete(followId);
 
             CustomerUnfollowedEvent unfollow = new()
             {
-                FollowServiceId = id,
+                FollowServiceId = followId,
                 FollowerId = followEntity.Follower.Id,
                 FollowingId = followEntity.Following.Id,
             };

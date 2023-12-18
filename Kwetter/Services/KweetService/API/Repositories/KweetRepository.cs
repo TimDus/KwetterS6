@@ -78,7 +78,7 @@ namespace KweetService.API.Repositories
 
         public async Task<KweetLikeEntity> GetKweetLike(int kweetId, int customerId)
         {
-            return await _kweetDbContext.KweetLikes.Where(kl => kl.Kweet.Id == kweetId & kl.Customer.Id == customerId).Include(kl => kl.Kweet).Include(kl => kl.Customer).FirstOrDefaultAsync();
+            return await _kweetDbContext.KweetLikes.Where(kl => kl.Kweet.Id == kweetId && kl.Customer.Id == customerId).Include(kl => kl.Kweet).Include(kl => kl.Customer).FirstOrDefaultAsync();
         }
     }
 }
