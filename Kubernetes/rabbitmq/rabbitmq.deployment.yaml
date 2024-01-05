@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: rabbitmq-service
+  namespace: kwetter
 spec:
   selector:
     app: rabbitmq-pod
@@ -19,6 +20,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: rabbitmq
+  namespace: kwetter
 spec:
   replicas: 1
   selector:

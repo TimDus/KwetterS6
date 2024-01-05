@@ -30,9 +30,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FollowService", "FollowService", "{9E4B5A01-FEBE-4C63-9984-7CE825F56EA3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", "{ADA318F3-D9B9-4B09-8A39-069B18E83A19}"
-	ProjectSection(SolutionItems) = preProject
-		..\Kubernetes\kwetternamespace.yaml = ..\Kubernetes\kwetternamespace.yaml
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AD321D73-43BF-4C82-A0ED-8E51DF02F0E4}"
 	ProjectSection(SolutionItems) = preProject
@@ -115,7 +112,21 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dashboard", "Dashboard", "{2B4B45C8-13E4-4457-B9C8-7EE407EAC865}"
 	ProjectSection(SolutionItems) = preProject
 		..\Kubernetes\Dashboard\dashboard-adminuser.yaml = ..\Kubernetes\Dashboard\dashboard-adminuser.yaml
-		..\Kubernetes\Dashboard\datadog-agent.yaml = ..\Kubernetes\Dashboard\datadog-agent.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Monitoring", "Monitoring", "{67B6FB1C-9CC3-436A-BDCE-429CF03CEB1D}"
+	ProjectSection(SolutionItems) = preProject
+		..\Kubernetes\Monitoring\clusterRole.yaml = ..\Kubernetes\Monitoring\clusterRole.yaml
+		..\Kubernetes\Monitoring\config-map.yaml = ..\Kubernetes\Monitoring\config-map.yaml
+		..\Kubernetes\Monitoring\datadog-agent.yaml = ..\Kubernetes\Monitoring\datadog-agent.yaml
+		..\Kubernetes\Monitoring\kube-state-metrics.deployment.yaml = ..\Kubernetes\Monitoring\kube-state-metrics.deployment.yaml
+		..\Kubernetes\Monitoring\prometheus-deployment.yaml = ..\Kubernetes\Monitoring\prometheus-deployment.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Namespaces", ".Namespaces", "{8450281D-D709-456C-93D5-58D3BDFCF34A}"
+	ProjectSection(SolutionItems) = preProject
+		..\Kubernetes\.Namespaces\kwetternamespace.yaml = ..\Kubernetes\.Namespaces\kwetternamespace.yaml
+		..\Kubernetes\.Namespaces\monitoring.yaml = ..\Kubernetes\.Namespaces\monitoring.yaml
 	EndProjectSection
 EndProject
 Global
@@ -181,6 +192,8 @@ Global
 		{0F7FF60D-208E-4FA1-8D95-841E47EF0CC6} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
 		{39161C76-11FA-415E-9048-B49825EEB8FB} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
 		{2B4B45C8-13E4-4457-B9C8-7EE407EAC865} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
+		{67B6FB1C-9CC3-436A-BDCE-429CF03CEB1D} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
+		{8450281D-D709-456C-93D5-58D3BDFCF34A} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2B5A65A9-0857-4D6D-9876-59B6E417394B}
