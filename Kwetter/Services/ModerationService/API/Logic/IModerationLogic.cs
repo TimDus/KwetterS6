@@ -6,6 +6,6 @@ namespace ModerationService.API.Logic
     {
         Task<List<KweetDTO>> GetPendingList();
 
-        Task<KweetDTO> CheckKweet(KweetDTO kweetDTO);
+        Task<string> CheckKweet(KweetDTO kweetDTO);
     }
 }

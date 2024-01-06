@@ -23,7 +23,7 @@ namespace ModerationService.API.Controllers
         }
 
         [HttpPost("CheckKweet")]
-        public async Task<KweetDTO> CheckKweet([FromBody] KweetDTO kweetDTO)
+        public async Task<string> CheckKweet([FromBody] KweetDTO kweetDTO)
         {
             return await _moderationLogic.CheckKweet(kweetDTO);
         }
