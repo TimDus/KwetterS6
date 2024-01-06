@@ -1,5 +1,6 @@
 using CustomerService.API.Logic;
 using CustomerService.API.Models.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerService.API.Controllers
@@ -15,14 +16,27 @@ namespace CustomerService.API.Controllers
             _customerlogic = customerLogic;
         }
 
-        [HttpPost("Create")]
-        public async Task<CustomerCreateDTO> Create(CustomerCreateDTO customerDTO)
+        [HttpPost("create"), AllowAnonymous]
+        public async Task<CustomerAuthDto> Create(CustomerAuthDto customerAuthDTO)
         {
-            return await _customerlogic.CreateCustomerLogic(customerDTO);
+            return await _customerlogic.CreateCustomerLogic(customerAuthDTO);
         }
 
-        [HttpPut("Update")]
+        [HttpPost("login"), AllowAnonymous]
+        public async Task<string> Login(CustomerAuthDto customerAuthDTO)
+        {
+            return await _customerlogic.LoginCustomerLogic(customerAuthDTO);
+        }
+
+        [HttpPut("update"), Authorize]
         public async Task<ActionResult> Update(String customer)
+        {
+            await Task.CompletedTask;
+            return Ok();
+        }
+
+        [HttpPut("updateadmin"), Authorize]
+        public async Task<ActionResult> UpdateAdmin(String customer)
         {
             await Task.CompletedTask;
             return Ok();

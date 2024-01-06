@@ -5,5 +5,6 @@ namespace CustomerService.API.Repositories
 {
     public interface ICustomerRepository : IGenericRepository<CustomerEntity>
     {
+        Task<CustomerEntity> GetByName(string customerName);
     }
 }

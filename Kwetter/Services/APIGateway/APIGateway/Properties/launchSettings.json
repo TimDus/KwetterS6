@@ -7,7 +7,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:8100"
+      "applicationUrl": "http://localhost:8100/swagger"
     },
     "IIS Express": {
       "commandName": "IISExpress",

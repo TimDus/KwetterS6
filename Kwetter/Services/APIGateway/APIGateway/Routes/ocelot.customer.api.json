@@ -2,7 +2,7 @@
   "Routes": [
     //Customer
     {
-      "UpstreamPathTemplate": "/api/Customer/Create",
+      "UpstreamPathTemplate": "/api/customer/create",
       "UpstreamHttpMethod": [ "POST" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -11,11 +11,11 @@
           "Port": 8101
         }
       ],
-      "DownstreamPathTemplate": "/api/Customer/Create",
+      "DownstreamPathTemplate": "/api/customer/create",
       "SwaggerKey": "customer"
     },
     {
-      "UpstreamPathTemplate": "/api/Customer/Update",
+      "UpstreamPathTemplate": "/api/customer/update",
       "UpstreamHttpMethod": [ "PUT" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -24,7 +24,20 @@
           "Port": 8101
         }
       ],
-      "DownstreamPathTemplate": "/api/Customer/Update",
+      "DownstreamPathTemplate": "/api/customer/update",
+      "SwaggerKey": "customer"
+    },
+    {
+      "UpstreamPathTemplate": "/api/customer/Login",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customerapi-service",
+          "Port": 8101
+        }
+      ],
+      "DownstreamPathTemplate": "/api/customer/Login",
       "SwaggerKey": "customer"
     }
   ]

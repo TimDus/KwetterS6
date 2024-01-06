@@ -10,11 +10,15 @@ namespace CustomerService.API.Models.Entity
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public int AccountId { get; set; }
-
         public string DisplayName { get; set; }
 
         public string CustomerName { get; set; }
+
+        public byte[] PasswordHash { get; set; }
+
+        public byte[] PasswordSalt { get; set; }
+
+        public string Role { get; set; }
 
         public string? ProfilePicture { get; set; }
 
@@ -22,11 +26,13 @@ namespace CustomerService.API.Models.Entity
 
         public CustomerEntity() { }
 
-        public CustomerEntity(int accountId, string displayName, string customerName)
+        public CustomerEntity(string displayName, string customerName, byte[] passwordHash, byte[] passwordSalt)
         {
-            AccountId = accountId;
             DisplayName = displayName;
             CustomerName = customerName;
+            PasswordHash = passwordHash;
+            PasswordSalt = passwordSalt;
+            Role = "Customer";
         }
     }
 }

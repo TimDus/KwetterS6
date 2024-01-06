@@ -1,3 +1,4 @@
+using APIGateway;
 using BFF.Web.Config;
 using MMLib.SwaggerForOcelot.DependencyInjection;
 using Ocelot.DependencyInjection;
@@ -21,6 +22,8 @@ builder.Configuration.AddOcelotWithSwaggerSupport(options =>
 {
     options.Folder = routes;
 });
+
+builder.Services.AddCors();
 
 builder.Services.AddOcelot(builder.Configuration).AddPolly();
 builder.Services.AddSwaggerForOcelot(builder.Configuration);
@@ -51,6 +54,14 @@ app.UseSwagger();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors(builder => builder // Allow any
+    .WithOrigins("http://localhost:3000")
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowCredentials()
+    );
+app.UsePreflightRequestHandler();
 
 app.UseSwaggerForOcelotUI(options =>
 {

@@ -30,6 +30,11 @@ namespace CustomerService.API.Repositories
             return await _customerDBContext.Customers.Where(a => a.Id == id).FirstOrDefaultAsync();
         }
 
+        public async Task<CustomerEntity> GetByName(string customerName)
+        {
+            return await _customerDBContext.Customers.Where(c => c.CustomerName == customerName).FirstOrDefaultAsync();
+        }
+
         public async Task<CustomerEntity> Update(CustomerEntity obj)
         {
             _customerDBContext.Customers.Update(obj);
