@@ -23,19 +23,19 @@ namespace CustomerService.API.Controllers
         }
 
         [HttpPost("login"), AllowAnonymous]
-        public async Task<string> Login(CustomerAuthDto customerAuthDTO)
+        public async Task<AuthResponse> Login(CustomerAuthDto customerAuthDTO)
         {
             return await _customerlogic.LoginCustomerLogic(customerAuthDTO);
         }
 
-        [HttpPut("update"), Authorize]
+        [HttpPut("update"), Authorize(Roles = "Customer")]
         public async Task<ActionResult> Update(String customer)
         {
             await Task.CompletedTask;
             return Ok();
         }
 
-        [HttpPut("updateadmin"), Authorize]
+        [HttpPut("updateadmin"), Authorize(Roles = "Admin")]
         public async Task<ActionResult> UpdateAdmin(String customer)
         {
             await Task.CompletedTask;

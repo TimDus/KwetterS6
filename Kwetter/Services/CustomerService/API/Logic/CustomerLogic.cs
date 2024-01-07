@@ -49,18 +49,18 @@ namespace CustomerService.API.Logic
             return customerAuthDTO;
         }
 
-        public async Task<string> LoginCustomerLogic(CustomerAuthDto customerAuthDTO)
+        public async Task<AuthResponse> LoginCustomerLogic(CustomerAuthDto customerAuthDTO)
         {
             CustomerEntity customerEntity = await _repository.GetByName(customerAuthDTO.CustomerName);
 
             if(customerEntity.PasswordHash == null) 
             {
-                return "no1";
+                return new AuthResponse();
             }
 
             if(!VerifyPasswordHash(customerAuthDTO.Password, customerEntity.PasswordHash, customerEntity.PasswordSalt))
             {
-                return "no2";
+                return new AuthResponse();
             }
 
             return CreateToken(customerEntity);
@@ -86,11 +86,12 @@ namespace CustomerService.API.Logic
             }
         }
 
-        private string CreateToken(CustomerEntity customer)
+        private AuthResponse CreateToken(CustomerEntity customer)
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, customer.CustomerName)
+                new Claim(ClaimTypes.Name, customer.CustomerName),
+                new Claim(ClaimTypes.Role, customer.Role),
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
@@ -103,7 +104,16 @@ namespace CustomerService.API.Logic
                 signingCredentials: creds
                 );
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            int[] roles = new int[1];
+
+            if(customer.Role == "Admin")
+            {
+                roles[0] = 2;
+                return new AuthResponse(new JwtSecurityTokenHandler().WriteToken(token), roles);
+            }
+
+            roles[0] = 1;
+            return new AuthResponse(new JwtSecurityTokenHandler().WriteToken(token), roles);
         }
     }
 }

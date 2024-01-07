@@ -31,8 +31,6 @@ namespace ModerationService.API.Logic
 
             CompletionRequest completion = new();
 
-            return "no";
-
             completion.Prompt = "Determine if the text after sentence carries negative sentiment and respond with yes or no. " + kweetDTO.Text;
             completion.Model = "gpt-3.5-turbo";
             completion.MaxTokens = 200;
@@ -43,6 +41,8 @@ namespace ModerationService.API.Logic
             {
                 response = item.Text;
             }
+
+            return response;
         }
 
         public async Task<List<KweetDTO>> GetPendingList()

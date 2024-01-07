@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import useAuth from '../hooks/useAuth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { jwtDecode } from "jwt-decode";
 
 import axios from '../api/axios';
 const LOGIN_URL = '/customer/login';
@@ -40,8 +41,11 @@ const Login = () => {
             );
             console.log(JSON.stringify(response?.data));
             //console.log(JSON.stringify(response));
-            const accessToken = response?.data?.accessToken;
+            const accessToken = response?.data?.jwtToken;
+            console.log(accessToken);
             const roles = response?.data?.roles;
+            console.log("test")
+            console.log(roles);
             setAuth({ user, pwd, roles, accessToken });
             setUser('');
             setPwd('');

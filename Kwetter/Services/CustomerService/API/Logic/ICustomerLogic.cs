@@ -6,6 +6,6 @@ namespace CustomerService.API.Logic
     {
         Task<CustomerAuthDto> CreateCustomerLogic(CustomerAuthDto customerAuthDTO);
 
-        Task<string> LoginCustomerLogic(CustomerAuthDto customerAuthDTO);
+        Task<AuthResponse> LoginCustomerLogic(CustomerAuthDto customerAuthDTO);
     }
 }

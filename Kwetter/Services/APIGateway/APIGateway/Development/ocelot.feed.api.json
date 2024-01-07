@@ -2,7 +2,7 @@
   "Routes": [
     //Feed
     {
-      "UpstreamPathTemplate": "/api/Feed/Random",
+      "UpstreamPathTemplate": "/api/feed/random",
       "UpstreamHttpMethod": [ "GET" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -11,11 +11,11 @@
           "Port": 8104
         }
       ],
-      "DownstreamPathTemplate": "/api/Feed/Random",
+      "DownstreamPathTemplate": "/api/feed/random",
       "SwaggerKey": "feed"
     },
     {
-      "UpstreamPathTemplate": "/api/Feed/Followed",
+      "UpstreamPathTemplate": "/api/feed/followed",
       "UpstreamHttpMethod": [ "GET" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -24,7 +24,7 @@
           "Port": 8104
         }
       ],
-      "DownstreamPathTemplate": "/api/Feed/Followed",
+      "DownstreamPathTemplate": "/api/feed/followed",
       "SwaggerKey": "feed"
     }
   ]
