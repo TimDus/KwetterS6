@@ -1,8 +1,8 @@
 {
   "Routes": [
-    //Follow
+    //follow
     {
-      "UpstreamPathTemplate": "/api/Follow/Follow",
+      "UpstreamPathTemplate": "/api/follow/follow",
       "UpstreamHttpMethod": [ "POST" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -11,11 +11,11 @@
           "Port": 8103
         }
       ],
-      "DownstreamPathTemplate": "/api/Follow/Follow",
-      "SwaggerKey": "Follow"
+      "DownstreamPathTemplate": "/api/follow/follow",
+      "SwaggerKey": "follow"
     },
     {
-      "UpstreamPathTemplate": "/api/Follow/Unfollow",
+      "UpstreamPathTemplate": "/api/follow/unfollow",
       "UpstreamHttpMethod": [ "POST" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -24,11 +24,11 @@
           "Port": 8103
         }
       ],
-      "DownstreamPathTemplate": "/api/Follow/Unfollow",
-      "SwaggerKey": "Follow"
+      "DownstreamPathTemplate": "/api/follow/unfollow",
+      "SwaggerKey": "follow"
     },
     {
-      "UpstreamPathTemplate": "/api/Follow/GetFollowers",
+      "UpstreamPathTemplate": "/api/follow/getfollowers",
       "UpstreamHttpMethod": [ "GET" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -37,11 +37,11 @@
           "Port": 8103
         }
       ],
-      "DownstreamPathTemplate": "/api/Follow/GetFollowers",
-      "SwaggerKey": "Follow"
+      "DownstreamPathTemplate": "/api/follow/getfollowers",
+      "SwaggerKey": "follow"
     },
     {
-      "UpstreamPathTemplate": "/api/Follow/GetFollowing",
+      "UpstreamPathTemplate": "/api/follow/getfollowing",
       "UpstreamHttpMethod": [ "GET" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -50,8 +50,8 @@
           "Port": 8103
         }
       ],
-      "DownstreamPathTemplate": "/api/Follow/GetFollowing",
-      "SwaggerKey": "Follow"
+      "DownstreamPathTemplate": "/api/follow/getfollowing",
+      "SwaggerKey": "follow"
     }
   ]
 }

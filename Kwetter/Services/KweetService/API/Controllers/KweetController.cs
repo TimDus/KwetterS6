@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace KweetService.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/kweet")]
     public class KweetController : ControllerBase
     {
         private readonly IKweetLogic _kweetLogic;
@@ -15,13 +15,13 @@ namespace KweetService.API.Controllers
             _kweetLogic = kweetLogic;
         }
 
-        [HttpPost("Create")]
+        [HttpPost("create")]
         public async Task<KweetCreatedDTO> Create([FromBody] KweetCreatedDTO kweetDTO)
         {
             return await _kweetLogic.CreateKweetLogic(kweetDTO);
         }
 
-        [HttpPost("Like")]
+        [HttpPost("like")]
         public async Task<ActionResult> Like([FromBody] KweetLikeDTO kweetLikeDTO)
         {
             await _kweetLogic.LikeKweetLogic(kweetLikeDTO);
@@ -30,7 +30,7 @@ namespace KweetService.API.Controllers
             return Ok();
         }
 
-        [HttpPost("Unlike")]
+        [HttpPost("unlike")]
         public async Task<ActionResult> Unlike([FromBody] KweetLikeDTO kweetLikeDTO)
         {
             await _kweetLogic.UnlikeKweetLogic(kweetLikeDTO);

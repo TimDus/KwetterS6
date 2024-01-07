@@ -5,7 +5,7 @@ using ModerationService.API.Models.DTO;
 namespace ModerationService.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/moderation")]
     public class ModerationController : ControllerBase
     {
 
@@ -16,13 +16,13 @@ namespace ModerationService.API.Controllers
             _moderationLogic = moderationLogic;
         }
 
-        [HttpGet("GetPendingList")]
+        [HttpGet("getpendinglist")]
         public async Task<List<KweetDTO>> GetPendingList()
         {
             return await _moderationLogic.GetPendingList();
         }
 
-        [HttpPost("CheckKweet")]
+        [HttpPost("checkkweet")]
         public async Task<string> CheckKweet([FromBody] KweetDTO kweetDTO)
         {
             return await _moderationLogic.CheckKweet(kweetDTO);

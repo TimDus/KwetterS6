@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FollowService.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/follow")]
     public class FollowController : ControllerBase
     {
         private readonly IFollowLogic _followLogic;
@@ -15,25 +15,25 @@ namespace FollowService.API.Controllers
             _followLogic = followLogic;
         }
 
-        [HttpPost("Follow")]
+        [HttpPost("follow")]
         public async Task<ActionResult<FollowDTO>> Follow([FromBody] FollowDTO followDTO)
         {
             return await _followLogic.CustomerFollowedLogic(followDTO);
         }
 
-        [HttpPost("Unfollow")]
+        [HttpPost("unfollow")]
         public async Task<ActionResult<FollowDTO>> Unfollow(int followId)
         {
             return await _followLogic.CustomerUnfollowedLogic(followId);
         }
 
-        [HttpGet("GetFollowers")]
+        [HttpGet("getfollowers")]
         public async Task<ActionResult<FollowListDTO>> GetFollowers(int customerId)
         {
             return await _followLogic.GetFollowersLogic(customerId);
         }
 
-        [HttpGet("GetFollowing")]
+        [HttpGet("getfollowing")]
         public async Task<ActionResult<FollowListDTO>> GetFollowing(int customerId)
         {
             return await _followLogic.GetFollowingLogic(customerId);

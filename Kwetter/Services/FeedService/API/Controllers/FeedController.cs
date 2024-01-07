@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FeedService.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/feed")]
     public class FeedController : ControllerBase
     {
         private readonly IFeedLogic _feedLogic;
@@ -15,25 +15,25 @@ namespace FeedService.API.Controllers
             _feedLogic = feedLogic;
         }
 
-        [HttpGet("Random")]
+        [HttpGet("random")]
         public async Task<List<KweetDTO>> Random(int id)
         {
             return await _feedLogic.GetRandomKweetsFeed(id);
         }
 
-        [HttpGet("RandomExtension")]
+        [HttpGet("randomextension")]
         public async Task<List<KweetDTO>> RandomExtension(int id, DateTime time)
         {
             return await _feedLogic.GetRandomKweetsFeedExtension(id, time);
         }
 
-        [HttpGet("Followed")]
+        [HttpGet("followed")]
         public async Task<List<KweetDTO>> Followed(int customerId)
         {
             return await _feedLogic.GetFollowedKweetsFeed(customerId);
         }
 
-        [HttpGet("FollowedExtension")]
+        [HttpGet("followedextension")]
         public async Task<List<KweetDTO>> FollowedExtension(int customerId, DateTime time)
         {
             return await _feedLogic.GetFollowedKweetsFeedExtension(customerId, time);

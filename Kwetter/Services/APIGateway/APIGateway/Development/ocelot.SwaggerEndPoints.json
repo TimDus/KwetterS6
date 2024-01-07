@@ -5,7 +5,7 @@
       "TransformByOcelotConfig": false,
       "Config": [
         {
-          "Name": "customer.API",
+          "Name": "Customer.API",
           "Version": "1.0",
           "Url": "http://localhost:8101/swagger/v1/swagger.json"
         }
@@ -16,7 +16,7 @@
       "TransformByOcelotConfig": false,
       "Config": [
         {
-          "Name": "kweet.API",
+          "Name": "Kweet.API",
           "Version": "1.0",
           "Url": "http://localhost:8102/swagger/v1/swagger.json"
         }
@@ -27,7 +27,7 @@
       "TransformByOcelotConfig": false,
       "Config": [
         {
-          "Name": "follow.API",
+          "Name": "Follow.API",
           "Version": "1.0",
           "Url": "http://localhost:8103/swagger/v1/swagger.json"
         }
@@ -38,7 +38,7 @@
       "TransformByOcelotConfig": false,
       "Config": [
         {
-          "Name": "feed.API",
+          "Name": "Feed.API",
           "Version": "1.0",
           "Url": "http://localhost:8104/swagger/v1/swagger.json"
         }

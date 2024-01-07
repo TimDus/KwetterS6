@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var routes = "Routes";
 
-if (builder.Environment.IsDevelopment() && Environment.GetEnvironmentVariable("DOCKER") == "Docker")
+if (Environment.GetEnvironmentVariable("DOCKER") == "Docker")
 {
     routes = "Docker";
 }

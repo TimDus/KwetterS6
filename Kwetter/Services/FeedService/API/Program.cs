@@ -64,7 +64,7 @@ builder.Services.AddSingleton<IConnection>(sp =>
 {
     var factory = new ConnectionFactory();
 
-    if (builder.Environment.IsDevelopment())
+    if (builder.Environment.IsDevelopment() || Environment.GetEnvironmentVariable("DOCKER") == "Docker")
     {
         string name = "localhost";
         if (Environment.GetEnvironmentVariable("DOCKER") == "Docker")

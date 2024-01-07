@@ -1,8 +1,8 @@
 {
   "Routes": [
-    //Kweet
+    //kweet
     {
-      "UpstreamPathTemplate": "/api/Kweet/Create",
+      "UpstreamPathTemplate": "/api/kweet/create",
       "UpstreamHttpMethod": [ "POST" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -11,11 +11,11 @@
           "Port": 8102
         }
       ],
-      "DownstreamPathTemplate": "/api/Kweet/Create",
+      "DownstreamPathTemplate": "/api/kweet/create",
       "SwaggerKey": "kweet"
     },
     {
-      "UpstreamPathTemplate": "/api/Kweet/Like",
+      "UpstreamPathTemplate": "/api/kweet/like",
       "UpstreamHttpMethod": [ "POST" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -24,11 +24,11 @@
           "Port": 8102
         }
       ],
-      "DownstreamPathTemplate": "/api/Kweet/Like",
+      "DownstreamPathTemplate": "/api/kweet/like",
       "SwaggerKey": "kweet"
     },
     {
-      "UpstreamPathTemplate": "/api/Kweet/Unlike",
+      "UpstreamPathTemplate": "/api/kweet/unlike",
       "UpstreamHttpMethod": [ "POST" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -37,7 +37,7 @@
           "Port": 8102
         }
       ],
-      "DownstreamPathTemplate": "/api/Kweet/Unlike",
+      "DownstreamPathTemplate": "/api/kweet/unlike",
       "SwaggerKey": "kweet"
     }
   ]

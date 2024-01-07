@@ -23,8 +23,8 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "KweetService",
-        Description = "KweetService API for Kwetter",
+        Title = "ModerationService",
+        Description = "ModerationService API for Kwetter",
 
     });
 });
@@ -46,7 +46,7 @@ builder.Services.AddSingleton<IConnection>(sp =>
 {
     var factory = new ConnectionFactory();
 
-    if (builder.Environment.IsDevelopment())
+    if (builder.Environment.IsDevelopment() || Environment.GetEnvironmentVariable("DOCKER") == "Docker")
     {
         string name = "localhost";
         if (Environment.GetEnvironmentVariable("DOCKER") == "Docker")

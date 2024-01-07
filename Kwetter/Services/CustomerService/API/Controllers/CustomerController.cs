@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CustomerService.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/customer")]
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerLogic _customerlogic;
