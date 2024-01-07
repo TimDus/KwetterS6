@@ -62,8 +62,7 @@ services:
     networks:
       - backend
       - rabbitmq 
-    environment:
-     - DOCKER=Docker
+    env_file: docker.env
     depends_on:
       rabbitmq: 
         condition: service_healthy
