@@ -159,3 +159,22 @@ services:
       - frontend
     environment:
      - DOCKER=Docker
+
+  kwetterfront:
+    image: timdus/kwetterfront:latest
+    ports:
+      - 3000:80
+    networks:
+      - frontend
+    environment:
+     - PORT=80
+     - HTTPS=false
+     - SSL_CRT_FILE=./.certs/crt.pem
+     - SSL_KEY_FILE=./.certs/key.pem
+     ## Set the ip if nessecery. API logic will take the current ip if false.
+     - REACT_APP_API_CUSTOM_IP=true
+     - REACT_APP_API_IP=apigateway
+     ## Set the port
+     - REACT_APP_API_PORT=8100
+     ## Set the https if nessecery. API logic will take the current http if false.
+     - REACT_APP_API_HTTPS=false
