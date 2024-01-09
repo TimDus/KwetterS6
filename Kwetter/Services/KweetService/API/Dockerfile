@@ -6,6 +6,7 @@ WORKDIR /app
 
 # Copy the project files to the working directory
 COPY Kwetter/Services/KweetService/API ./
+COPY Kwetter/Services/Common/API ./
 
 # Build the solution including the "Common" class library
 RUN dotnet restore "./KweetService.API.csproj"
