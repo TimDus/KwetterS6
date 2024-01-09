@@ -1,4 +1,5 @@
 ﻿using Common.Interfaces;
+using Common.Startup;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using ModerationService.API.Eventing.EventConsumer.CustomerCreated;
@@ -42,72 +43,7 @@ builder.Services.AddScoped<IModerationRepository, ModerationRepository>();
 //Messaging
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
-builder.Services.AddSingleton<IConnection>(sp =>
-{
-    var factory = new ConnectionFactory();
-
-    if (builder.Environment.IsDevelopment() || Environment.GetEnvironmentVariable("DOCKER") == "Docker")
-    {
-        string name = "localhost";
-        if (Environment.GetEnvironmentVariable("DOCKER") == "Docker")
-        {
-            name = "rabbitmq";
-        }
-        factory = new ConnectionFactory()
-        {
-            HostName = name,
-            Port = 5672,
-            UserName = "guest",
-            Password = "guest",
-            DispatchConsumersAsync = true
-        };
-    }
-    else
-    {
-        factory = new ConnectionFactory()
-        {
-            HostName = "rabbitmq-service",
-            Port = 5672,
-            UserName = "guest",
-            Password = "guest",
-            DispatchConsumersAsync = true
-        };
-        /* cloud connection
-        factory = new ConnectionFactory()
-        {
-            VirtualHost = "mnidiotp",
-            HostName = "cow-01.rmq2.cloudamqp.com",
-            Port = 5672,
-            UserName = "mnidiotp",
-            Password = "k4l71JcIUK-t-Z2YSdOr1sr27eRCIH8T",
-            DispatchConsumersAsync = true
-        };
-        */
-    }
-
-    var retryPolicy = Policy.Handle<SocketException>()
-        .WaitAndRetry(new[]
-        {
-            TimeSpan.FromSeconds(1),
-            TimeSpan.FromSeconds(2),
-            TimeSpan.FromSeconds(3)
-        });
-
-    return retryPolicy.Execute(() =>
-    {
-        while (true)
-        {
-            try
-            {
-                return factory.CreateConnection();
-            }
-            catch (Exception ex) when (ex is SocketException || ex is BrokerUnreachableException)
-            {
-                Console.WriteLine("RabbitMQ Client is trying to connect...");
-            }
-        }
-    });
-});
+RabbitMQConnection.SetupRabbitMQConnection(builder.Services, builder.Environment.EnvironmentName);
 
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {

@@ -25,4 +25,4 @@ COPY --from=build /app/out ./
 EXPOSE 8105
 
 # Set the entry point for the container
-ENTRYPOINT ["dotnet", "ModerationService.API.dll", "--server.urls", "https://+:8105"]
+ENTRYPOINT ["dotnet", "ModerationService.API.dll"]
