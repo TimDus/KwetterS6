@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
 # Copy the project files to the working directory
-COPY Kwetter/Services/KweetService/API ./
+COPY Services/KweetService/API ./
 
 # Build the solution including the "Common" class library
 RUN dotnet restore "./Kwetter/Services/KweetService/API/KweetService.API.csproj"
