@@ -2,8 +2,8 @@
 FROM node:18-alpine as builder
 
 # Set the working directory inside the container
-WORKDIR /usr/app
-COPY . .
+WORKDIR /app
+ADD package*.json ./
 
 # Install dependencies
 RUN npm install
