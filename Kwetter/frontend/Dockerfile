@@ -9,7 +9,7 @@ COPY Kwetter/frontend/package*.json ./
 RUN npm install
 
 # Copy the remaining application files to the working directory
-COPY Kwetter/frontend/* .
+COPY Kwetter/frontend .
 
 # Build the React app
 RUN npm run build
