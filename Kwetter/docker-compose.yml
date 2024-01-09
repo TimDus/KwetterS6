@@ -38,8 +38,7 @@ services:
     networks:
       - backend
       - rabbitmq 
-    environment:
-     - DOCKER=Docker
+    env_file: docker.env
     depends_on:
       rabbitmq: 
         condition: service_healthy
@@ -85,8 +84,7 @@ services:
     networks:
       - backend
       - rabbitmq 
-    environment:
-     - DOCKER=Docker
+    env_file: docker.env
     depends_on:
       rabbitmq: 
         condition: service_healthy
@@ -109,8 +107,7 @@ services:
     networks:
       - backend
       - rabbitmq 
-    environment:
-     - DOCKER=Docker
+    env_file: docker.env
     depends_on:
       rabbitmq: 
         condition: service_healthy
@@ -133,8 +130,7 @@ services:
     networks:
       - backend
       - rabbitmq 
-    environment:
-     - DOCKER=Docker
+    env_file: docker.env
     depends_on:
       rabbitmq: 
         condition: service_healthy
@@ -159,6 +155,7 @@ services:
       - frontend
     environment:
      - DOCKER=Docker
+     - ASPNETCORE_ENVIRONMENT=Production
 
   kwetterfront:
     image: timdus/kwetterfront:latest
