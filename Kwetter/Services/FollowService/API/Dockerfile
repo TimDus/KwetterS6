@@ -6,10 +6,11 @@ WORKDIR /app
 
 # Copy the project files to the working directory
 COPY Kwetter/Services/KweetService/API ./
+COPY Kwetter/Services/Common/API ./
 
 # Build the solution including the "Common" class library
-RUN dotnet restore "./Kwetter/Services/FollowService/API/FollowService.API.csproj"
-RUN dotnet publish -c Release -o out "./Kwetter/Services/FollowService/API/FollowService.API.csproj"
+RUN dotnet restore "./FollowService.API.csproj"
+RUN dotnet publish -c Release -o out "./FollowService.API.csproj"
 
 # Use a lightweight runtime image as the base image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
