@@ -3,7 +3,7 @@ FROM node:18-alpine as builder
 
 # Set the working directory inside the container
 WORKDIR /app
-ADD package*.json ./
+COPY Kwetter/frontend/package*.json ./
 
 # Install dependencies
 RUN npm install
