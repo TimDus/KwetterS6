@@ -1,20 +1,23 @@
-# pull official base image
+# Use an official Node.js runtime as a base image
 FROM node:18-alpine as builder
 
-# set working directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
 
-# install app dependencies
-COPY package.json ./
-COPY package-lock.json ./
-RUN npm install --silent
-RUN npm install react-scripts@3.4.1 -g --silent
+# Install dependencies
+RUN npm install
 
-# add app
-COPY . ./
+# Copy the remaining application files to the working directory
+COPY . .
 
-# start app
+# Build the React app
+RUN npm run build
+
+# Expose the port that the app will run on
+EXPOSE 3000
+
+# Define the command to run the application
 CMD ["npm", "start"]
