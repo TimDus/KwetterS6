@@ -5,11 +5,11 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
 # Copy the project files to the working directory
-COPY Services/KweetService/API ./
+COPY Kwetter/Services/KweetService/API ./
 
 # Build the solution including the "Common" class library
-RUN dotnet restore "./Kwetter/Services/KweetService/API/KweetService.API.csproj"
-RUN dotnet publish -c Release -o out "./Kwetter/Services/KweetService/API/KweetService.API.csproj"
+RUN dotnet restore "./KweetService.API.csproj"
+RUN dotnet publish -c Release -o out "./KweetService.API.csproj"
 
 # Use a lightweight runtime image as the base image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
