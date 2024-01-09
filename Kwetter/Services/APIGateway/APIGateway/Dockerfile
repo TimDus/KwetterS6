@@ -6,7 +6,6 @@ WORKDIR ./Kwetter
 
 # Copy the project files to the working directory
 COPY Kwetter/Services/APIGateway/APIGateway ./
-COPY Kwetter/Services/Common/API ./
 
 # Build the solution including the "Common" class library
 RUN dotnet restore "./APIGateway.csproj"
