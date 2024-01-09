@@ -80,3 +80,15 @@ jobs:
       run: |
         docker build -t ${{ env.DOCKERHUB_USERNAME }}/kwettergateway:latest -f ./Kwetter/Services/APIGateway/APIGateway/Dockerfile .
         docker push ${{ env.DOCKERHUB_USERNAME }}/kwettergateway:latest
+
+  build_frontend:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ env.DOCKERHUB_USERNAME }} --password-stdin
+    - name: Build and Push frontend
+      run: |
+        docker build -t ${{ env.DOCKERHUB_USERNAME }}/kwetterfront:latest -f ./Kwetter/frontend/Dockerfile .
+        docker push ${{ env.DOCKERHUB_USERNAME }}/kwetterfront:latest
