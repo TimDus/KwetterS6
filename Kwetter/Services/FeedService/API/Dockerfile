@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
 # Copy the project files to the working directory
-COPY . ./
+COPY Kwetter/Services/FeedService/API ./
 
 # Build the solution including the "Common" class library
 RUN dotnet restore "./Kwetter/Services/FeedService/API/FeedService.API.csproj"
