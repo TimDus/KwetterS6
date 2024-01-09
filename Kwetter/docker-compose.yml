@@ -175,6 +175,6 @@ services:
      - REACT_APP_API_CUSTOM_IP=true
      - REACT_APP_API_IP=apigateway
      ## Set the port
-     - REACT_APP_API_PORT=8100
+     - REACT_APP_API_PORT=:8100
      ## Set the https if nessecery. API logic will take the current http if false.
      - REACT_APP_API_HTTPS=false

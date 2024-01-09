@@ -8,14 +8,17 @@ using Ocelot.Provider.Polly;
 var builder = WebApplication.CreateBuilder(args);
 
 var routes = "Routes";
+string origin = "apigateway-service";
 
 if (Environment.GetEnvironmentVariable("DOCKER") == "Docker")
 {
     routes = "Docker";
+    origin = "http://kwetterfront:3000";
 }
 else if(builder.Environment.IsDevelopment())
 {
     routes = "Development";
+    origin = "http://localhost:3000";
 }
 
 builder.Configuration.AddOcelotWithSwaggerSupport(options =>
@@ -56,7 +59,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.UseCors(builder => builder // Allow any
-    .WithOrigins("http://localhost:3000")
+    .WithOrigins(origin)
     .AllowAnyMethod()
     .AllowAnyHeader()
     .AllowCredentials()
