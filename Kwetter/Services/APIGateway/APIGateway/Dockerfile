@@ -24,4 +24,4 @@ COPY --from=build ./Kwetter/out ./
 EXPOSE 8100
 
 # Set the entry point for the container
-ENTRYPOINT ["dotnet", "APIGateway.dll", "--server.urls", "https://+:8100"]
+ENTRYPOINT ["dotnet", "APIGateway.dll"]
