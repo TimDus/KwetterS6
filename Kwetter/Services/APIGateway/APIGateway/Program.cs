@@ -8,7 +8,7 @@ using Ocelot.Provider.Polly;
 var builder = WebApplication.CreateBuilder(args);
 
 var routes = "Routes";
-string origin = "apigateway-service";
+string origin = "http://kwetterfront.localhost";
 
 if (Environment.GetEnvironmentVariable("DOCKER") == "Docker")
 {

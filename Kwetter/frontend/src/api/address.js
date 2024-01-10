@@ -14,7 +14,6 @@ const getIp = () => {
   
   const generateAddress = (protocol) => {
     const ip = getIp();
-    debugger;
     const port = process.env.REACT_APP_API_PORT
   
     return `${protocol}${ip}${port}`;

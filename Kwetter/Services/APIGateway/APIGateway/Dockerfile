@@ -5,11 +5,11 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR ./Kwetter
 
 # Copy the project files to the working directory
-COPY Kwetter/Services/APIGateway/APIGateway ./
+COPY . ./
 
 # Build the solution including the "Common" class library
-RUN dotnet restore "./APIGateway.csproj"
-RUN dotnet publish -c Release -o out "./APIGateway.csproj"
+RUN dotnet restore "./Kwetter/Services/APIGateway/APIGateway/APIGateway.csproj"
+RUN dotnet publish -c Release -o out "./Kwetter/Services/APIGateway/APIGateway/APIGateway.csproj"
 
 # Use a lightweight runtime image as the base image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime

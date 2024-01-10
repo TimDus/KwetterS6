@@ -128,6 +128,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Namespaces", ".Namespaces"
 		..\Kubernetes\.Namespaces\monitoring.yaml = ..\Kubernetes\.Namespaces\monitoring.yaml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{A694E8D8-4B11-4EF6-94A7-5C2F02C63ABC}"
+	ProjectSection(SolutionItems) = preProject
+		..\Kubernetes\Frontend\frontend.deployment.yaml = ..\Kubernetes\Frontend\frontend.deployment.yaml
+		..\Kubernetes\Frontend\frontend.ingress.yaml = ..\Kubernetes\Frontend\frontend.ingress.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -193,6 +199,7 @@ Global
 		{2B4B45C8-13E4-4457-B9C8-7EE407EAC865} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
 		{67B6FB1C-9CC3-436A-BDCE-429CF03CEB1D} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
 		{8450281D-D709-456C-93D5-58D3BDFCF34A} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
+		{A694E8D8-4B11-4EF6-94A7-5C2F02C63ABC} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2B5A65A9-0857-4D6D-9876-59B6E417394B}

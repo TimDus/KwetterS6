@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  namespace: kwetter
+  labels:
+    app: frontend
+    service: frontend-service
+spec:
+  selector:
+    app: frontend-pod
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: kwetter
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: frontend-pod
+      version: latest
+  template:
+    metadata:
+      labels:
+        app: frontend-pod
+        version: latest
+    spec:
+      containers:
+      - name: frontend-container
+        image: timdus/kwetterfront:latest
+        env:
+        - name: HTTPS
+          value: "false"
+        - name: REACT_APP_API_CUSTOM_IP
+          value: "true"
+        - name: REACT_APP_API_IP
+          value: "apigateway-service"
+        - name: REACT_APP_API_PORT
+          value: ":8100"
+        - name: REACT_APP_API_HTTPS
+          value: "false"
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:   
+            memory: 512Mi
+            cpu: "1"
