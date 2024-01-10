@@ -21,8 +21,7 @@ namespace KweetService.API.Logic
 
         public async Task<KweetCreatedDTO> CreateKweetLogic(KweetCreatedDTO kweetDTO)
         {
-            kweetDTO.CreatedDate = DateTime.Now;
-            KweetEntity kweetEntity = new(kweetDTO.Text, kweetDTO.CreatedDate);
+            KweetEntity kweetEntity = new(kweetDTO.Text, DateTime.Now);
 
             if (kweetDTO.Hashtags != null)
             {

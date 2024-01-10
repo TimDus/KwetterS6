@@ -41,11 +41,9 @@ const Login = () => {
             console.log(JSON.stringify(response?.data));
             //console.log(JSON.stringify(response));
             const accessToken = response?.data?.jwtToken;
-            console.log(accessToken);
             const roles = response?.data?.roles;
-            console.log("test")
-            console.log(roles);
-            setAuth({ user, pwd, roles, accessToken });
+            const id = response?.data?.id;
+            setAuth({ user, pwd, roles, id, accessToken });
             setUser('');
             setPwd('');
             navigate(from, { replace: true });

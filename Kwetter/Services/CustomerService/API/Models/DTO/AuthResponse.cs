@@ -6,12 +6,15 @@
 
         public int[] Roles { get; set; }
 
+        public int Id { get; set; }
+
         public AuthResponse() { }
 
-        public AuthResponse(string jwtToken, int[] roles)
+        public AuthResponse(string jwtToken, int[] roles, int id)
         {
             JwtToken = jwtToken;
             Roles = roles;
+            Id = id;
         }
     }
 }

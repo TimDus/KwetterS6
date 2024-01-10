@@ -92,6 +92,7 @@ namespace CustomerService.API.Logic
             {
                 new Claim(ClaimTypes.Name, customer.CustomerName),
                 new Claim(ClaimTypes.Role, customer.Role),
+                new Claim("Id", customer.Id.ToString()),
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
@@ -109,11 +110,11 @@ namespace CustomerService.API.Logic
             if(customer.Role == "Admin")
             {
                 roles[0] = 2;
-                return new AuthResponse(new JwtSecurityTokenHandler().WriteToken(token), roles);
+                return new AuthResponse(new JwtSecurityTokenHandler().WriteToken(token), roles, customer.Id);
             }
 
             roles[0] = 1;
-            return new AuthResponse(new JwtSecurityTokenHandler().WriteToken(token), roles);
+            return new AuthResponse(new JwtSecurityTokenHandler().WriteToken(token), roles, customer.Id);
         }
     }
 }
