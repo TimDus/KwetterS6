@@ -1,4 +1,6 @@
-﻿using CustomerService.API.Models.DTO;
+﻿using CustomerService.API.Models.Auth;
+using CustomerService.API.Models.DTO;
+using CustomerService.API.Models.Entity;
 
 namespace CustomerService.API.Logic
 {
@@ -6,6 +8,12 @@ namespace CustomerService.API.Logic
     {
         Task<CustomerAuthDto> CreateCustomerLogic(CustomerAuthDto customerAuthDTO);
 
-        Task<AuthResponse> LoginCustomerLogic(CustomerAuthDto customerAuthDTO);
+        Task<AuthResponse> LoginCustomerLogic(CustomerAuthDto customerAuthDTO, RefreshToken refreshToken);
+
+        Task<CustomerEntity> GetCustomer(int id);
+
+        Task<AuthResponse> CreateToken(CustomerEntity customer);
+
+        Task SetRefreshToken(CustomerEntity customer);
     }
 }

@@ -41,9 +41,8 @@ builder.Services.AddScoped<IKweetRepository, KweetRepository>();
 builder.Services.AddSingleton<IConsumer<CustomerCreatedEvent>, CustomerCreatedConsumer>();
 builder.Services.AddHostedService<CustomerCreatedHosted>();
 
-//Messaging
+//MediatR and RabbitMQConnection
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-
 RabbitMQConnection.SetupRabbitMQConnection(builder.Services, builder.Environment.EnvironmentName);
 
 builder.WebHost.ConfigureKestrel(serverOptions =>

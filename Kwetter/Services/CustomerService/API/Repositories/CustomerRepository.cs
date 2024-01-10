@@ -1,4 +1,5 @@
-﻿using CustomerService.API.Models.Entity;
+﻿using CustomerService.API.Models.Auth;
+using CustomerService.API.Models.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace CustomerService.API.Repositories

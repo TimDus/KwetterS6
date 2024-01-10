@@ -1,4 +1,5 @@
 ﻿using Common.Interfaces;
+using CustomerService.API.Models.Auth;
 using CustomerService.API.Models.Entity;
 
 namespace CustomerService.API.Repositories

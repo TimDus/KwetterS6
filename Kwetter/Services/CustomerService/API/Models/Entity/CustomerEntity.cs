@@ -18,6 +18,12 @@ namespace CustomerService.API.Models.Entity
 
         public byte[] PasswordSalt { get; set; }
 
+        public string? RefreshToken { get; set; }
+
+        public DateTime? TokenCreated {  get; set; }
+
+        public DateTime? TokenExpires { get; set; }
+
         public string Role { get; set; }
 
         public string? ProfilePicture { get; set; }

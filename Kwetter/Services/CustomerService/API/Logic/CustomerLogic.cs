@@ -8,6 +8,7 @@ using System.Text;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.IdentityModel.Tokens.Jwt;
+using CustomerService.API.Models.Auth;
 
 namespace CustomerService.API.Logic
 {
@@ -49,9 +50,15 @@ namespace CustomerService.API.Logic
             return customerAuthDTO;
         }
 
-        public async Task<AuthResponse> LoginCustomerLogic(CustomerAuthDto customerAuthDTO)
+        public async Task<AuthResponse> LoginCustomerLogic(CustomerAuthDto customerAuthDTO, RefreshToken refreshToken)
         {
             CustomerEntity customerEntity = await _repository.GetByName(customerAuthDTO.CustomerName);
+
+            customerEntity.RefreshToken = refreshToken.Token;
+            customerEntity.TokenCreated = refreshToken.Created;
+            customerEntity.TokenExpires = refreshToken.Expires;
+
+            await _repository.Update(customerEntity);
 
             if(customerEntity.PasswordHash == null) 
             {
@@ -63,7 +70,7 @@ namespace CustomerService.API.Logic
                 return new AuthResponse();
             }
 
-            return CreateToken(customerEntity);
+            return await CreateToken(customerEntity);
         }
 
         private CustomerEntity CreatePasswordHash(CustomerAuthDto customerAuthDTO, out byte[] passwordHash, out byte[] passwordSalt) 
@@ -86,8 +93,9 @@ namespace CustomerService.API.Logic
             }
         }
 
-        private AuthResponse CreateToken(CustomerEntity customer)
+        public async Task<AuthResponse> CreateToken(CustomerEntity customer)
         {
+            await Task.CompletedTask;
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, customer.CustomerName),
@@ -115,6 +123,16 @@ namespace CustomerService.API.Logic
 
             roles[0] = 1;
             return new AuthResponse(new JwtSecurityTokenHandler().WriteToken(token), roles, customer.Id);
+        }
+
+        public async Task<CustomerEntity> GetCustomer(int id)
+        {
+            return await _repository.GetById(id);
+        }
+
+        public async Task SetRefreshToken(CustomerEntity customer)
+        {
+            await _repository.Update(customer);
         }
     }
 }
