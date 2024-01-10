@@ -7,14 +7,18 @@ metadata:
     app: apigateway
     service: apigateway-service
   annotations:
-    prometheus.io/scrape: 'true'
-    prometheus.io/port: '80'
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "kwetterfront.localhost"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, OPTIONS, DELETE"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,X-CustomHeader,X-LANG,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,X-Api-Key,X-Device-Id,Access-Control-Allow-Origin"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
 spec:
   selector:
     app: apigateway-pod
   ports:
   - protocol: TCP
-    port: 8100
+    port: 80
     targetPort: 8100
 ---
 apiVersion: apps/v1

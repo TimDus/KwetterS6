@@ -46,9 +46,9 @@ spec:
         - name: REACT_APP_API_CUSTOM_IP
           value: "true"
         - name: REACT_APP_API_IP
-          value: "apigateway-service"
+          value: "kwetter.localhost"
         - name: REACT_APP_API_PORT
-          value: ":8100"
+          value: ":80"
         - name: REACT_APP_API_HTTPS
           value: "false"
         ports:

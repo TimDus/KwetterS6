@@ -28,8 +28,8 @@
       "SwaggerKey": "customer"
     },
     {
-      "UpstreamPathTemplate": "/api/customer/Login",
-      "UpstreamHttpMethod": [ "PUT" ],
+      "UpstreamPathTemplate": "/api/customer/login",
+      "UpstreamHttpMethod": [ "POST" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -37,7 +37,7 @@
           "Port": 8101
         }
       ],
-      "DownstreamPathTemplate": "/api/customer/Login",
+      "DownstreamPathTemplate": "/api/customer/login",
       "SwaggerKey": "customer"
     }
   ]
