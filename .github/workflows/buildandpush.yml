@@ -18,8 +18,8 @@ jobs:
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ env.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build and Push customerapi
       run: |
-        docker build -t ${{ env.DOCKERHUB_USERNAME }}/customerapi:old -f ./Kwetter/Services/CustomerService/API/Dockerfile .
-        docker push ${{ env.DOCKERHUB_USERNAME }}/customerapi:old
+        docker build -t ${{ env.DOCKERHUB_USERNAME }}/customerapi:latest -f ./Kwetter/Services/CustomerService/API/Dockerfile .
+        docker push ${{ env.DOCKERHUB_USERNAME }}/customerapi:latest
 
   build_kweetapi:
     runs-on: ubuntu-latest
@@ -30,8 +30,8 @@ jobs:
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ env.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build and Push kweetapi
       run: |
-        docker build -t ${{ env.DOCKERHUB_USERNAME }}/kweetapi:old -f ./Kwetter/Services/KweetService/API/Dockerfile .
-        docker push ${{ env.DOCKERHUB_USERNAME }}/kweetapi:old
+        docker build -t ${{ env.DOCKERHUB_USERNAME }}/kweetapi:latest -f ./Kwetter/Services/KweetService/API/Dockerfile .
+        docker push ${{ env.DOCKERHUB_USERNAME }}/kweetapi:latest
 
   build_followapi:
     runs-on: ubuntu-latest
@@ -42,8 +42,8 @@ jobs:
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ env.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build and Push followapi
       run: |
-        docker build -t ${{ env.DOCKERHUB_USERNAME }}/followapi:old -f ./Kwetter/Services/FollowService/API/Dockerfile .
-        docker push ${{ env.DOCKERHUB_USERNAME }}/followapi:old
+        docker build -t ${{ env.DOCKERHUB_USERNAME }}/followapi:latest -f ./Kwetter/Services/FollowService/API/Dockerfile .
+        docker push ${{ env.DOCKERHUB_USERNAME }}/followapi:latest
 
   build_feedapi:
     runs-on: ubuntu-latest
@@ -54,8 +54,8 @@ jobs:
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ env.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build and Push feedapi
       run: |
-        docker build -t ${{ env.DOCKERHUB_USERNAME }}/feedapi:old -f ./Kwetter/Services/FeedService/API/Dockerfile .
-        docker push ${{ env.DOCKERHUB_USERNAME }}/feedapi:old
+        docker build -t ${{ env.DOCKERHUB_USERNAME }}/feedapi:latest -f ./Kwetter/Services/FeedService/API/Dockerfile .
+        docker push ${{ env.DOCKERHUB_USERNAME }}/feedapi:latest
 
   build_moderationapi:
     runs-on: ubuntu-latest
@@ -66,8 +66,8 @@ jobs:
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ env.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build and Push moderationapi
       run: |
-        docker build -t ${{ env.DOCKERHUB_USERNAME }}/moderationapi:old -f ./Kwetter/Services/ModerationService/API/Dockerfile .
-        docker push ${{ env.DOCKERHUB_USERNAME }}/moderationapi:old
+        docker build -t ${{ env.DOCKERHUB_USERNAME }}/moderationapi:latest -f ./Kwetter/Services/ModerationService/API/Dockerfile .
+        docker push ${{ env.DOCKERHUB_USERNAME }}/moderationapi:latest
 
   build_gateway:
     runs-on: ubuntu-latest
@@ -78,8 +78,8 @@ jobs:
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ env.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build and Push apigateway
       run: |
-        docker build -t ${{ env.DOCKERHUB_USERNAME }}/kwettergateway:old -f ./Kwetter/Services/APIGateway/APIGateway/Dockerfile .
-        docker push ${{ env.DOCKERHUB_USERNAME }}/kwettergateway:old
+        docker build -t ${{ env.DOCKERHUB_USERNAME }}/kwettergateway:latest -f ./Kwetter/Services/APIGateway/APIGateway/Dockerfile .
+        docker push ${{ env.DOCKERHUB_USERNAME }}/kwettergateway:latest
 
   build_frontend:
     runs-on: ubuntu-latest
@@ -90,5 +90,5 @@ jobs:
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ env.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build and Push frontend
       run: |
-        docker build -t ${{ env.DOCKERHUB_USERNAME }}/kwetterfront:old -f ./Kwetter/frontend/Dockerfile ./Kwetter/frontend
-        docker push ${{ env.DOCKERHUB_USERNAME }}/kwetterfront:old
+        docker build -t ${{ env.DOCKERHUB_USERNAME }}/kwetterfront:latest -f ./Kwetter/frontend/Dockerfile ./Kwetter/frontend
+        docker push ${{ env.DOCKERHUB_USERNAME }}/kwetterfront:latest
