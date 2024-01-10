@@ -64,7 +64,6 @@ app.UseCors(builder => builder // Allow any
     .AllowAnyHeader()
     .AllowCredentials()
     );
-app.UsePreflightRequestHandler();
 
 app.UseSwaggerForOcelotUI(options =>
 {
