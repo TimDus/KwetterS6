@@ -51,8 +51,6 @@ spec:
           value: ":80"
         - name: REACT_APP_API_HTTPS
           value: "false"
-        - name: Dummy
-          value: "Automated update"
         ports:
         - containerPort: 3000
         resources:

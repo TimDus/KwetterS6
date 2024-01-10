@@ -13,7 +13,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: kwetterfronttimdus.com
+  - host: autodeploy.test
     http:
       paths:
       - path: /
