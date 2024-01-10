@@ -3,13 +3,13 @@ FROM node:18-alpine as builder
 
 # Set the working directory inside the container
 WORKDIR /app
-COPY Kwetter/frontend/package*.json ./
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy the remaining application files to the working directory
-COPY Kwetter/frontend .
+COPY . .
 
 # Build the React app
 RUN npm run build
