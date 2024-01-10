@@ -5,7 +5,7 @@ metadata:
   namespace: kwetter
   labels:
     app: frontend
-    service: frontend-service ##test note for auto update
+    service: frontend-service ###test note for auto update
 spec:
   selector:
     app: frontend-pod
