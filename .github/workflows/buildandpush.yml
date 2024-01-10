@@ -90,5 +90,5 @@ jobs:
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ env.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build and Push frontend
       run: |
-        docker build -t ${{ env.DOCKERHUB_USERNAME }}/kwetterfront:latest -f ./Kwetter/frontend/Dockerfile .
+        docker build -t ${{ env.DOCKERHUB_USERNAME }}/kwetterfront:latest -f ./Kwetter/frontend/Dockerfile ./Kwetter/frontend
         docker push ${{ env.DOCKERHUB_USERNAME }}/kwetterfront:latest
