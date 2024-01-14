@@ -45,14 +45,15 @@ services:
 
   kweetdb:
     container_name: kweet-db
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: postgres:latest
     environment:
-     - ACCEPT_EULA=Y
-     - SA_PASSWORD=Test123!
+     - POSTGRES_PASSWORD=Test123!
+     - POSTGRES_USER=postgres
+     - POSTGRES_DB=kweet
     networks:
      - backend
     ports:
-     - 8002:1433
+     - 8002:5432
 
   customerapi:
     image: timdus/customerapi:latest

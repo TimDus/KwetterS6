@@ -21,12 +21,12 @@ metadata:
   name: kweetapi
   namespace: kwetter
 spec:
-  replicas: 1
+  replicas: 2
   minReadySeconds: 10
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 1
+      maxSurge: 3
       maxUnavailable: 1
   selector:
     matchLabels:

@@ -30,6 +30,8 @@ namespace CustomerService.API.Models.Entity
 
         public string? ProfileBio { get; set; }
 
+        public bool Disabled { get; set; }
+
         public CustomerEntity() { }
 
         public CustomerEntity(string displayName, string customerName, byte[] passwordHash, byte[] passwordSalt)
@@ -39,6 +41,7 @@ namespace CustomerService.API.Models.Entity
             PasswordHash = passwordHash;
             PasswordSalt = passwordSalt;
             Role = "Customer";
+            Disabled = false;
         }
     }
 }

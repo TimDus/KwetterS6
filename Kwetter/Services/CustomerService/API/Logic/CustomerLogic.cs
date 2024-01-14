@@ -9,6 +9,8 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.IdentityModel.Tokens.Jwt;
 using CustomerService.API.Models.Auth;
+using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace CustomerService.API.Logic
 {
@@ -59,6 +61,11 @@ namespace CustomerService.API.Logic
             customerEntity.TokenExpires = refreshToken.Expires;
 
             await _repository.Update(customerEntity);
+
+            if(customerEntity.Disabled)
+            {
+                return new AuthResponse();
+            }
 
             if(customerEntity.PasswordHash == null) 
             {
@@ -133,6 +140,27 @@ namespace CustomerService.API.Logic
         public async Task SetRefreshToken(CustomerEntity customer)
         {
             await _repository.Update(customer);
+        }
+
+        public async Task DeleteAccount(int id)
+        {
+            CustomerEntity customer = await _repository.GetById(id);
+            await _repository.Update(SetDeletionParameters(customer));
+            return;
+        }
+
+        private CustomerEntity SetDeletionParameters(CustomerEntity customer)
+        {
+            customer.Disabled = true;
+            customer.CustomerName = "Deleted User " + new Guid();
+            customer.DisplayName = customer.CustomerName;
+            customer.ProfileBio = string.Empty;
+            customer.PasswordHash = Array.Empty<byte>();
+            customer.PasswordSalt = Array.Empty<byte>();
+            customer.ProfilePicture = string.Empty;
+            customer.RefreshToken = string.Empty;
+
+            return customer;
         }
     }
 }

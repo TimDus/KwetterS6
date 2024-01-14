@@ -1,6 +1,7 @@
 ﻿using CustomerService.API.Models.Auth;
 using CustomerService.API.Models.DTO;
 using CustomerService.API.Models.Entity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerService.API.Logic
 {
@@ -15,5 +16,7 @@ namespace CustomerService.API.Logic
         Task<AuthResponse> CreateToken(CustomerEntity customer);
 
         Task SetRefreshToken(CustomerEntity customer);
+
+        Task DeleteAccount(int id);
     }
 }

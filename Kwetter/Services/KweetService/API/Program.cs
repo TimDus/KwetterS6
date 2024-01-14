@@ -9,6 +9,7 @@ using KweetService.API.Logic;
 using KweetService.API.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
 using RabbitMQ.Client;
 using System.Reflection;
@@ -55,9 +56,9 @@ string dbHost = builder.Configuration.GetValue<string>("Database:DB_HOST");
 string dbName = builder.Configuration.GetValue<string>("Database:DB_NAME");
 string dbPassword = builder.Configuration.GetValue<string>("Database:DB_PASSWORD");
 
-var connectionString = $"Data Source={dbHost};Initial Catalog={dbName};User ID=sa;Password={dbPassword};TrustServerCertificate=true";
+var connectionString = $"Host={dbHost};Initial Catalog={dbName};User ID=sa;Password={dbPassword};TrustServerCertificate=true";
 
-builder.Services.AddDbContext<KweetDbContext>(opt => opt.UseSqlServer(connectionString));
+builder.Services.AddDbContext<KweetDbContext>(opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

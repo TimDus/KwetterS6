@@ -37,6 +37,15 @@ namespace KweetService.API.Repositories
                 .OnDelete(DeleteBehavior.NoAction);
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                // Replace the connection string with your PostgreSQL connection string
+                optionsBuilder.UseNpgsql("Host=localhost;Port=8002;Database=kweet;Username=postgres;Password=Test123!");
+            }
+        }
+
 
         public DbSet<KweetEntity> Kweets { get; set; }
 

@@ -49,7 +49,7 @@ namespace CustomerService.API.Controllers
             return Ok();
         }
 
-        [HttpPost("refresh-token")]
+        [HttpGet("refresh-token")]
         public async Task<ActionResult<string>> RefreshToken(int id)
         {
             var refreshToken = Request.Cookies["refreshtoken"];
@@ -73,13 +73,25 @@ namespace CustomerService.API.Controllers
             customer.TokenCreated = newRefreshToken.Created;
             customer.TokenExpires = newRefreshToken.Expires;
 
-            _customerlogic.SetRefreshToken(customer);
+            await _customerlogic.SetRefreshToken(customer);
 
             return Ok(token);
         }
 
+        [HttpGet("personaldata"), Authorize(Roles = "Customer")]
+        public async Task<ActionResult<CustomerEntity>> GetPersonalData(int id)
+        {
+            return Ok(await _customerlogic.GetCustomer(id));
+        }
 
-        private RefreshToken CreateRefreshToken()
+        [HttpGet("delete"), Authorize(Roles = "Customer")]
+        public async Task<ActionResult> DeleteAccount(int id)
+        {
+            await _customerlogic.DeleteAccount(id);
+            return Ok();
+        }
+
+        private static RefreshToken CreateRefreshToken()
         {
             var refreshToken = new RefreshToken()
             {
