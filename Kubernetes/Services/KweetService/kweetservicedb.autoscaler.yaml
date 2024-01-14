@@ -1,0 +1,13 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: kweetdb-autoscaler
+  namespace: kwetter
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: kweetdb
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 50

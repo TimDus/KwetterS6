@@ -8,31 +8,49 @@ spec:
     app: kweetdb-pod
   ports:
     - protocol: TCP
-      port: 1433
-      targetPort: 1433
+      port: 5432
+      targetPort: 5432
 ---
+# PostgreSQL StatefulSet
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: kweetdb
   namespace: kwetter
 spec:
-  replicas: 1
+  serviceName: postgresql-db-service
   selector:
-    matchLabels:
-      app: kweetdb-pod
+  matchLabels:
+    app: kweetdb-pod
+  replicas: 1
   template:
     metadata:
       labels:
         app: kweetdb-pod
     spec:
       containers:
-        - name: kweetdb-container
-          image: mcr.microsoft.com/mssql/server:2019-latest
-          ports:
-            - containerPort: 1433
-          env:
-          - name: ACCEPT_EULA
-            value: "Y"
-          - name: MSSQL_SA_PASSWORD
-            value: "Test123!"
+      - name: kweetdb-container
+      image: postgres:latest
+      ports:
+      - containerPort: 5432
+      volumeMounts:
+      - name: postgresql-db-disk
+      mountPath: /data
+      env:
+        - name: POSTGRES_PASSWORD
+          value: Test123!
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_DB
+          value: kweet
+        - name: PGDATA
+          value: /data/pgdata
+      # Volume Claim
+      volumeClaimTemplates:
+      - metadata:
+      name: postgresql-db-disk
+      spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+      requests:
+      storage: 1Gi
