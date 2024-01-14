@@ -18,39 +18,40 @@ metadata:
   name: kweetdb
   namespace: kwetter
 spec:
-  serviceName: postgresql-db-service
-  selector:
-  matchLabels:
-    app: kweetdb-pod
+  serviceName: kweetdb-service
   replicas: 1
+  selector:
+    matchLabels:
+      app: kweetdb-pod
   template:
     metadata:
       labels:
         app: kweetdb-pod
     spec:
       containers:
-      - name: kweetdb-container
-      image: postgres:latest
-      ports:
-      - containerPort: 5432
-      volumeMounts:
-      - name: postgresql-db-disk
-      mountPath: /data
-      env:
-        - name: POSTGRES_PASSWORD
-          value: Test123!
-        - name: POSTGRES_USER
-          value: postgres
-        - name: POSTGRES_DB
-          value: kweet
-        - name: PGDATA
-          value: /data/pgdata
-      # Volume Claim
-      volumeClaimTemplates:
-      - metadata:
+        - name: kweetdb-container
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: postgresql-db-disk
+              mountPath: /data
+          env:
+            - name: POSTGRES_PASSWORD
+              value: Test123!
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_DB
+              value: kweet
+            - name: PGDATA
+              value: /data/pgdata
+   # Volume Claim
+  volumeClaimTemplates:
+  - metadata:
       name: postgresql-db-disk
-      spec:
-      accessModes: ["ReadWriteOnce"]
+    spec:
+      accessModes:
+        - ReadWriteOnce
       resources:
-      requests:
-      storage: 1Gi
+        requests:
+          storage: 1Gi

@@ -17,6 +17,7 @@ namespace KweetService.API.Repositories
                     if (!databaseCreator.CanConnect()) databaseCreator.Create();
                     if (!databaseCreator.HasTables()) databaseCreator.CreateTables();
                 }
+                AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             }
             catch (Exception ex)
             {

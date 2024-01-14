@@ -62,6 +62,8 @@ builder.Services.AddDbContext<KweetDbContext>(opt => opt.UseNpgsql(builder.Confi
 
 var app = builder.Build();
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 //rabbitmq channels
 using (var scope = app.Services.CreateScope())
 {
