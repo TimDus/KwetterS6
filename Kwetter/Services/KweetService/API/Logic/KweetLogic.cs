@@ -79,6 +79,7 @@ namespace KweetService.API.Logic
                 var dto = new KweetCreatedDTO();
                 dto.Text = kweet.Text;
                 dto.CustomerId = kweet.Customer.Id;
+                dto.Id = kweet.Id;
                 outgoing.Add(dto);
             }
 
