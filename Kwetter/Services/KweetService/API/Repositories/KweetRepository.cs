@@ -80,5 +80,10 @@ namespace KweetService.API.Repositories
         {
             return await _kweetDbContext.KweetLikes.Where(kl => kl.Kweet.Id == kweetId && kl.Customer.Id == customerId).Include(kl => kl.Kweet).Include(kl => kl.Customer).FirstOrDefaultAsync();
         }
+
+        public async Task<List<KweetEntity>> GetRandomKweetsFeed()
+        {
+            return await _kweetDbContext.Kweets.OrderByDescending(k => k.CreatedDate).Take(5).ToListAsync();
+        }
     }
 }

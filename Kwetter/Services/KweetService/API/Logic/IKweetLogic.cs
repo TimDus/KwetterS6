@@ -9,5 +9,7 @@ namespace KweetService.API.Logic
         Task<KweetLikeDTO> LikeKweetLogic(KweetLikeDTO kweetLikeDTO);
 
         Task<KweetLikeDTO> UnlikeKweetLogic(KweetLikeDTO kweetLikeDTO);
+
+        Task<List<KweetCreatedDTO>> GetRandomKweetsFeed();
     }
 }

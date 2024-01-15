@@ -6,10 +6,12 @@ metadata:
 spec:
   selector:
     app: kweetdb-pod
+  type: LoadBalancer
   ports:
     - protocol: TCP
       port: 5432
       targetPort: 5432
+
 ---
 # PostgreSQL StatefulSet
 apiVersion: apps/v1
@@ -45,6 +47,10 @@ spec:
               value: kweet
             - name: PGDATA
               value: /data/pgdata
+          resources:
+            limits:   
+              memory: 512Mi
+              cpu: "1"
    # Volume Claim
   volumeClaimTemplates:
   - metadata:

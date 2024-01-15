@@ -38,5 +38,11 @@ namespace KweetService.API.Controllers
             // Return a 200 OK response
             return Ok();
         }
+
+        [HttpGet("testfeed")]
+        public async Task<List<KweetCreatedDTO>> testfeed()
+        {
+            return await _kweetLogic.GetRandomKweetsFeed();
+        }
     }
 }

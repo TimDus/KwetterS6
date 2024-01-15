@@ -14,5 +14,7 @@ namespace KweetService.API.Repositories
         Task<CustomerEntity> GetCustomer(int id);
 
         Task<KweetLikeEntity> GetKweetLike(int kweetId, int customerId);
+
+        Task<List<KweetEntity>> GetRandomKweetsFeed();
     }
 }

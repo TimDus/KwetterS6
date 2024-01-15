@@ -69,6 +69,22 @@ namespace KweetService.API.Logic
             return kweetDTO;
         }
 
+        public async Task<List<KweetCreatedDTO>> GetRandomKweetsFeed()
+        {
+            List<KweetEntity> kweets = await _repository.GetRandomKweetsFeed();
+            List<KweetCreatedDTO> outgoing = new();
+
+            foreach(KweetEntity kweet in kweets) 
+            {
+                var dto = new KweetCreatedDTO();
+                dto.Text = kweet.Text;
+                dto.CustomerId = kweet.Customer.Id;
+                outgoing.Add(dto);
+            }
+
+            return outgoing;
+        }
+
         public async Task<KweetLikeDTO> LikeKweetLogic(KweetLikeDTO kweetLikeDTO)
         {
             KweetLikeEntity kweetLikeEntity = new(

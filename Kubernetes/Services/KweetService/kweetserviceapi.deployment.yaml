@@ -9,6 +9,7 @@ metadata:
 spec:
   selector:
     app: kweetapi-pod
+  type: LoadBalancer
   ports:
     - protocol: TCP
       name: http
