@@ -1,0 +1,26 @@
+apiVersion: kubegres.reactive-tech.io/v1
+kind: Kubegres
+metadata:
+  name: mypostgres
+  namespace: kwetter
+
+spec:
+
+   replicas: 2
+   image: postgres:16.1
+
+   database:
+      size: 200Mi
+
+   env:
+      - name: POSTGRES_PASSWORD
+        valueFrom:
+           secretKeyRef:
+              name: postgres-secret
+              key: superUserPassword
+
+      - name: POSTGRES_REPLICATION_PASSWORD
+        valueFrom:
+           secretKeyRef:
+              name: postgres-secret
+              key: replicationUserPassword

@@ -41,6 +41,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KweetService", "KweetServic
 		..\Kubernetes\Services\KweetService\kweetserviceapi.deployment.yaml = ..\Kubernetes\Services\KweetService\kweetserviceapi.deployment.yaml
 		..\Kubernetes\Services\KweetService\kweetservicedb.autoscaler.yaml = ..\Kubernetes\Services\KweetService\kweetservicedb.autoscaler.yaml
 		..\Kubernetes\Services\KweetService\kweetservicedb.deployment.yaml = ..\Kubernetes\Services\KweetService\kweetservicedb.deployment.yaml
+		..\Kubernetes\Services\KweetService\kweetservicedb.deploymentkubegress.yaml = ..\Kubernetes\Services\KweetService\kweetservicedb.deploymentkubegress.yaml
+		..\Kubernetes\Services\KweetService\postgres-secret.yaml = ..\Kubernetes\Services\KweetService\postgres-secret.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FollowService", "FollowService", "{12D415B3-D6C0-4664-9531-34581FA40254}"

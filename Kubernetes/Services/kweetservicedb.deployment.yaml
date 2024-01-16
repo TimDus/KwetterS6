@@ -21,7 +21,7 @@ metadata:
   namespace: kwetter
 spec:
   serviceName: kweetdb-service
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: kweetdb-pod
