@@ -16,41 +16,50 @@ namespace Common.Startup
 
                 if (env == "Development" || Environment.GetEnvironmentVariable("DOCKER") == "Docker")
                 {
-                    string name = "localhost";
-                    if (Environment.GetEnvironmentVariable("DOCKER") == "Docker")
-                    {
-                        name = "rabbitmq";
-                    }
-                    factory = new ConnectionFactory()
-                    {
-                        HostName = name,
-                        Port = 5672,
-                        UserName = "guest",
-                        Password = "guest",
-                        DispatchConsumersAsync = true
-                    };
-                }
-                else
-                {
-                    factory = new ConnectionFactory()
-                    {
-                        HostName = "rabbitmq-service",
-                        Port = 5672,
-                        UserName = "guest",
-                        Password = "guest",
-                        DispatchConsumersAsync = true
-                    };
-                    /* cloud connection
+                    //string name = "localhost";
+                    //if (Environment.GetEnvironmentVariable("DOCKER") == "Docker")
+                    //{
+                    //    name = "rabbitmq";
+                    //}
+                    //factory = new ConnectionFactory()
+                    //{
+                    //    HostName = name,
+                    //    Port = 5672,
+                    //    UserName = "guest",
+                    //    Password = "guest",
+                    //    DispatchConsumersAsync = true
+                    //};
                     factory = new ConnectionFactory()
                     {
                         VirtualHost = "mnidiotp",
                         HostName = "cow-01.rmq2.cloudamqp.com",
                         Port = 5672,
                         UserName = "mnidiotp",
-                        Password = "k4l71JcIUK-t-Z2YSdOr1sr27eRCIH8T",
+                        Password = "b5TLxvHHma1spxVEPghmhSoKS7X9PdKV",
                         DispatchConsumersAsync = true
                     };
-                    */
+                }
+                else
+                {
+                    //factory = new ConnectionFactory()
+                    //{
+                    //    HostName = "rabbitmq-service",
+                    //    Port = 5672,
+                    //    UserName = "guest",
+                    //    Password = "guest",
+                    //    DispatchConsumersAsync = true
+                    //};
+                    //cloud connection
+                    factory = new ConnectionFactory()
+                    {
+                        VirtualHost = "mnidiotp",
+                        HostName = "cow-01.rmq2.cloudamqp.com",
+                        Port = 5672,
+                        UserName = "mnidiotp",
+                        Password = "b5TLxvHHma1spxVEPghmhSoKS7X9PdKV",
+                        DispatchConsumersAsync = true
+                    };
+
                 }
 
                 var retryPolicy = Policy.Handle<SocketException>()
