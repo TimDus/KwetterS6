@@ -14,7 +14,7 @@ export let options = {
 };
 
 function kweetCreate() {
-    const url = "http://kwetter.localhost:9080/api/Kweet/Create";
+    const url = "http://kweetservice.api:8102/api/kweet/create";
     const payload = JSON.stringify({ "customerId": 1, "text": "today is a nice day" });
     const params = {
         headers: {
