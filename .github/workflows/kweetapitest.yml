@@ -1,0 +1,43 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DOCKERHUB_USERNAME: timdus
+
+jobs:
+  build_kweetapi:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ env.DOCKERHUB_USERNAME }} --password-stdin
+    - name: Build and Push kweetapi
+      run: |
+        docker build -t ${{ env.DOCKERHUB_USERNAME }}/kweetapi:latest -f ./Kwetter/Services/KweetService/API/Dockerfile .
+        docker push ${{ env.DOCKERHUB_USERNAME }}/kweetapi:latest
+    - name: Send metrics to DataDog
+      run: |
+        STATUS=$?
+        if [ $STATUS -eq 0 ]; then
+          BUILD_STATUS=1
+        else
+          BUILD_STATUS=0
+        fi
+        curl -X POST -H "Content-type: application/json" \
+        -d '{
+          "series": [
+            {
+              "metric": "kweetapi.build.success",
+              "points": [[$(date +%s), $BUILD_STATUS]],
+              "type": "gauge",
+              "host": "github",
+              "tags": ["github:actions"]
+            }
+          ]
+        }' \
+        "https://api.datadoghq.eu/api/v1/series?api_key=${{ secrets.DATADOG_API_KEY }}"
