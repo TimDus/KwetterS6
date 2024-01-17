@@ -20,24 +20,10 @@ jobs:
       run: |
         docker build -t ${{ env.DOCKERHUB_USERNAME }}/kweetapi:latest -f ./Kwetter/Services/KweetService/API/Dockerfile .
         docker push ${{ env.DOCKERHUB_USERNAME }}/kweetapi:latest
-    - name: Send metrics to DataDog
-      run: |
-        STATUS=$?
-        if [ $STATUS -eq 0 ]; then
-          BUILD_STATUS=1
-        else
-          BUILD_STATUS=0
-        fi
-        curl -X POST -H "Content-type: application/json" \
-        -d '{
-          "series": [
-            {
-              "metric": "kweetapi.build.success",
-              "points": [[$(date +%s), $BUILD_STATUS]],
-              "type": "gauge",
-              "host": "github",
-              "tags": ["github:actions"]
-            }
-          ]
-        }' \
-        "https://api.datadoghq.eu/api/v1/series?api_key=${{ secrets.DATADOG_API_KEY }}"
+        
+  tests:
+    name: Unit Testing
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2.1.0
+      - run: dotnet test
