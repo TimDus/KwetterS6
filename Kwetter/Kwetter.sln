@@ -137,6 +137,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{A6
 		..\Kubernetes\Frontend\frontend.ingress.yaml = ..\Kubernetes\Frontend\frontend.ingress.yaml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Services\KweetService\Test\Test.csproj", "{9EB5CC08-B6BB-45C5-A1A7-D42334271E8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -171,6 +173,10 @@ Global
 		{2D87135E-ECCD-4555-9962-6B6E5B0E88ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D87135E-ECCD-4555-9962-6B6E5B0E88ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D87135E-ECCD-4555-9962-6B6E5B0E88ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EB5CC08-B6BB-45C5-A1A7-D42334271E8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EB5CC08-B6BB-45C5-A1A7-D42334271E8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EB5CC08-B6BB-45C5-A1A7-D42334271E8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EB5CC08-B6BB-45C5-A1A7-D42334271E8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -203,6 +209,7 @@ Global
 		{67B6FB1C-9CC3-436A-BDCE-429CF03CEB1D} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
 		{8450281D-D709-456C-93D5-58D3BDFCF34A} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
 		{A694E8D8-4B11-4EF6-94A7-5C2F02C63ABC} = {ADA318F3-D9B9-4B09-8A39-069B18E83A19}
+		{9EB5CC08-B6BB-45C5-A1A7-D42334271E8A} = {0262AAF0-9685-4BD0-95D0-F56C787B70F3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2B5A65A9-0857-4D6D-9876-59B6E417394B}

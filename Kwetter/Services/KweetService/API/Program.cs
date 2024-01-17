@@ -9,7 +9,6 @@ using KweetService.API.Logic;
 using KweetService.API.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
 using RabbitMQ.Client;
 using System.Reflection;
@@ -125,3 +124,5 @@ app.UseEndpoints(endpoints =>
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }
