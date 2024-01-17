@@ -1,0 +1,21 @@
+name: Testing KweetApi
+on: push
+
+jobs:
+  runner-job:
+    runs-on: ubuntu-latest
+
+    services:
+      kweetapi:
+        image: timdus/kweetapi:latest
+        ports:
+          - 8102:8102
+          
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+  
+      - name: Run local k6 test
+        uses: grafana/k6-action@v0.3.1
+        with:
+          filename: CreateKweet.js ./Kubernetes/LoadTesting/
