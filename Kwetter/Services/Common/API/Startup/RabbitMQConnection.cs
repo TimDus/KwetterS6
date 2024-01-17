@@ -35,7 +35,7 @@ namespace Common.Startup
                         HostName = "cow-01.rmq2.cloudamqp.com",
                         Port = 5672,
                         UserName = "mnidiotp",
-                        Password = "b5TLxvHHma1spxVEPghmhSoKS7X9PdKV",
+                        Password = "Hki1eA6NFnm9ncwwToOjGhX8b-97TSXN",
                         DispatchConsumersAsync = true
                     };
                 }
@@ -56,7 +56,7 @@ namespace Common.Startup
                         HostName = "cow-01.rmq2.cloudamqp.com",
                         Port = 5672,
                         UserName = "mnidiotp",
-                        Password = "b5TLxvHHma1spxVEPghmhSoKS7X9PdKV",
+                        Password = "Hki1eA6NFnm9ncwwToOjGhX8b-97TSXN",
                         DispatchConsumersAsync = true
                     };
 
