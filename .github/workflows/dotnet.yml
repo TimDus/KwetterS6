@@ -14,7 +14,7 @@ jobs:
       mypostgres:
         image: postgres:latest
         ports:
-          - 5432:5432
+          - 8002:5432
         env:
           POSTGRES_PASSWORD: postgresSuperUserPsw
           POSTGRES_USER: postgres
