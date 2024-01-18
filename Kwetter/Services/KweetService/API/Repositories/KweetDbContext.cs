@@ -43,7 +43,7 @@ namespace KweetService.API.Repositories
             if (!optionsBuilder.IsConfigured)
             {
                 // Replace the connection string with your PostgreSQL connection string
-                optionsBuilder.UseNpgsql("Host=mypostgres;Port=5432;Database=kweet;Username=postgres;Password=postgresSuperUserPsw");
+                optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=kweet;Username=postgres;Password=postgresSuperUserPsw");
             }
         }
 
