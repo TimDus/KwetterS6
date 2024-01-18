@@ -37,6 +37,7 @@ namespace KweetService.API.Logic
                     kweetEntity.Mentions.Add(new MentionEntity() { Customer = await _repository.GetCustomer(mention.MentionedCustomerId) });
                 };
             }
+
             if(await _repository.GetCustomer(kweetDTO.CustomerId) == default || await _repository.GetCustomer(kweetDTO.CustomerId) == null)
             {
                 await _repository.CreateCustomer(new CustomerEntity(kweetDTO.CustomerId, "test", "test"));
