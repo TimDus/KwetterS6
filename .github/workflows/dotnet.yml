@@ -11,6 +11,15 @@ jobs:
         ports:
           - 8102:8102
           
+      mypostgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_PASSWORD: Test123!
+          POSTGRES_USER: postgres
+          POSTGRES_DB: kweet
+          
     steps:
       - name: Checkout
         uses: actions/checkout@v4
