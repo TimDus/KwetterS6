@@ -47,13 +47,13 @@ services:
     container_name: kweet-db
     image: postgres:latest
     environment:
-     - POSTGRES_PASSWORD=Test123!
+     - POSTGRES_PASSWORD=postgresSuperUserPsw
      - POSTGRES_USER=postgres
      - POSTGRES_DB=kweet
     networks:
      - backend
     ports:
-     - 8002:5432
+     - 5432:5432
 
   customerapi:
     image: timdus/customerapi:latest
