@@ -24,6 +24,16 @@ jobs:
   tests:
     name: Unit Testing
     runs-on: windows-latest
+    services:
+      mypostgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_PASSWORD: postgresSuperUserPsw
+          POSTGRES_USER: postgres
+          POSTGRES_DB: kweet
+          
     steps:
       - uses: actions/checkout@v2.1.0
       - run: dotnet test ./Kwetter/Services/KweetService/Test/Test.csproj
