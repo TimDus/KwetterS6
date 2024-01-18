@@ -30,7 +30,6 @@ namespace KweetService.API.Logic
                     kweetEntity.Hashtags.Add(new HashtagEntity(hashtag.Tag));
                 };
             }
-
             if (kweetDTO.Mentions != null)
             {
                 foreach (MentionDTO mention in kweetDTO.Mentions)
