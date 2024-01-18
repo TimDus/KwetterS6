@@ -31,10 +31,11 @@ namespace Test
         [Fact]
         public async void CreateKweetIntegration()
         {
-            KweetCreatedDTO dto = new();
-
-            dto.Text = "test kweet integration";
-            dto.CustomerId = 1;
+            KweetCreatedDTO dto = new()
+            {
+                Text = "test kweet integration",
+                CustomerId = 1
+            };
 
             var jSonData = JsonConvert.SerializeObject(dto);
 
