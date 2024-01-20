@@ -4,6 +4,7 @@
    name: datadog
  spec:
    global:
+     clusterName: kwetter
      site: datadoghq.eu
      credentials:
        apiSecret:
@@ -14,6 +15,12 @@
          keyName: app-key
    features:
      liveContainerCollection:
+       enabled: true
+     cws:
+       enabled: true
+     usm:
+       enabled: true
+     npm:
        enabled: true
      orchestratorExplorer:
        enabled: true
