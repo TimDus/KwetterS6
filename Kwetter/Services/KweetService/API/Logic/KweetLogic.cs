@@ -74,6 +74,18 @@ namespace KweetService.API.Logic
 
         public async Task<List<KweetCreatedDTO>> GetRandomKweetsFeed()
         {
+            CustomerEntity customer;
+            if (await _repository.GetCustomer(1) == default || await _repository.GetCustomer(1) == null)
+            {
+                await _repository.CreateCustomer(new CustomerEntity(1, "test", "test"));
+            }
+            customer = await _repository.GetCustomer(1);
+            var kweeta = new KweetEntity("test", DateTime.Now);
+
+            kweeta.Customer = customer;
+
+            await _repository.Create(kweeta);
+
             List<KweetEntity> kweets = await _repository.GetRandomKweetsFeed();
             List<KweetCreatedDTO> outgoing = new();
 

@@ -1,0 +1,23 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: Zap scan
+
+on: push
+
+jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+    name: Scan ZAP website
+    
+    services:
+      kweetapi:
+        image: timdus/kwetterfront:latest
+        ports:
+          - 3000:3000
+          
+    steps:
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.8.0
+        with:
+          target: 'http://www.localhost:3000'

@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
+﻿using KweetService.API.Models.DTO;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace Test
 {
@@ -13,15 +18,32 @@ namespace Test
         }
 
         [Fact]
-        public async void CreateKweetIntegration()
+        public async void GetFeedIntegration()
         {
             // Act
             var response = await _client.GetAsync("/api/kweet/testfeed");
 
-            var result = await response.Content.ReadAsStringAsync();
+            // Assert
+            Assert.True(response.IsSuccessStatusCode);
+
+        }
+
+        [Fact]
+        public async void CreateKweetIntegration()
+        {
+            KweetCreatedDTO dto = new()
+            {
+                Text = "test kweet integration",
+                CustomerId = 1
+            };
+
+            var jSonData = JsonConvert.SerializeObject(dto);
+
+            // Act
+            var response = await _client.PostAsync("/api/kweet/create", new StringContent(jSonData, Encoding.UTF8, "application/json"));
 
             // Assert
-            Assert.True(!string.IsNullOrEmpty(result));
+            Assert.True(response.IsSuccessStatusCode);
 
         }
     }
