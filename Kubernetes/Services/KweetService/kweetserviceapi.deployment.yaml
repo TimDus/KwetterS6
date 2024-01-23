@@ -44,13 +44,6 @@ spec:
         image: timdus/kweetapi:latest
         ports:
         - containerPort: 8102
-        readinessProbe:
-          exec:
-            command:
-            - stat
-            - /tmp/ready
-          initialDelaySeconds: 10
-          periodSeconds: 5
         imagePullPolicy: Always
         resources:
           limits:   
