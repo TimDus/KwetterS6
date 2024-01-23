@@ -30,8 +30,8 @@ jobs:
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ env.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build and Push kweetapi
       run: |
-        docker build -t ${{ env.DOCKERHUB_USERNAME }}/kweetapi:latest -f ./Kwetter/Services/KweetService/API/Dockerfile .
-        docker push ${{ env.DOCKERHUB_USERNAME }}/kweetapi:latest
+        docker build -t ${{ env.DOCKERHUB_USERNAME }}/kweetapi:old -f ./Kwetter/Services/KweetService/API/Dockerfile .
+        docker push ${{ env.DOCKERHUB_USERNAME }}/kweetapi:old
 
   build_followapi:
     runs-on: ubuntu-latest
