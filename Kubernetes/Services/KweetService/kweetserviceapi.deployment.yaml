@@ -22,12 +22,12 @@ metadata:
   name: kweetapi
   namespace: kwetter
 spec:
-  replicas: 1
+  replicas: 3
   minReadySeconds: 10
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 3
+      maxSurge: 1
       maxUnavailable: 1
   selector:
     matchLabels:
@@ -44,8 +44,22 @@ spec:
         image: timdus/kweetapi:latest
         ports:
         - containerPort: 8102
+        readinessProbe:
+          exec:
+            command:
+            - stat
+            - /tmp/ready
+          initialDelaySeconds: 10
+          periodSeconds: 5
         imagePullPolicy: Always
         resources:
           limits:   
             memory: 512Mi
             cpu: "1"
+        lifecycle:
+          preStop:
+            exec:
+              command:
+              - sh
+              - -c 
+              - "sleep 10"
